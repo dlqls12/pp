@@ -50,8 +50,10 @@ public class ArticleController extends Controller {
 
 		int id = Util.getInt(req, "id");
 
+		int fullPage = articleService.getForPrintListArticlesCount(0, "", "");
 		Article article = articleService.getForPrintArticle(id);
 		
+		req.setAttribute("fullPage", fullPage);
 		req.setAttribute("article", article);
 
 		return "article/detail.jsp";

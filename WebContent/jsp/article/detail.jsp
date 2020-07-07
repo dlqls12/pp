@@ -4,6 +4,7 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%
 	Article article = (Article) request.getAttribute("article");
+	int fullPage = (int) request.getAttribute("fullPage");
 %>
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
@@ -60,6 +61,22 @@
 							youtubePlugin, replPlugin, codepenPlugin ]
 				});
 			</script>
+		</div>
+		<div class="next-or-prev-button">
+			<%
+				if (article.getId() > 1) {
+			%>
+			<a href="detail?id=<%=article.getId() - 1%>">[이전글]</a>
+			<%
+				}
+			%>
+			<%
+				if (article.getId() < fullPage) {
+			%>
+			<a href="detail?id=<%=article.getId() + 1%>">[다음글]</a>
+			<%
+				}
+			%>
 		</div>
 	</div>
 	<div class="bottom">

@@ -62,7 +62,7 @@
 					<%
 						for (CateItem cateItem : cateItems) {
 					%>
-					<option value="<%=cateItem.getId()%>"></option>
+					<option value="<%=cateItem.getId()%>"><%=cateItem.getName() %></option>
 					<%
 						}
 					%>

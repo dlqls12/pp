@@ -62,7 +62,7 @@ public class ArticleDao extends Dao {
 			sql += String.format("AND title LIKE CONCAT('%%', '%s', '%%')", searchKeyword);
 		}
 
-		int count = dbUtil.selectRowIntValue(dbConn, sql);
+		int count = DBUtil.selectRowIntValue(dbConn, sql);
 		return count;
 	}
 

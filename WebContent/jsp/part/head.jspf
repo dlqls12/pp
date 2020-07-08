@@ -54,6 +54,9 @@
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/s/home/main"
 					class="block">Home</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/s/article/write"
+					class="block">Write</a></li>
 				<li><a href="${pageContext.request.contextPath}/s/article/list"
 					class="block">Articles</a>
 					<ul>
@@ -73,7 +76,8 @@
 					<ul>
 						<li><a href="https://github.com/dlqls12" target="_blank"
 							class="block">GITHUB</a></li>
-						<li><a href="https://dlqls12.tistory.com/" target="_blank" class="block">TISTORY</a></li>
+						<li><a href="https://dlqls12.tistory.com/" target="_blank"
+							class="block">TISTORY</a></li>
 						<li><a
 							href="https://www.youtube.com/channel/UCqNhFabl_LORlyYzvHeJTVg?view_as=subscriber"
 							target="_blank" class="block">YOUTUBE</a></li>
@@ -91,6 +95,8 @@
 				<ul class="flex height-100p">
 					<li><a href="${pageContext.request.contextPath}/s/home/main"
 						class="flex height-100p flex-ai-c">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/s/article/write"
+						class="flex height-100p flex-ai-c">Write</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/s/article/list"
 						class="flex height-100p flex-ai-c">Articles</a>
@@ -112,7 +118,8 @@
 						<ul>
 							<li><a href="https://github.com/dlqls12" target="_blank"
 								class="block">GITHUB</a></li>
-							<li><a href="https://dlqls12.tistory.com/" target="_blank" class="block">TISTORY</a></li>
+							<li><a href="https://dlqls12.tistory.com/" target="_blank"
+								class="block">TISTORY</a></li>
 							<li><a
 								href="https://www.youtube.com/channel/UCqNhFabl_LORlyYzvHeJTVg?view_as=subscriber"
 								target="_blank" class="block">YOUTUBE</a></li>

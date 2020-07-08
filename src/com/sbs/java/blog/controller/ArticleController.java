@@ -36,7 +36,7 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionDoWrite(HttpServletRequest req, HttpServletResponse resp) {
-		return null;
+		return "article/write.jsp";
 	}
 
 	private String doActionDetail(HttpServletRequest req, HttpServletResponse resp) {
@@ -52,7 +52,9 @@ public class ArticleController extends Controller {
 
 		int fullPage = articleService.getForPrintListArticlesCount(0, "", "");
 		Article article = articleService.getForPrintArticle(id);
+		CateItem cateItem = articleService.getCateItem(article.getCateItemId());
 		
+		req.setAttribute("cateItem", cateItem);
 		req.setAttribute("fullPage", fullPage);
 		req.setAttribute("article", article);
 

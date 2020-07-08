@@ -14,6 +14,15 @@ function MobileSideBar__init() {
 	});
 }
 
+var editor1 = new toastui.Editor({
+	el : document.querySelector('#editor1'),
+	height : '600px',
+	initialEditType : 'markdown',
+	previewStyle : 'vertical',
+	initialValue : "# 안녕",
+	plugins : [ toastui.Editor.plugin.codeSyntaxHighlight ]
+});
+
 // 유튜브 플러그인 시작
 function youtubePlugin() {
 	toastui.Editor.codeBlockManager.setReplacer("youtube", function(youtubeId) {

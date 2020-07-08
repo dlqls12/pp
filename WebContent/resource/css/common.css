@@ -6,6 +6,10 @@ html {
 }
 
 /* 노말라이즈 */
+body {
+	background-color:#F2F4EF;
+}
+
 body, ul, li, h1 {
 	margin: 0;
 	padding: 0;
@@ -25,6 +29,11 @@ label[for] {
 /* 라이브러리 */
 .block {
 	display: block;
+}
+
+.block-block {
+	padding:14px;
+	display:block;
 }
 
 .inline-block {
@@ -368,8 +377,9 @@ label[for] {
 /* 탑바 시작 */
 .top-bar {
 	height: 100px;
-	border-bottom:5px solid black;
-	color: black;
+	border-bottom:5px solid #261326;
+	color: #261326;
+	background-color:#F2F4EF;
 }
 
 .top-bar .logo {
@@ -384,8 +394,8 @@ label[for] {
 }
 
 .top-bar .menu-box-1>ul>li:hover>a {
-	background-color: black;
-	color: white;
+	background-color: #261326;
+	color: #F2F4EF;
 }
 
 .top-bar .menu-box-1 ul>li {
@@ -395,7 +405,7 @@ label[for] {
 .top-bar .menu-box-1>ul ul {
 	display: none;
 	color: black;
-	background-color: white;
+	background-color: #F2F4EF;
 	position: absolute;
 	top: 100%;
 	width: 98%;
@@ -414,21 +424,22 @@ label[for] {
 }
 
 .top-bar .menu-box-1>ul ul>li:hover>a {
-	background-color: black;
-	color: white;
+	background-color: #261326;
+	color: #F2F4EF;
 }
 
 /* 탑바 끝 */
 
 /* 모바일 탑바 시작 */
 .mobile-top-bar {
-	background-color: black;
-	color: white;
+	background-color: #F2F4EF;
+	color: #261326;
 	height: 100px;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
+	border-bottom:5px solid #261326;
 }
 
 @media ( max-width :799px) {
@@ -467,8 +478,8 @@ label[for] {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: black;
-	color: white;
+	background-color: #F2F4EF;
+	color: #261326;
 	display: none;
 }
 
@@ -480,11 +491,12 @@ label[for] {
 	font-size: 1.2rem;
 	font-weight: bold;
 	text-align: center;
+	padding:25px 0;
 }
 
 .mobile-side-bar .menu-box-1 ul>li:hover>a {
-	background-color: white;
-	color: black;
+	background-color: #261326;
+	color: #F2F4EF;
 }
 
 .mobile-side-bar .menu-box-1>ul ul {
@@ -509,13 +521,13 @@ label[for] {
 }
 
 .article-title {
-	font-size:1.5rem;
+	font-size:2rem;
 	font-weight:bold;
 }
 
 .body-box {
-	min-height:80vh;
-	border-bottom:5px solid black;
+	min-height:85vh;
+	border-bottom:5px solid #261326;
 }
 
 .bottom > div {
@@ -551,7 +563,7 @@ label[for] {
 }
 
 .list-box table tbody tr td {
-	background-color:whitesmoke;
+	background-color:#F2F4EF;
 	width: 500px;
 	padding: 10px;
 	vertical-align: top;
@@ -560,6 +572,10 @@ label[for] {
 
 .list-box table tbody tr td:first-child {
 	font-weight:bold;
+}
+
+.list-box table tbody tr td > a:hover {
+	color:red;
 }
 
 .cate-and-date {

@@ -40,6 +40,7 @@
 </head>
 
 <body>
+	<div class="block-block visible-on-sm-down">aaaaa</div>
 	<div class="mobile-top-bar visible-on-sm-down flex">
 		<a href="#" class="btn-toggle-mobile-side-bar flex flex-ai-c"> <i
 			class="fas fa-bars"></i> <i class="fas fa-times"></i>
@@ -48,17 +49,14 @@
 			class="fas fa-hiking"></i>
 		</a>
 	</div>
-	<div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
+	<div class="mobile-side-bar flex visible-on-sm-down">
 		<nav class="menu-box-1 flex-grow-1">
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/s/home/main"
 					class="block">Home</a></li>
-				<li>
-					<a href="#" class="block">Articles</a>
+				<li><a href="${pageContext.request.contextPath}/s/article/list"
+					class="block">Articles</a>
 					<ul>
-						<li><a
-								href="${pageContext.request.contextPath}/s/article/list"
-								class="block">전체</a></li>
 						<%
 							for (CateItem cateItem : cateItems) {
 						%>
@@ -68,16 +66,17 @@
 						<%
 							}
 						%>
-					</ul>
-				</li>
+					</ul></li>
 				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe"
 					class="block">AboutMe</a></li>
 				<li><a href="#" class="block">SNS</a>
 					<ul>
-						<li><a href="https://github.com/jhs512" target="_blank"
+						<li><a href="https://github.com/dlqls12" target="_blank"
 							class="block">GITHUB</a></li>
-						<li><a href="https://github.com/jhs512" target="_blank"
-							class="block">INSTA</a></li>
+						<li><a href="https://dlqls12.tistory.com/" target="_blank" class="block">TISTORY</a></li>
+						<li><a
+							href="https://www.youtube.com/channel/UCqNhFabl_LORlyYzvHeJTVg?view_as=subscriber"
+							target="_blank" class="block">YOUTUBE</a></li>
 					</ul></li>
 			</ul>
 		</nav>
@@ -92,7 +91,9 @@
 				<ul class="flex height-100p">
 					<li><a href="${pageContext.request.contextPath}/s/home/main"
 						class="flex height-100p flex-ai-c">Home</a></li>
-					<li><a href="${pageContext.request.contextPath}/s/article/list" class="flex height-100p flex-ai-c">Articles</a>
+					<li><a
+						href="${pageContext.request.contextPath}/s/article/list"
+						class="flex height-100p flex-ai-c">Articles</a>
 						<ul>
 							<%
 								for (CateItem cateItem : cateItems) {
@@ -109,10 +110,12 @@
 						class="flex height-100p flex-ai-c">AboutMe</a></li>
 					<li><a href="#" class="flex height-100p flex-ai-c">SNS</a>
 						<ul>
-							<li><a href="https://github.com/jhs512" target="_blank"
+							<li><a href="https://github.com/dlqls12" target="_blank"
 								class="block">GITHUB</a></li>
-							<li><a href="https://github.com/jhs512" target="_blank"
-								class="block">INSTA</a></li>
+							<li><a href="https://dlqls12.tistory.com/" target="_blank" class="block">TISTORY</a></li>
+							<li><a
+								href="https://www.youtube.com/channel/UCqNhFabl_LORlyYzvHeJTVg?view_as=subscriber"
+								target="_blank" class="block">YOUTUBE</a></li>
 						</ul></li>
 				</ul>
 			</nav>

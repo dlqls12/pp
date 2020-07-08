@@ -5,6 +5,7 @@
 <%
 	Article article = (Article) request.getAttribute("article");
 	int fullPage = (int) request.getAttribute("fullPage");
+	CateItem cateItem = (CateItem) request.getAttribute("cateItem");
 %>
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
@@ -46,7 +47,7 @@
 	<div class="body-box">
 		<h1 class="main-title"><%=article.getTitle()%></h1>
 		<div class="cate-and-date">
-			카테고리 : null | 등록날짜 :
+			카테고리 : <%=cateItem.getName() %> | 등록날짜 :
 			<%=article.getRegDate()%></div>
 		<div class="detail-box">
 			<script type="text/x-template" id="origin1" style="display: none;"><%=article.getBody()%></script>

@@ -3,6 +3,7 @@ package com.sbs.java.blog.dao;
 import java.sql.Connection;
 
 import com.sbs.java.blog.util.DBUtil;
+import com.sbs.java.blog.util.SecSql;
 
 public class MemberDao extends Dao {
 	private Connection dbConn;
@@ -12,14 +13,14 @@ public class MemberDao extends Dao {
 	}
 	
 	public int join(String userId, String userPw, String nickname) {
-		String sql = "";
+		SecSql secSql = new SecSql();
+		
+		secSql.append("INSERT INTO members");
+		secSql.append("SET regDate = NOW()");
+		secSql.append(", userId = ? ", userId);
+		secSql.append(", userPw = ? ", userPw);
+		secSql.append(", nickname = ?", nickname);
 
-		sql += String.format("INSERT INTO members ");
-		sql += String.format("SET regDate = NOW() ");
-		sql += String.format(", userId = '%s' ", userId);
-		sql += String.format(", userPw = '%s' ", userPw);
-		sql += String.format(", nickname = '%s' ", nickname);
-
-		return DBUtil.insert(dbConn, sql);
+		return DBUtil.insert(dbConn, secSql);
 	}
 }

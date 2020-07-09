@@ -116,17 +116,6 @@ public class ArticleDao extends Dao {
 		secSql.append(", displayStatus = '1'");
 		secSql.append(", cateItemId = ?", cateItemId);
 		
-		/*
-		String sql = "";
-		sql += String.format("INSERT INTO article ");
-		sql += String.format("SET regDate = NOW() ");
-		sql += String.format(", updateDate = NOW1() ");
-		sql += String.format(", title = '%s' ", title);
-		sql += String.format(", body = '%s' ", body);
-		sql += String.format(", displayStatus = '1' ");
-		sql += String.format(", cateItemId = '%d' ", cateItemId);
-		*/
-		
 		return DBUtil.insert(dbConn, secSql);
 	}
 }

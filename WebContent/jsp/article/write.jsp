@@ -51,7 +51,7 @@
 	<div class="write-form-box body-box con">
 	<h1 class="main-title">article write</h1>
 		<form action="doWrite" method="POST" class="write-form form1"
-			onsubmit="submitJoinForm(this); return false;">
+			onsubmit="submitWriteForm(this); return false;">
 			<div class="form-row">
 				<div class="label">카테고리 선택</div>
 				<div class="input">

@@ -3,18 +3,6 @@ console.clear();
 var joinFormSubmitted = false;
 
 function submitJoinForm(form) {
-  if ( joinFormSubmitted ) {
-    alert('처리 중입니다.');
-    return;
-  }
-  
-  form.loginId.value = form.loginId.value.trim();
-  if ( form.loginId.value.length == 0 ) {
-    alert('아이디를 입력해주세요.');
-    form.loginId.focus();
-    
-    return;
-  }
   
   form.body.value = form.body.value.trim();
   if ( form.body.value.length == 0 ) {
@@ -31,6 +19,23 @@ function submitJoinForm(form) {
     
     return;
   }
+}
+
+function submitJoinForm(form) {
+  if ( joinFormSubmitted ) {
+    alert('처리 중입니다.');
+    return;
+  }
+  
+  form.loginId.value = form.loginId.value.trim();
+  if ( form.loginId.value.length == 0 ) {
+    alert('아이디를 입력해주세요.');
+    form.loginId.focus();
+    
+    return;
+  }
+  
+  
   
   if ( form.loginId.value.indexOf(' ') != -1 ) {
     alert('아이디를 영문소문자와 숫자의 조합으로 입력해주세요.')

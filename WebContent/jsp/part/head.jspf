@@ -123,7 +123,11 @@
 							<li><a
 								href="https://www.youtube.com/channel/UCqNhFabl_LORlyYzvHeJTVg?view_as=subscriber"
 								target="_blank" class="block">YOUTUBE</a></li>
-						</ul></li>
+						</ul>
+					</li>
+					<li>
+						<a href="${pageContext.request.contextPath}/s/member/join" class="flex height-100p flex-ai-c">Sign Up</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

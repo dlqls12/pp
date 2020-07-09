@@ -526,7 +526,7 @@ label[for] {
 }
 
 .body-box {
-	min-height:85vh;
+	min-height:80vh;
 	border-bottom:5px solid #261326;
 }
 
@@ -550,7 +550,7 @@ label[for] {
 .list-box > table {
 	border-collapse: collapse;
 	text-align: left;
-	line-height: 2.5;
+	line-height: 2;
 }
 
 .list-box table thead tr th {

@@ -5,8 +5,6 @@ import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sbs.java.blog.service.MemberService;
-
 public class MemberController extends Controller {
 
 	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req,
@@ -38,8 +36,8 @@ public class MemberController extends Controller {
 
 	private String doActionDoJoin(HttpServletRequest req, HttpServletResponse resp) {
 		
-		String userId = req.getParameter("userId");
-		String userPw = req.getParameter("userPw");
+		String userId = req.getParameter("loginId");
+		String userPw = req.getParameter("loginPw");
 		String nickname = req.getParameter("nickname");
 
 		int id = memberService.join(userId, userPw, nickname);

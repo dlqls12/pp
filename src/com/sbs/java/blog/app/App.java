@@ -65,7 +65,7 @@ public class App {
 		} catch (SQLErrorException e) {
 			Util.printEx(e.getMessage(), resp, e);
 		} catch (Exception e) {
-			Util.printEx("기타 예외123", resp, e);
+			Util.printEx("기타 예외", resp, e);
 		} finally {
 			if (dbConn != null) {
 				try {

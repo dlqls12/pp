@@ -25,6 +25,7 @@ public abstract class Controller {
 		this.req = req;
 		this.resp = resp;
 		articleService = new ArticleService(dbConn);
+		memberService = new MemberService(dbConn);
 	}
 
 	public void beforeAction() {

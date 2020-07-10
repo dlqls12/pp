@@ -588,10 +588,28 @@ label[for] {
 	border:2px solid #261326;
 }
 
+.join-box {
+	padding: 20px;
+	border:2px solid #261326;
+}
+
 .next-or-prev-button > a:hover {
 	color:red;
 }
 
 .main-img > img {
 	width:1200px;
+}
+
+.form-row {
+	display:flex;
+	align-items: center;
+}
+
+.form1 .form-row {
+	margin-top: 10px;
+}
+
+.label {
+	width:100px;
 }

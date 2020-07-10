@@ -63,21 +63,27 @@
 				});
 			</script>
 		</div>
-		<div class="next-or-prev-button">
-			<%
+		<div class="con flex flex-jc-sb">
+			<div class="next-or-prev-button">
+				<%
 				if (article.getId() > 1) {
-			%>
-			<a href="detail?id=<%=article.getId() - 1%>">[이전글]</a>
-			<%
+				%>
+				<a href="detail?id=<%=article.getId() - 1%>">[이전글]</a>
+				<%
 				}
-			%>
-			<%
-				if (article.getId() < fullPage) {
-			%>
-			<a href="detail?id=<%=article.getId() + 1%>">[다음글]</a>
-			<%
+				%>
+				<%
+					if (article.getId() < fullPage) {
+				%>
+				<a href="detail?id=<%=article.getId() + 1%>">[다음글]</a>
+				<%
 				}
-			%>
+				%>
+			</div>
+			<div class="next-or-prev-button">
+				<a href="${pageContext.request.contextPath}/s/article/delete?id=<%=article.getId()%>">[삭제하기]</a>
+				<a href="${pageContext.request.contextPath}/s/article/modify?id=<%=article.getId()%>">[수정하기]</a>
+			</div>
 		</div>
 	</div>
 	<div class="bottom">

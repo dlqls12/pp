@@ -6,10 +6,10 @@
 
 <div class="con">
 	<div class="body-box con">
-		<h1 class="main-title">회원가입</h1>
+		<h1 class="main-title">로그인</h1>
 		<div class="join-box">
-			<form action="doJoin" method="GET" target="_blank"
-				onsubmit="submitJoinForm(this); return false;">
+			<form action="doLogin" method="GET" target="_blank"
+				onsubmit="submitLoginForm(this); return false;">
 				<input type="hidden" name="loginPwReal">
 				<div class="form-row">
 					<div class="label">아이디</div>
@@ -18,10 +18,6 @@
 				<div class="form-row">
 					<div class="label">비밀번호</div>
 					<input name="loginPw" type="password" placeholder="비밀번호 입력해주세요.">
-				</div>
-				<div class="form-row">
-					<div class="label">닉네임</div>
-					<input name="nickname" type="text" placeholder="닉네임 입력해주세요.">
 				</div>
 				<div>
 					<input type="submit" value="제출">

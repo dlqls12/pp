@@ -32,9 +32,43 @@ public class ArticleController extends Controller {
 			return doActionDoWrite(req, resp);
 		case "write":
 			return doActionWrite(req, resp);
+		case "delete":
+			return doActionDelete(req, resp);
+		case "modify":
+			return doActionModify(req, resp);
+		case "doModify":
+			return doActionDoModify(req, resp);
 		}
 
 		return "";
+	}
+
+	private String doActionDoModify(HttpServletRequest req, HttpServletResponse resp) {
+		String title = req.getParameter("title");
+		String body = req.getParameter("body");
+		int cateItemId = Util.getInt(req, "cateItemId");
+		int id = Util.getInt(req, "id");
+		
+		articleService.update(cateItemId, title, body, id);
+		
+		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('list'); </script>";
+	}
+
+	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
+		int id = Util.getInt(req, "id");
+		
+		Article article = articleService.getForPrintArticle(id);
+		
+		req.setAttribute("article", article);
+		return "article/modify.jsp";
+	}
+
+	private String doActionDelete(HttpServletRequest req, HttpServletResponse resp) {
+		
+		int id = Util.getInt(req, "id");
+		articleService.delete(id);
+		
+		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
 	}
 
 	private String doActionWrite(HttpServletRequest req, HttpServletResponse resp) {

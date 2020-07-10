@@ -1,8 +1,50 @@
 console.clear();
 
-var joinFormSubmitted = false;
+function MobileSideBar__init() {
+	$('.mobile-top-bar .btn-toggle-mobile-side-bar').click(function() {
+		var $this = $(this);
 
-function submitJoinForm(form) {
+		if ($this.hasClass('active')) {
+			$this.removeClass('active');
+			$('.mobile-side-bar').removeClass('active');
+		} else {
+			$this.addClass('active')
+			$('.mobile-side-bar').addClass('active');
+		}
+	});
+}
+
+$(function() {
+	MobileSideBar__init();
+});
+
+var joinFormSubmitted = false;
+var writeFormSubmitted = false;
+var loginFormSubmitted = false;
+
+function submitLoginForm(form) {
+	  
+	  form.loginId.value = form.loginId.value.trim();
+	  if ( form.loginId.value.length == 0 ) {
+	    alert('아이디를 입력해주세요.');
+	    form.loginId.focus();
+	    
+	    return;
+	  }
+	  
+	  form.loginPw.value = form.loginPw.value.trim();
+	  if ( form.loginPw.value.length == 0 ) {
+	    alert('비밀번호를 입력해주세요.');
+	    form.loginPw.focus();
+	    
+	    return;
+	  }
+	  
+	  form.submit();
+	  writeFormSubmitted = true;
+	}
+
+function submitWriteForm(form) {
   
   form.body.value = form.body.value.trim();
   if ( form.body.value.length == 0 ) {
@@ -19,6 +61,9 @@ function submitJoinForm(form) {
     
     return;
   }
+  
+  form.submit();
+  writeFormSubmitted = true;
 }
 
 function submitJoinForm(form) {
@@ -34,8 +79,6 @@ function submitJoinForm(form) {
     
     return;
   }
-  
-  
   
   if ( form.loginId.value.indexOf(' ') != -1 ) {
     alert('아이디를 영문소문자와 숫자의 조합으로 입력해주세요.')
@@ -67,28 +110,14 @@ function submitJoinForm(form) {
   joinFormSubmitted = true;
 }
 
-function MobileSideBar__init() {
-	$('.mobile-top-bar .btn-toggle-mobile-side-bar').click(function() {
-		var $this = $(this);
-
-		if ($this.hasClass('active')) {
-			$this.removeClass('active');
-			$('.mobile-side-bar').removeClass('active');
-		} else {
-			$this.addClass('active')
-			$('.mobile-side-bar').addClass('active');
-		}
-	});
-}
-
 var editor1 = new toastui.Editor({
-	el : document.querySelector('#editor1'),
-	height : '600px',
-	initialEditType : 'markdown',
-	previewStyle : 'vertical',
-	initialValue : "# 안녕",
-	plugins : [ toastui.Editor.plugin.codeSyntaxHighlight ]
-});
+	  el: document.querySelector("#editor1"),
+	  height: "600px",
+	  initialEditType: "markdown",
+	  previewStyle: "vertical",
+	  initialValue: "# 안녕",
+	  plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, replPlugin, codepenPlugin]
+	});
 
 // 유튜브 플러그인 시작
 function youtubePlugin() {
@@ -286,7 +315,3 @@ function getUrlParams(url) {
 	return params;
 }
 // lib 끝
-
-$(function() {
-	MobileSideBar__init();
-});

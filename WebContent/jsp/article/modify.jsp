@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ include file="/jsp/part/head.jspf"%>
-
+<%
+	Article article = (Article) request.getAttribute("article");
+%>
 <style>
 /* lib */
 .form1 {
@@ -45,12 +48,11 @@
 		display: block;
 	}
 }
-
 </style>
 <div class="con">
 	<div class="write-form-box body-box con">
-	<h1 class="main-title">게시물 작성하기</h1>
-		<form action="doWrite" method="POST" class="write-form form1"
+		<h1 class="main-title">게시물 수정</h1>
+		<form action="doModify" method="POST" class="write-form form1"
 			onsubmit="submitWriteForm(this); return false;">
 			<div class="form-row">
 				<div class="label">카테고리 선택</div>
@@ -67,15 +69,20 @@
 				</div>
 			</div>
 			<div class="form-row">
+				<div class="input">
+					<input name="id" type="hidden" value='<%=article.getId()%>' />
+				</div>
+			</div>
+			<div class="form-row">
 				<div class="label">제목</div>
 				<div class="input">
-					<input name="title" type="text" placeholder="제목을 입력해주세요." />
+					<input name="title" type="text" value='<%=article.getTitle()%>' />
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="label">내용</div>
 				<div class="input">
-					<textarea name="body" placeholder="내용을 입력해주세요." /></textarea>
+					<textarea name="body" /><%=article.getBody()%></textarea>
 				</div>
 			</div>
 			<div class="form-row">
@@ -87,12 +94,12 @@
 		</form>
 	</div>
 	<div class="bottom">
-		<div>	
+		<div>
 			<div class="yb">
 				<img src="../../resource/img/yb.png" alt="로고입니다." />
 			</div>
 			<div class="ment">dlqls0190@naver.com</div>
 		</div>
-	</div>	
+	</div>
 </div>
 <%@ include file="/jsp/part/foot.jspf"%>

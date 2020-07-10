@@ -25,9 +25,21 @@ public class MemberController extends Controller {
 			return doActionJoin(req, resp);
 		case "doJoin":
 			return doActionDoJoin(req, resp);
+		case "login":
+			return doActionLogin(req, resp);
+		case "doLogin":
+			return doActionDoLogin(req, resp);
 		}
 
 		return "";
+	}
+
+	private String doActionDoLogin(HttpServletRequest req, HttpServletResponse resp) {
+		return null;
+	}
+
+	private String doActionLogin(HttpServletRequest req, HttpServletResponse resp) {
+		return "member/login.jsp";
 	}
 
 	private String doActionJoin(HttpServletRequest req, HttpServletResponse resp) {

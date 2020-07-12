@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 
+<script src="../../resource/js/write.js"></script>
+
 <style>
 /* lib */
 .form1 {

@@ -4,6 +4,8 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
+<script src="../../resource/js/login.js"></script>
+
 <div class="con">
 	<div class="body-box con">
 		<h1 class="main-title">로그인</h1>

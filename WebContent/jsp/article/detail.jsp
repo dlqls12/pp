@@ -7,6 +7,9 @@
 	int fullPage = (int) request.getAttribute("fullPage");
 	CateItem cateItem = (CateItem) request.getAttribute("cateItem");
 %>
+
+<script src="../../resource/js/detail.js"></script>
+
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>

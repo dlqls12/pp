@@ -48,7 +48,7 @@
 		<h1 class="main-title"><%=article.getTitle()%></h1>
 		<div class="cate-and-date">
 			카테고리 : <%=cateItem.getName() %> | 등록날짜 :
-			<%=article.getRegDate()%></div>
+			<%=article.getRegDate()%> | 조회수 : <%=article.getHit() %></div>
 		<div class="detail-box">
 			<script type="text/x-template" id="origin1" style="display: none;"><%=article.getBody()%></script>
 			<div id="viewer1"></div>

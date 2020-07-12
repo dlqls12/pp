@@ -173,7 +173,6 @@ public class DBUtil {
 		PreparedStatement stmt = null;
 		try {
 			stmt = sql.getPreparedStatement(dbConn);
-			stmt.executeUpdate();
 			affectedRows = stmt.executeUpdate();
 		} catch (SQLException e) {
 			System.err.printf("[SQL 예외, SQL : %s] : %s\n", sql, e.getMessage());

@@ -96,6 +96,7 @@ public class ArticleController extends Controller {
 
 		int id = Util.getInt(req, "id");
 
+		articleService.increaseHit(id);
 		int fullPage = articleService.getForPrintListArticlesCount(0, "", "");
 		Article article = articleService.getForPrintArticle(id);
 		CateItem cateItem = articleService.getCateItem(article.getCateItemId());

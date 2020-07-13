@@ -69,8 +69,7 @@
 						<%
 							}
 						%>
-					</ul>
-				</li>
+					</ul></li>
 				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe"
 					class="block">AboutMe</a></li>
 				<li><a href="#" class="block">SNS</a>
@@ -82,14 +81,19 @@
 						<li><a
 							href="https://www.youtube.com/channel/UCqNhFabl_LORlyYzvHeJTVg?view_as=subscriber"
 							target="_blank" class="block">YOUTUBE</a></li>
-					</ul>
-				</li>
+					</ul></li>
 				<li><a href="#" class="block">Member</a>
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/s/member/join" class="block">Sing Up</a></li>
-						<li><a href="${pageContext.request.contextPath}/s/member/login" class="block">Login</a></li>
-					</ul>
-				</li>
+						<li><a
+							href="${pageContext.request.contextPath}/s/member/join"
+							class="block">Sing Up</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/s/member/login"
+							class="block">Login</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/s/member/logout"
+							class="block">Logout</a></li>
+					</ul></li>
 			</ul>
 		</nav>
 	</div>
@@ -119,8 +123,7 @@
 							<%
 								}
 							%>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a
 						href="${pageContext.request.contextPath}/s/home/aboutMe"
 						class="flex height-100p flex-ai-c">AboutMe</a></li>
@@ -133,16 +136,19 @@
 							<li><a
 								href="https://www.youtube.com/channel/UCqNhFabl_LORlyYzvHeJTVg?view_as=subscriber"
 								target="_blank" class="block">YOUTUBE</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li><a href="#" class="flex height-100p flex-ai-c">Member</a>
 						<ul>
 							<li><a
-								href="${pageContext.request.contextPath}/s/member/join" class="block">Sing Up</a></li>
+								href="${pageContext.request.contextPath}/s/member/join"
+								class="block">Sing Up</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/s/member/login" class="block">Login</a></li>
-						</ul>
-					</li>
+								href="${pageContext.request.contextPath}/s/member/login"
+								class="block">Login</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/s/member/logout"
+								class="block">Logout</a></li>
+						</ul></li>
 				</ul>
 			</nav>
 		</div>

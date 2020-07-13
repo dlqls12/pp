@@ -41,11 +41,15 @@ public class MemberController extends Controller {
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
 		
+		if (memberService.isLogined(loginId) > 0) {
+			return "html:<script> alert('이미 로그인 하셨습니다.'); location.replace('../home/main'); </script>";
+		}
+		
 		Member member = null;
 		member = memberService.login(loginId, loginPw);
 		if (member != null) {
 			memberService.loginComplete(loginId);
-			return "html:<script> alert('" + member.getNickname() + "님 환영합니다.123123123123'); location.replace('../home/main'); </script>";
+			return "html:<script> alert('" + member.getNickname() + "님 환영합니다.'); location.replace('../home/main'); </script>";
 		} else {
 			return "html:<script> alert('아이디나 비밀번호가 틀렸습니다.'); location.replace('../home/main'); </script>";
 		}

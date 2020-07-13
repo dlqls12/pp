@@ -28,4 +28,8 @@ public class MemberService extends Service {
 	public int loginComplete(String loginId) {
 		return MemberDao.loginComplete(loginId);
 	}
+
+	public int isLogined(String loginId) {
+		return MemberDao.isLogined(loginId);
+	}
 }

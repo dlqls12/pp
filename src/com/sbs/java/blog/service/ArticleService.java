@@ -6,6 +6,7 @@ import java.util.List;
 import com.sbs.java.blog.dao.ArticleDao;
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.CateItem;
+import com.sbs.java.blog.dto.Reply;
 
 public class ArticleService extends Service {
 
@@ -51,7 +52,11 @@ public class ArticleService extends Service {
 		articleDao.increaseHit(id);
 	}
 
-	public void addReply(int articleId, String body) {
-		articleDao.addReply(articleId, body);
+	public int addReply(int articleId, String body, int memberId) {
+		return articleDao.addReply(articleId, body, memberId);
+	}
+
+	public List<Reply> getReplies(int id) {
+		return articleDao.getReplies(id);
 	}
 }

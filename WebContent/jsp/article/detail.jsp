@@ -1,8 +1,10 @@
 <%@ page import="com.sbs.java.blog.dto.Article"%>
+<%@ page import="com.sbs.java.blog.dto.Reply"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%
+	List<Reply> replies = (List<Reply>) request.getAttribute("replies");
 	Article article = (Article) request.getAttribute("article");
 	int fullPage = (int) request.getAttribute("fullPage");
 	CateItem cateItem = (CateItem) request.getAttribute("cateItem");

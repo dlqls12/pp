@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.CateItem;
+import com.sbs.java.blog.dto.Reply;
 import com.sbs.java.blog.util.Util;
 
 public class ArticleController extends Controller {
@@ -47,10 +48,10 @@ public class ArticleController extends Controller {
 	private String doActionAddReply(HttpServletRequest req, HttpServletResponse resp) {
 		int articleId = Util.getInt(req, "articleId");
 		String body = req.getParameter("body");
+		int memberId = Util.nowLoginedMember.getId();
+		articleService.addReply(articleId, body, memberId);
 		
-		articleService.addReply(articleId, body);
-		
-		return null;
+		return "html:<script> alert('댓글 작성 완료.'); location.replace('list'); </script>";
 	}
 
 	private String doActionDoModify(HttpServletRequest req, HttpServletResponse resp) {
@@ -110,7 +111,9 @@ public class ArticleController extends Controller {
 		int fullPage = articleService.getForPrintListArticlesCount(0, "", "");
 		Article article = articleService.getForPrintArticle(id);
 		CateItem cateItem = articleService.getCateItem(article.getCateItemId());
+		List<Reply> replies = articleService.getReplies(article.getId());
 		
+		req.setAttribute("replies", replies);
 		req.setAttribute("cateItem", cateItem);
 		req.setAttribute("fullPage", fullPage);
 		req.setAttribute("article", article);

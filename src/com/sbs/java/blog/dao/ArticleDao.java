@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.CateItem;
+import com.sbs.java.blog.dto.Reply;
 import com.sbs.java.blog.util.DBUtil;
 import com.sbs.java.blog.util.SecSql;
 
@@ -149,6 +150,32 @@ public class ArticleDao extends Dao {
 		return DBUtil.update(dbConn, sql);
 	}
 
-	public void addReply(int articleId, String body) {
+	public int addReply(int articleId, String body, int memberId) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("INSERT INTO articleReply");
+		secSql.append("SET regDate = NOW()");
+		secSql.append(", updateDate = NOW()");
+		secSql.append(", articleId = ? ", articleId);
+		secSql.append(", body = ? ", body);
+		secSql.append(", memberId = ?", memberId);
+
+		return DBUtil.insert(dbConn, secSql);
+	}
+
+	public List<Reply> getReplies(int id) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("SELECT * FROM articleReply");
+		secSql.append("WHERE articleId = ?", id);
+
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
+		List<Reply> replies = new ArrayList<>();
+
+		for (Map<String, Object> row : rows) {
+			replies.add(new Reply(row));
+		}
+
+		return replies;
 	}
 }

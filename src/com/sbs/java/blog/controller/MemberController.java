@@ -9,6 +9,7 @@ import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.util.Util;
 
 public class MemberController extends Controller {
+	Member nowLoginedMember = null;
 	
 	
 	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req,
@@ -41,26 +42,40 @@ public class MemberController extends Controller {
 	}
 
 	private String doActionLogout(HttpServletRequest req, HttpServletResponse resp) {
+<<<<<<< HEAD
 		if (Util.nowLoginedMember == null) {
 			return "html:<script> alert('이미 로그아웃 하셨습니다.'); location.replace('../home/main'); </script>";
 		}
 		Util.nowLoginedMember = null;
 		return "html:<script> alert('로그아웃 되었습니다.'); location.replace('../home/main'); </script>";
+=======
+	
+		return null;
+>>>>>>> 7dcfd5fe58af26060d1271d7dac03dddc3112b0b
 	}
 
 	private String doActionDoLogin(HttpServletRequest req, HttpServletResponse resp) {
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
 		
+<<<<<<< HEAD
 		if (Util.nowLoginedMember != null) {
+=======
+		if (nowLoginedMember != null) {
+>>>>>>> 7dcfd5fe58af26060d1271d7dac03dddc3112b0b
 			return "html:<script> alert('이미 로그인 하셨습니다.'); location.replace('../home/main'); </script>";
 		}
 		
 		Member member = null;
 		member = memberService.login(loginId, loginPw);
 		if (member != null) {
+<<<<<<< HEAD
 			Util.nowLoginedMember = member;
 			return "html:<script> alert('" + Util.nowLoginedMember.getNickname() + "님 환영합니다.'); location.replace('../home/main'); </script>";
+=======
+			nowLoginedMember = member;
+			return "html:<script> alert('" + nowLoginedMember.getNickname() + "님 환영합니다.'); location.replace('../home/main'); </script>";
+>>>>>>> 7dcfd5fe58af26060d1271d7dac03dddc3112b0b
 		} else {
 			return "html:<script> alert('아이디나 비밀번호가 틀렸습니다.'); location.replace('../home/main'); </script>";
 		}

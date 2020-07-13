@@ -10,7 +10,7 @@
 	<div class="body-box con">
 		<h1 class="main-title">로그인</h1>
 		<div class="join-box">
-			<form action="doLogin" method="GET" target="_blank"
+			<form action="doLogin" method="POST" target="_blank"
 				onsubmit="submitLoginForm(this); return false;">
 				<input type="hidden" name="loginPwReal">
 				<div class="form-row">

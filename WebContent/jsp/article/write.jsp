@@ -64,18 +64,14 @@
 	flex-grow: 1;
 }
 
-.form1 .form-row>.input>input, .form1 .form-row>.input>textarea {
+.form1 .form-row>.input>input {
 	display: block;
-	width: 100%;
+	width:100%;
 	padding: 10px;
 }
 
 .form1 .form-row>.input>select {
 	padding: 10px;
-}
-
-.form1 .form-row>.input>textarea {
-	height: 500px;
 }
 
 @media ( max-width :700px ) {
@@ -111,8 +107,10 @@
 			</div>
 			<div class="form-row">
 				<div class="label">내용</div>
-				<input type="hidden" name="body">
-				<div id="editor1"></div>
+				<div class="input">
+					<input type="hidden" name="body">
+					<div id="editor1"></div>
+				</div>
 			</div>
 			<div class="form-row">
 				<div class="label">전송</div>
@@ -139,7 +137,7 @@
 		height : "600px",
 		initialEditType : "markdown",
 		previewStyle : "vertical",
-		initialValue : "# 안녕",
+		initialValue : "# 내용을 입력해주세요...",
 		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
 				replPlugin, codepenPlugin ]
 	});

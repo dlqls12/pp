@@ -411,6 +411,7 @@ label[for] {
 	width: 98%;
 	border-top-width: 0;
 	border:1px solid #261326;
+	z-index:100;
 }
 
 .top-bar .menu-box-1 ul>li:hover>ul {

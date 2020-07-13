@@ -5,6 +5,9 @@ import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sbs.java.blog.dto.Member;
+import com.sbs.java.blog.util.Util;
+
 public class MemberController extends Controller {
 
 	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req,
@@ -35,7 +38,17 @@ public class MemberController extends Controller {
 	}
 
 	private String doActionDoLogin(HttpServletRequest req, HttpServletResponse resp) {
-		return null;
+		String loginId = req.getParameter("loginId");
+		String loginPw = req.getParameter("loginPwReal");
+
+		Member member = null;
+		member = memberService.login(loginId, loginPw);
+		if ( member != null ) {
+			return "html:<script> alert('"+ member.getNickname()+"님 환영합니다.'); location.replace('../home/main'); </script>";
+		}
+		else {
+			return "html:<script> alert('아이디나 비밀번호가 틀렸습니다.'); location.replace('../home/main'); </script>";
+		}
 	}
 
 	private String doActionLogin(HttpServletRequest req, HttpServletResponse resp) {
@@ -47,13 +60,21 @@ public class MemberController extends Controller {
 	}
 
 	private String doActionDoJoin(HttpServletRequest req, HttpServletResponse resp) {
-		
-		String userId = req.getParameter("loginId");
-		String userPw = req.getParameter("loginPw");
+		String loginId = req.getParameter("loginId");
+		String loginPwReal = req.getParameter("loginPwReal");
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
 		String nickname = req.getParameter("nickname");
-
-		int id = memberService.join(userId, userPw, nickname);
 		
-		return "html:<script> alert('" + id + " : " + nickname + "님 환영합니다.'); location.replace('../home/main'); </script>";
+		int isExist = memberService.isExistId(loginId);
+		
+		if ( isExist > 0 ) {
+			return "html:<script> alert('입력하신 아이디가 이미 존재합니다.'); location.replace('../home/main'); </script>";
+		}
+		
+		memberService.join(loginId, loginPwReal, name, email, nickname);
+			
+		return "html:<script> alert('" + nickname + "님 환영합니다.'); location.replace('../home/main'); </script>";
+
 	}
 }

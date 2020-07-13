@@ -1,7 +1,10 @@
 package com.sbs.java.blog.dao;
 
 import java.sql.Connection;
+import java.util.Map;
 
+import com.sbs.java.blog.dto.CateItem;
+import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.util.DBUtil;
 import com.sbs.java.blog.util.SecSql;
 
@@ -11,16 +14,50 @@ public class MemberDao extends Dao {
 	public MemberDao(Connection dbConn) {
 		this.dbConn = dbConn;
 	}
-	
-	public int join(String userId, String userPw, String nickname) {
+
+	public Member login(String loginId, String loginPw) {
 		SecSql secSql = new SecSql();
-		
-		secSql.append("INSERT INTO members");
+
+		secSql.append("SELECT * FROM `member` ");
+		secSql.append("WHERE loginId = ? ", loginId);
+		secSql.append("AND loginPw = ? ", loginPw);
+
+		if(!DBUtil.selectRow(dbConn, secSql).isEmpty()) {
+			Map<String, Object> row = DBUtil.selectRow(dbConn, secSql);
+			Member m = new Member(row);
+			return m;
+		}
+
+		return null;
+	}
+
+	public int join(String loginId, String loginPw, String name, String email, String nickname) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("INSERT INTO `member`");
 		secSql.append("SET regDate = NOW()");
-		secSql.append(", userId = ? ", userId);
-		secSql.append(", userPw = ? ", userPw);
+		secSql.append(", updateDate = NOW() ");
+		secSql.append(", loginId = ? ", loginId);
+		secSql.append(", loginPw = ? ", loginPw);
+		secSql.append(", name = ?", name);
+		secSql.append(", email = ?", email);
 		secSql.append(", nickname = ?", nickname);
 
 		return DBUtil.insert(dbConn, secSql);
+	}
+
+	public int isExistId(String loginId) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("SELECT * FROM `member` ");
+		secSql.append("WHERE loginId = ? ", loginId);
+		
+		if(!DBUtil.selectRow(dbConn, secSql).isEmpty()) {
+			Map<String, Object> row = DBUtil.selectRow(dbConn, secSql);
+			Member m = new Member(row);
+			return m.getId();
+		}
+		
+		return -1;
 	}
 }

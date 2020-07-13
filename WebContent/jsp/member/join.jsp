@@ -10,7 +10,7 @@
 	<div class="body-box con">
 		<h1 class="main-title">회원가입</h1>
 		<div class="join-box">
-			<form action="doJoin" method="GET" target="_blank"
+			<form action="doJoin" method="POST" target="_blank"
 				onsubmit="submitJoinForm(this); return false;">
 				<input type="hidden" name="loginPwReal">
 				<div class="form-row">
@@ -19,11 +19,23 @@
 				</div>
 				<div class="form-row">
 					<div class="label">비밀번호</div>
-					<input name="loginPw" type="password" placeholder="비밀번호 입력해주세요.">
+					<input name="loginPw" type="password" placeholder="비밀번호를 입력해주세요.">
+				</div>
+				<div class="form-row">
+					<div class="label">비밀번호 확인</div>
+					<input name="loginPwConfirm" type="password" placeholder="비밀번호 확인을 입력해주세요.">
+				</div>
+				<div class="form-row">
+					<div class="label">이름</div>
+					<input name="name" type="text" placeholder="이름을 입력해주세요.">
+				</div>
+				<div class="form-row">
+					<div class="label">이메일</div>
+					<input name="email" type="text" placeholder="이메일을 입력해주세요.">
 				</div>
 				<div class="form-row">
 					<div class="label">닉네임</div>
-					<input name="nickname" type="text" placeholder="닉네임 입력해주세요.">
+					<input name="nickname" type="text" placeholder="닉네임을 입력해주세요.">
 				</div>
 				<div>
 					<input type="submit" value="제출">

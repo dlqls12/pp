@@ -24,12 +24,4 @@ public class MemberService extends Service {
 	public int isExistId(String loginId) {
 		return MemberDao.isExistId(loginId);
 	}
-
-	public int loginComplete(String loginId) {
-		return MemberDao.loginComplete(loginId);
-	}
-
-	public int isLogined(String loginId) {
-		return MemberDao.isLogined(loginId);
-	}
 }

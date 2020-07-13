@@ -60,26 +60,4 @@ public class MemberDao extends Dao {
 		
 		return -1;
 	}
-
-	public int loginComplete(String loginId) {
-		SecSql secSql = new SecSql();
-
-		secSql.append("INSERT INTO nowLogin ");
-		secSql.append("SET loginId = ? ", loginId);
-		
-		return DBUtil.insert(dbConn, secSql);
-	}
-
-	public int isLogined(String loginId) {
-		SecSql secSql = new SecSql();
-
-		secSql.append("SELECT * FROM nowLogin ");
-		secSql.append("WHERE loginId = ? ", loginId);
-		
-		if(!DBUtil.selectRow(dbConn, secSql).isEmpty()) {
-			return 100;
-		}
-		
-		return -1;
-	}
 }

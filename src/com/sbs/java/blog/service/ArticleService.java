@@ -50,4 +50,8 @@ public class ArticleService extends Service {
 	public void increaseHit(int id) {
 		articleDao.increaseHit(id);
 	}
+
+	public void addReply(int articleId, String body) {
+		
+	}
 }

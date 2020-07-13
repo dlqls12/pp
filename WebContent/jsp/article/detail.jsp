@@ -88,6 +88,27 @@
 				<a href="${pageContext.request.contextPath}/s/article/modify?id=<%=article.getId()%>">[수정하기]</a>
 			</div>
 		</div>
+		<div class="con">
+		<form action="addReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
+			<div class="form-row">
+				<div class="input">
+					<input name="id" type="hidden" value='<%=article.getId()%>' />
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="label">댓글</div>
+				<div class="input">
+					<textarea name="body" placeholder="내용을 입력해주세요." /></textarea>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="label">전송</div>
+				<div class="input">
+					<input type="submit" value="전송" />
+				</div>
+			</div>
+		</form>
+		</div>
 	</div>
 	<div class="bottom">
 		<div>

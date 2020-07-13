@@ -38,9 +38,20 @@ public class ArticleController extends Controller {
 			return doActionModify(req, resp);
 		case "doModify":
 			return doActionDoModify(req, resp);
+		case "addReply":
+			return doActionAddReply(req, resp);
 		}
 
 		return "";
+	}
+
+	private String doActionAddReply(HttpServletRequest req, HttpServletResponse resp) {
+		int articleId = Util.getInt(req, "articleId");
+		String body = req.getParameter("body");
+		
+		articleService.addReply(articleId, body);
+		
+		return null;
 	}
 
 	private String doActionDoModify(HttpServletRequest req, HttpServletResponse resp) {

@@ -1,13 +1,14 @@
 console.clear();
 
 var editor1 = new toastui.Editor({
-	  el: document.querySelector("#editor1"),
-	  height: "600px",
-	  initialEditType: "markdown",
-	  previewStyle: "vertical",
-	  initialValue: "# 안녕",
-	  plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, replPlugin, codepenPlugin]
-	});
+	el : document.querySelector("#editor1"),
+	height : "600px",
+	initialEditType : "markdown",
+	previewStyle : "vertical",
+	initialValue : "# 안녕",
+	plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
+			replPlugin, codepenPlugin ]
+});
 
 // 유튜브 플러그인 시작
 function youtubePlugin() {
@@ -205,3 +206,19 @@ function getUrlParams(url) {
 	return params;
 }
 // lib 끝
+
+var ReplyFormSubmitted = false;
+
+function submitReplyForm(form) {
+
+	form.body.value = form.body.value.trim();
+	if (form.body.value.length == 0) {
+		alert('댓글을 작성해주세요.');
+		form.body.focus();
+
+		return;
+	}	
+
+	form.submit();
+	ReplyFormSubmitted = true;
+}

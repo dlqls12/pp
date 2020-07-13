@@ -21,7 +21,7 @@ public class MemberDao extends Dao {
 		secSql.append("SELECT * FROM `member` ");
 		secSql.append("WHERE loginId = ? ", loginId);
 		secSql.append("AND loginPw = ? ", loginPw);
-
+		
 		if(!DBUtil.selectRow(dbConn, secSql).isEmpty()) {
 			Map<String, Object> row = DBUtil.selectRow(dbConn, secSql);
 			Member m = new Member(row);
@@ -59,5 +59,14 @@ public class MemberDao extends Dao {
 		}
 		
 		return -1;
+	}
+
+	public int loginComplete(String loginId) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("INSERT INTO nowLogin ");
+		secSql.append("SET loginId = ? ", loginId);
+		
+		return DBUtil.insert(dbConn, secSql);
 	}
 }

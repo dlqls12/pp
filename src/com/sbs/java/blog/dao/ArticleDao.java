@@ -148,4 +148,7 @@ public class ArticleDao extends Dao {
 		
 		return DBUtil.update(dbConn, sql);
 	}
+
+	public void addReply(int articleId, String body) {
+	}
 }

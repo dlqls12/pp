@@ -1,5 +1,6 @@
 package com.sbs.java.blog.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,6 @@ public class Article extends Dto {
 	private int hit;
 	private String title;
 	private String body;
-	private List<Reply> reply;
 
 	public Article(Map<String, Object> row) {
 		super(row);

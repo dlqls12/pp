@@ -41,7 +41,6 @@ public class ArticleController extends Controller {
 		case "addReply":
 			return doActionAddReply(req, resp);
 		}
-
 		return "";
 	}
 

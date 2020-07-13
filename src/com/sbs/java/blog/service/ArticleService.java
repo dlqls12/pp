@@ -52,6 +52,6 @@ public class ArticleService extends Service {
 	}
 
 	public void addReply(int articleId, String body) {
-		
+		articleDao.addReply(articleId, body);
 	}
 }

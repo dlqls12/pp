@@ -27,35 +27,56 @@ public class ArticleController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "list":
+			if (Util.nowLoginedMember == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
 			return doActionList(req, resp);
 		case "detail":
+			if (Util.nowLoginedMember == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
 			return doActionDetail(req, resp);
 		case "doWrite":
+			if (Util.nowLoginedMember == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
 			return doActionDoWrite(req, resp);
 		case "write":
+			if (Util.nowLoginedMember == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
 			return doActionWrite(req, resp);
 		case "delete":
+			if (Util.nowLoginedMember == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
 			return doActionDelete(req, resp);
 		case "modify":
+			if (Util.nowLoginedMember == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
 			return doActionModify(req, resp);
 		case "doModify":
+			if (Util.nowLoginedMember == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
 			return doActionDoModify(req, resp);
 		case "addReply":
+			if (Util.nowLoginedMember == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
 			return doActionAddReply(req, resp);
 		}
 		return "";
 	}
 
 	private String doActionAddReply(HttpServletRequest req, HttpServletResponse resp) {
-		if (Util.nowLoginedMember == null) {
-			return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('list'); </script>";
-		}
 		int articleId = Util.getInt(req, "id");
 		String body = req.getParameter("body");
 		int memberId = Util.nowLoginedMember.getId();
 		articleService.addReply(articleId, body, memberId);
 		
-		return "html:<script> alert('댓글 작성 완료.'); location.replace('list'); </script>";
+		return "html:<script> alert('댓글 작성 완료.'); location.replace('detail?id="+articleId+"'); </script>";
 	}
 
 	private String doActionDoModify(HttpServletRequest req, HttpServletResponse resp) {
@@ -66,11 +87,16 @@ public class ArticleController extends Controller {
 		
 		articleService.update(cateItemId, title, body, id);
 		
-		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('list'); </script>";
+		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('detail?id="+id+"'); </script>";
 	}
 
 	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
+		int memberId = Util.getInt(req, "memberId");
 		int id = Util.getInt(req, "id");
+		
+		if (memberId != Util.nowLoginedMember.getId()) {
+			return "html:<script> alert('작성자 본인만 수정할 수 있습니다.'); location.replace('detail?id="+id+"'); </script>";
+		}
 		
 		Article article = articleService.getForPrintArticle(id);
 		
@@ -79,8 +105,12 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionDelete(HttpServletRequest req, HttpServletResponse resp) {
-		
+		int memberId = Util.getInt(req, "memberId");
 		int id = Util.getInt(req, "id");
+		if (memberId != Util.nowLoginedMember.getId()) {
+			return "html:<script> alert('작성자 본인만 삭제할 수 있습니다.'); location.replace('detail?id="+id+"'); </script>";
+		}
+		
 		articleService.delete(id);
 		
 		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
@@ -95,7 +125,7 @@ public class ArticleController extends Controller {
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
 		
-		int id = articleService.write(cateItemId, title, body);
+		int id = articleService.write(cateItemId, title, body, Util.nowLoginedMember.getId());
 		
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}

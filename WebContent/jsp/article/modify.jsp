@@ -107,6 +107,9 @@
 				<div class="input">
 					<input name="id" type="hidden" value='<%=article.getId()%>' />
 				</div>
+				<div class="input">
+					<input name="memberId" type="hidden" value='<%=article.getMemberId()%>' />
+				</div>
 			</div>
 			<div class="form-row">
 				<div class="label">제목</div>

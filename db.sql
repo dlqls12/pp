@@ -35,18 +35,31 @@ CREATE TABLE article (
 );
 
 # 회원 테이블 생성
-CREATE TABLE members (
+DROP TABLE IF EXISTS MEMBER;
+CREATE TABLE `member` (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
-    userId CHAR(100) NOT NULL UNIQUE,
-    userPw CHAR(100) NOT NULL,
-    nickname CHAR(100) NOT NULL
-)
+    updateDate DATETIME NOT NULL,
+    loginId CHAR(100) NOT NULL UNIQUE,
+    loginPw CHAR(200) NOT NULL,
+    `name` CHAR(100) NOT NULL,
+    email char(200) not null,
+    nickname char(200) not null
+);
+
+create table articleReply (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    articleId int(10) NOT NULL,
+    `body` TEXT NOT NULL,
+    memberId int(10) NOT NULL
+);
 
 # 게시물 작성
-INSERT INTO article SET
-regDate = NOW(),
-updateDate = NOW(),
+insert into article set
+regDate = now(),
+updateDate = now(),
 cateItemId = 2,
 displayStatus = 1,
 title = 'jsp에서 파라미터를 변수처럼 쓰는 방법',
@@ -76,14 +89,17 @@ displayStatus = 1,
 title = '[JSP 기초 5강] 데이터 입력',
 `body` = '';
 
-SELECT * FROM article ORDER BY id DESC;
-SELECT * FROM article WHERE id=1;
+select * from article order by id desc;
+SELECT * FROM article where id=1;
 SELECT * FROM cateItem;
-SELECT * FROM members;
+select * from `member`;
+SELECT * FROM articleReply;
 
-TRUNCATE members;
+truncate `member`;
+
+drop table articleReply;
 
 DELETE FROM article
-WHERE cateItemId = 6;
+WHERE cateItemId = 1;
 
- 
+select * from `member` where loginId = '111' and loginPw = '111';

@@ -54,7 +54,7 @@
 	<div class="body-box">
 		<h1 class="main-title"><%=article.getTitle()%></h1>
 		<div class="cate-and-date">
-			카테고리 :<%=cateItem.getName()%>| 등록날짜 :<%=article.getRegDate()%>| 조회수 :<%=article.getHit()%>
+			카테고리 :<%=cateItem.getName()%>| 등록날짜 :<%=article.getRegDate()%>| 작성자:<%for(Member member : members){%><%if(member.getId()==article.getMemberId()){%><%=member.getNickname()%><%}%><%}%>| 조회수 :<%=article.getHit()%>
 		</div>
 		<div class="detail-box">
 			<script type="text/x-template" id="origin1" style="display: none;"><%=article.getBody()%></script>
@@ -76,8 +76,8 @@
 				<%if (article.getId() < fullPage) {%><a href="detail?id=<%=article.getId() + 1%>">[다음글]</a><%}%>
 			</div>
 			<div class="next-or-prev-button">
-				<a href="${pageContext.request.contextPath}/s/article/delete?id=<%=article.getId()%>">[삭제하기]</a>
-				<a href="${pageContext.request.contextPath}/s/article/modify?id=<%=article.getId()%>">[수정하기]</a>
+				<a href="${pageContext.request.contextPath}/s/article/delete?id=<%=article.getId()%>&memberId=<%=article.getMemberId() %>">[삭제하기]</a>
+				<a href="${pageContext.request.contextPath}/s/article/modify?id=<%=article.getId()%>&memberId=<%=article.getMemberId() %>">[수정하기]</a>
 			</div>
 		</div>
 		<div class="con">

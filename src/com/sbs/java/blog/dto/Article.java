@@ -76,4 +76,7 @@ public class Article extends Dto {
 	public void setMemberId(int memberId) {
 		this.memberId = memberId;
 	}
+	public String getBodyForXTemplate() {
+		return body.replaceAll("(?i)script", "<!--REPLACE:script-->").trim();
+	}
 }

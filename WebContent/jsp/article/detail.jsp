@@ -57,13 +57,13 @@
 			카테고리 :<%=cateItem.getName()%>| 등록날짜 :<%=article.getRegDate()%>| 작성자:<%for(Member member : members){%><%if(member.getId()==article.getMemberId()){%><%=member.getNickname()%><%}%><%}%>| 조회수 :<%=article.getHit()%>
 		</div>
 		<div class="detail-box">
-			<script type="text/x-template" id="origin1" style="display: none;"><%=article.getBody()%></script>
+			<script type="text/x-template" id="origin1" style="display: none;"><%=article.getBodyForXTemplate()%></script>
 			<div id="viewer1"></div>
 			<script>
 				var editor1__initialValue = $('#origin1').html().trim();
 				var editor1 = new toastui.Editor({
 					el : document.querySelector('#viewer1'),
-					initialValue : editor1__initialValue,
+					initialValue : $('#origin1').html().trim().replace(/<!--REPLACE:script-->/gi, 'script'),
 					viewer : true,
 					plugins : [ toastui.Editor.plugin.codeSyntaxHighlight,
 							youtubePlugin, replPlugin, codepenPlugin ]

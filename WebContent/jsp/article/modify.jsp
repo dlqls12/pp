@@ -121,6 +121,7 @@
 				<div class="label">내용</div>
 				<div class="input">
 					<input type="hidden" name="body">
+					<script type="text/x-template" id="origin1" style="display:none;"><%=article.getBodyForXTemplate()%></script>
 					<div id="editor1"></div>
 				</div>
 			</div>
@@ -149,7 +150,7 @@
 		height : "600px",
 		initialEditType : "markdown",
 		previewStyle : "vertical",
-		initialValue : "<%=article.getTitle()%>",
+		initialValue : $('#origin1').html().trim().replace(/<!--REPLACE:script-->/gi, 'script'),
 		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
 				replPlugin, codepenPlugin ]
 	});

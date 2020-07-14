@@ -614,3 +614,24 @@ label[for] {
 .label {
 	width:100px;
 }
+
+.reply-writer {
+	display:block;
+}
+
+.reply-body {
+	display:block;
+	background-color:white;
+	padding:15px;
+	border:1px solid #261326;
+	padding-top:0;
+}
+
+.reply-info {
+	padding:0 10px;
+	text-align:right;
+}
+
+.reply-box {
+	padding:10px;
+}

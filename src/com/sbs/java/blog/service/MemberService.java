@@ -1,6 +1,7 @@
 package com.sbs.java.blog.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.sbs.java.blog.dao.MemberDao;
 import com.sbs.java.blog.dto.Member;
@@ -23,5 +24,9 @@ public class MemberService extends Service {
 
 	public int isExistId(String loginId) {
 		return MemberDao.isExistId(loginId);
+	}
+
+	public List<Member> getAllMembers() {
+		return MemberDao.getAllMembers();
 	}
 }

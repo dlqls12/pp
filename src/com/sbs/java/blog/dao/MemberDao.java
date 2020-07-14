@@ -1,6 +1,8 @@
 package com.sbs.java.blog.dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.sbs.java.blog.dto.CateItem;
@@ -59,5 +61,20 @@ public class MemberDao extends Dao {
 		}
 		
 		return -1;
+	}
+
+	public List<Member> getAllMembers() {
+		SecSql secSql = new SecSql();
+
+		secSql.append("SELECT * FROM `member` ");
+		
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
+		List<Member> members = new ArrayList<>();
+
+		for (Map<String, Object> row : rows) {
+			members.add(new Member(row));
+		}
+
+		return members;
 	}
 }

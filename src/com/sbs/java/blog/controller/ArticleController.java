@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.CateItem;
+import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.dto.Reply;
 import com.sbs.java.blog.util.Util;
 
@@ -46,7 +47,10 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionAddReply(HttpServletRequest req, HttpServletResponse resp) {
-		int articleId = Util.getInt(req, "articleId");
+		if (Util.nowLoginedMember == null) {
+			return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('list'); </script>";
+		}
+		int articleId = Util.getInt(req, "id");
 		String body = req.getParameter("body");
 		int memberId = Util.nowLoginedMember.getId();
 		articleService.addReply(articleId, body, memberId);
@@ -112,7 +116,9 @@ public class ArticleController extends Controller {
 		Article article = articleService.getForPrintArticle(id);
 		CateItem cateItem = articleService.getCateItem(article.getCateItemId());
 		List<Reply> replies = articleService.getReplies(article.getId());
+		List<Member> members = memberService.getAllMembers();
 		
+		req.setAttribute("members", members);
 		req.setAttribute("replies", replies);
 		req.setAttribute("cateItem", cateItem);
 		req.setAttribute("fullPage", fullPage);

@@ -27,53 +27,102 @@ public class ArticleController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "list":
-			if (Util.nowLoginedMember == null) {
+			if ((Member)session.getAttribute("LoginedMember") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
 			return doActionList(req, resp);
 		case "detail":
-			if (Util.nowLoginedMember == null) {
+			if ((Member)session.getAttribute("LoginedMember") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
 			return doActionDetail(req, resp);
 		case "doWrite":
-			if (Util.nowLoginedMember == null) {
+			if ((Member)session.getAttribute("LoginedMember") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
 			return doActionDoWrite(req, resp);
 		case "write":
-			if (Util.nowLoginedMember == null) {
+			if ((Member)session.getAttribute("LoginedMember") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
 			return doActionWrite(req, resp);
 		case "delete":
-			if (Util.nowLoginedMember == null) {
+			if ((Member)session.getAttribute("LoginedMember") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
 			return doActionDelete(req, resp);
 		case "modify":
-			if (Util.nowLoginedMember == null) {
+			if ((Member)session.getAttribute("LoginedMember") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
 			return doActionModify(req, resp);
 		case "doModify":
-			if (Util.nowLoginedMember == null) {
+			if ((Member)session.getAttribute("LoginedMember") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
 			return doActionDoModify(req, resp);
 		case "addReply":
-			if (Util.nowLoginedMember == null) {
+			if ((Member)session.getAttribute("LoginedMember") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
 			return doActionAddReply(req, resp);
+		case "removeReply":
+			if ((Member)session.getAttribute("LoginedMember") == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
+			return doActionRemoveReply(req, resp);
+		case "modifyReply":
+			if ((Member)session.getAttribute("LoginedMember") == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
+			return doActionModifyReply(req, resp);
 		}
 		return "";
+	}
+
+	private String doActionModifyReply(HttpServletRequest req, HttpServletResponse resp) {
+		int replyId = Util.getInt(req, "replyId");
+		int articleId = Util.getInt(req, "articleId");
+		Member loginedMember = (Member)session.getAttribute("LoginedMember");
+		Reply reply = articleService.getReply(replyId);
+		if (reply.getMemberId() != loginedMember.getId()) {
+			return "html:<script> alert('작성자 본인만 수정할 수 있습니다.'); location.replace('detail?id="+articleId+"'); </script>";
+		}
+		
+		int fullPage = articleService.getForPrintListArticlesCount(0, "", "");
+		Article article = articleService.getForPrintArticle(articleId);
+		CateItem cateItem = articleService.getCateItem(article.getCateItemId());
+		List<Reply> replies = articleService.getReplies(article.getId());
+		List<Member> members = memberService.getAllMembers();
+		
+		req.setAttribute("members", members);
+		req.setAttribute("replies", replies);
+		req.setAttribute("cateItem", cateItem);
+		req.setAttribute("fullPage", fullPage);
+		req.setAttribute("article", article);
+		req.setAttribute("replyId", replyId);
+		return "article/replyModify.jsp";
+	}
+
+	private String doActionRemoveReply(HttpServletRequest req, HttpServletResponse resp) {
+		int replyId = Util.getInt(req, "replyId");
+		int articleId = Util.getInt(req, "articleId");
+		Article article = articleService.getForPrintArticle(articleId);
+		Member loginedMember = (Member)session.getAttribute("LoginedMember");
+		
+		if (article.getMemberId() != loginedMember.getId()) {
+			return "html:<script> alert('작성자 본인만 삭제할 수 있습니다.'); location.replace('detail?id="+articleId+"'); </script>";
+		}
+		
+		articleService.removeReply(replyId);
+		return "html:<script> alert('댓글이 삭제되었습니다.'); location.replace('detail?id="+articleId+"'); </script>";
 	}
 
 	private String doActionAddReply(HttpServletRequest req, HttpServletResponse resp) {
 		int articleId = Util.getInt(req, "id");
 		String body = req.getParameter("body");
-		int memberId = Util.nowLoginedMember.getId();
+		Member loginedMember = (Member)session.getAttribute("LoginedMember");
+		int memberId = loginedMember.getId();
 		articleService.addReply(articleId, body, memberId);
 		
 		return "html:<script> alert('댓글 작성 완료.'); location.replace('detail?id="+articleId+"'); </script>";
@@ -91,23 +140,24 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
-		int memberId = Util.getInt(req, "memberId");
 		int id = Util.getInt(req, "id");
+		Article article = articleService.getForPrintArticle(id);
+		Member loginedMember = (Member)session.getAttribute("LoginedMember");
 		
-		if (memberId != Util.nowLoginedMember.getId()) {
+		if (article.getMemberId() != loginedMember.getId()) {
 			return "html:<script> alert('작성자 본인만 수정할 수 있습니다.'); location.replace('detail?id="+id+"'); </script>";
 		}
-		
-		Article article = articleService.getForPrintArticle(id);
 		
 		req.setAttribute("article", article);
 		return "article/modify.jsp";
 	}
 
 	private String doActionDelete(HttpServletRequest req, HttpServletResponse resp) {
-		int memberId = Util.getInt(req, "memberId");
 		int id = Util.getInt(req, "id");
-		if (memberId != Util.nowLoginedMember.getId()) {
+		Article article = articleService.getForPrintArticle(id);
+		Member loginedMember = (Member)session.getAttribute("LoginedMember");
+		
+		if (article.getMemberId() != loginedMember.getId()) {
 			return "html:<script> alert('작성자 본인만 삭제할 수 있습니다.'); location.replace('detail?id="+id+"'); </script>";
 		}
 		
@@ -124,8 +174,9 @@ public class ArticleController extends Controller {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
+		Member loginedMember = (Member)session.getAttribute("LoginedMember");
 		
-		int id = articleService.write(cateItemId, title, body, Util.nowLoginedMember.getId());
+		int id = articleService.write(cateItemId, title, body, loginedMember.getId());
 		
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}

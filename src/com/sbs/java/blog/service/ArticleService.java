@@ -59,4 +59,16 @@ public class ArticleService extends Service {
 	public List<Reply> getReplies(int id) {
 		return articleDao.getReplies(id);
 	}
+
+	public int removeReply(int replyId) {
+		return articleDao.removeReply(replyId);
+	}
+
+	public int modifyReply(String body, int replyId) {
+		return articleDao.modifyReply(body, replyId);
+	}
+
+	public Reply getReply(int replyId) {
+		return articleDao.getReply(replyId);
+	}
 }

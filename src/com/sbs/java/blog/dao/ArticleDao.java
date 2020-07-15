@@ -179,4 +179,35 @@ public class ArticleDao extends Dao {
 
 		return replies;
 	}
+
+	public int removeReply(int replyId) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("DELETE FROM articleReply");
+		secSql.append("WHERE id = ?", replyId);
+
+		return DBUtil.delete(dbConn, secSql);
+	}
+
+	public int modifyReply(String body, int replyId) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("UPDATE articleReply");
+		secSql.append("SET updateDate = NOW()");
+		secSql.append(", body = ? ", body);
+		secSql.append(" WHERE id = ?", replyId);
+
+		return DBUtil.update(dbConn, secSql);
+	}
+
+	public Reply getReply(int replyId) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("SELECT * ");
+		secSql.append("FROM articleReply ");
+		secSql.append("WHERE 1 ");
+		secSql.append("AND id = ? ", replyId);
+
+		return new Reply(DBUtil.selectRow(dbConn, secSql));
+	}
 }

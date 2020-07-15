@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%
+	int replyId = (int) request.getAttribute("replyId");
 	List<Member> members = (List<Member>) request.getAttribute("members");
 	List<Reply> replies = (List<Reply>) request.getAttribute("replies");
 	Article article = (Article) request.getAttribute("article");
@@ -89,13 +90,31 @@
 					<%} else {%>
 						<%for (Reply reply : replies) {%>
 						<div class="reply-body">
-						<div class="reply-writer">작성자 :<%for (Member member : members) {%><%if (member.getId() == reply.getMemberId()) {%><%=member.getNickname()%><%}%><%}%></div>
-						↪ <%=reply.getBody()%>
+						<%if(reply.getId() == replyId) { %>
+							<form action="addReply" method="POST" class="reply-form"
+								onsubmit="submitReplyForm(this); return false;">
+								<div class="form-row">
+									<div class="input">
+										<input name="id" type="hidden" value='<%=article.getId()%>' />
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="label">댓글</div>
+									<div class="input"><textarea name="body" value='<%=reply.getBody()%>'/></textarea></div>
+								</div>
+								<div class="form-row">
+									<div class="label">전송</div>
+									<div class="input">
+										<input type="submit" value="전송" />
+									</div>
+								</div>
+							</form>
+						<%} else {%>
+							<div class="reply-writer">작성자 :<%for (Member member : members) {%><%if (member.getId() == reply.getMemberId()) {%><%=member.getNickname()%><%}%><%}%></div>
+							↪ <%=reply.getBody()%>
+						<%}%>
 						</div>
-						<div class="reply-info">작성날짜 :<%=reply.getRegDate()%> | 수정날짜 : <%=reply.getUpdateDate()%>
-							<a href="${pageContext.request.contextPath}/s/article/removeReply?articleId=<%=article.getId() %>&replyId=<%=reply.getId()%>">[삭제하기]</a>
-							<a href="${pageContext.request.contextPath}/s/article/modifyReply?articleId=<%=article.getId() %>&replyId=<%=reply.getId()%>">[수정하기]</a>
-						</div>
+						<div class="reply-info">작성날짜 :<%=reply.getRegDate()%> | 수정날짜 : <%=reply.getUpdateDate()%></div>
 						<%}%>
 					<%}%>
 				</div>

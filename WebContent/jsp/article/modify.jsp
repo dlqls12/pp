@@ -87,8 +87,7 @@
 <div class="con">
 	<div class="write-form-box body-box con">
 		<h1 class="main-title">게시물 수정</h1>
-		<form action="doModify" method="POST" class="write-form form1"
-			onsubmit="submitWriteForm(this); return false;">
+		<form action="doModify" method="POST" class="write-form form1" onsubmit="submitWriteForm(this); return false;">
 			<div class="form-row">
 				<div class="label">카테고리 선택</div>
 				<div class="input">
@@ -111,7 +110,7 @@
 					<input name="memberId" type="hidden" value='<%=article.getMemberId()%>' />
 				</div>
 			</div>
-			<div class="form-row">
+			<div class="form-row write-form-title">
 				<div class="label">제목</div>
 				<div class="input">
 					<input name="title" type="text" value='<%=article.getTitle()%>' />

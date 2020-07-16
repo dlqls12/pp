@@ -4,6 +4,13 @@
 <div class="con">
 	<div class="body-box">
 		<h1 class="main-title">about Me</h1>
+		<div class="about-me-box">
+			<ul>
+				<li>이름 : 이용빈</li>
+				<li>나이 : 27</li>
+				<li>취미 : 영화감상 & 게임</li>
+			</ul>
+		</div>
 	</div>
 	<div class="bottom">
 		<div>

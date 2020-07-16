@@ -81,10 +81,9 @@
 }
 </style>
 <div class="con">
-	<div class="write-form-box body-box con">
+	<div class="con write-form-box body-box">
 		<h1 class="main-title">게시물 작성하기</h1>
-		<form action="doWrite" method="POST" class="write-form form1"
-			onsubmit="submitWriteForm(this); return false;">
+		<form action="doWrite" method="POST" class="write-form form1" onsubmit="submitWriteForm(this); return false;">
 			<div class="form-row">
 				<div class="label">카테고리 선택</div>
 				<div class="input">
@@ -99,7 +98,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="form-row">
+			<div class="form-row write-form-title">
 				<div class="label">제목</div>
 				<div class="input">
 					<input name="title" type="text" placeholder="제목을 입력해주세요." />

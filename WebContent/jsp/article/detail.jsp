@@ -108,9 +108,9 @@
 							<input name="id" type="hidden" value='<%=article.getId()%>' />
 						</div>
 					</div>
-					<div class="form-row">
+					<div class="con form-row">
 						<div class="label">댓글</div>
-						<div class="input"><textarea name="body" placeholder="내용을 입력해주세요." /></textarea></div>
+						<div class="input"><textarea class="reply-field" name="body" placeholder="내용을 입력해주세요." /></textarea></div>
 					</div>
 					<div class="form-row">
 						<div class="label">전송</div>

@@ -91,11 +91,11 @@
 						<%for (Reply reply : replies) {%>
 						<div class="reply-body">
 						<%if(reply.getId() == replyId) { %>
-							<form action="addReply" method="POST" class="reply-form"
+							<form action="doModifyReply" method="POST" class="reply-form"
 								onsubmit="submitReplyForm(this); return false;">
 								<div class="form-row">
 									<div class="input">
-										<input name="id" type="hidden" value='<%=article.getId()%>' />
+										<input name="replyId" type="hidden" value='<%=reply.getId()%>' />
 									</div>
 								</div>
 								<div class="form-row">

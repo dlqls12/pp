@@ -29,4 +29,8 @@ public class MemberService extends Service {
 	public List<Member> getAllMembers() {
 		return MemberDao.getAllMembers();
 	}
+
+	public Member getMemberById(int id) {
+		return MemberDao.getMemberById(id);
+	}
 }

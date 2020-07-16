@@ -23,54 +23,48 @@ public class MemberController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "join":
-			return doActionJoin(req, resp);
+			return doActionJoin();
 		case "doJoin":
-			return doActionDoJoin(req, resp);
+			return doActionDoJoin();
 		case "login":
-			return doActionLogin(req, resp);
+			return doActionLogin();
 		case "doLogin":
-			return doActionDoLogin(req, resp);
-		case "logout":
-			return doActionLogout(req, resp);
+			return doActionDoLogin();
+		case "doLogout":
+			return doActionDoLogout();
 		}
 
 		return "";
 	}
 
-	private String doActionLogout(HttpServletRequest req, HttpServletResponse resp) {
-		if ((Member)session.getAttribute("LoginedMember") == null) {
-			return "html:<script> alert('이미 로그아웃 하셨습니다.'); location.replace('../home/main'); </script>";
-		}
-		session.setAttribute("LoginedMember", null);
+	private String doActionDoLogout() {
+		session.removeAttribute("loginedMemberId");
 		return "html:<script> alert('로그아웃 되었습니다.'); location.replace('../home/main'); </script>";
 	}
 
-	private String doActionDoLogin(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDoLogin() {
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
-		if ((Member)session.getAttribute("LoginedMember") != null) {
-			return "html:<script> alert('이미 로그인 하셨습니다.'); location.replace('../home/main'); </script>";
-		}
 		
 		Member member = null;
 		member = memberService.login(loginId, loginPw);
 		if (member != null) {
-			session.setAttribute("LoginedMember", member);
+			session.setAttribute("loginedMemberId", member.getId());
 			return "html:<script> alert('" + member.getNickname() + "님 환영합니다.'); location.replace('../home/main'); </script>";
 		} else {
 			return "html:<script> alert('아이디나 비밀번호가 틀렸습니다.'); location.replace('../home/main'); </script>";
 		}
 	}
 
-	private String doActionLogin(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionLogin() {
 		return "member/login.jsp";		
 	}
 
-	private String doActionJoin(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionJoin() {
 		return "member/join.jsp";
 	}
 
-	private String doActionDoJoin(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDoJoin() {
 		String loginId = req.getParameter("loginId");
 		String loginPwReal = req.getParameter("loginPwReal");
 		String name = req.getParameter("name");
@@ -86,6 +80,5 @@ public class MemberController extends Controller {
 		memberService.join(loginId, loginPwReal, name, email, nickname);
 
 		return "html:<script> alert('" + nickname + "님 환영합니다.'); location.replace('../home/main'); </script>";
-
 	}
 }

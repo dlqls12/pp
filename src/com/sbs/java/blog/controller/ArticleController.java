@@ -27,65 +27,79 @@ public class ArticleController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "list":
-			if ((Member)session.getAttribute("LoginedMember") == null) {
+			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
-			return doActionList(req, resp);
+			return doActionList();
 		case "detail":
-			if ((Member)session.getAttribute("LoginedMember") == null) {
+			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
-			return doActionDetail(req, resp);
+			return doActionDetail();
 		case "doWrite":
-			if ((Member)session.getAttribute("LoginedMember") == null) {
+			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
-			return doActionDoWrite(req, resp);
+			return doActionDoWrite();
 		case "write":
-			if ((Member)session.getAttribute("LoginedMember") == null) {
+			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
-			return doActionWrite(req, resp);
+			return doActionWrite();
 		case "delete":
-			if ((Member)session.getAttribute("LoginedMember") == null) {
+			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
-			return doActionDelete(req, resp);
+			return doActionDelete();
 		case "modify":
-			if ((Member)session.getAttribute("LoginedMember") == null) {
+			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
-			return doActionModify(req, resp);
+			return doActionModify();
 		case "doModify":
-			if ((Member)session.getAttribute("LoginedMember") == null) {
+			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
-			return doActionDoModify(req, resp);
+			return doActionDoModify();
 		case "addReply":
-			if ((Member)session.getAttribute("LoginedMember") == null) {
+			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
-			return doActionAddReply(req, resp);
+			return doActionAddReply();
 		case "removeReply":
-			if ((Member)session.getAttribute("LoginedMember") == null) {
+			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
-			return doActionRemoveReply(req, resp);
+			return doActionRemoveReply();
 		case "modifyReply":
-			if ((Member)session.getAttribute("LoginedMember") == null) {
+			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
 			}
-			return doActionModifyReply(req, resp);
+			return doActionModifyReply();
+		case "doModifyReply":
+			if (session.getAttribute("loginedMemberId") == null) {
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+			}
+			return doActionDoModifyReply();
 		}
 		return "";
 	}
 
-	private String doActionModifyReply(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDoModifyReply() {
+		String body = req.getParameter("body");
+		int replyId = Util.getInt(req, "replyId");
+		Reply reply = articleService.getReply(replyId);
+		
+		articleService.modifyReply(body, replyId);
+		return "html:<script> alert('댓글 수정 완료.'); location.replace('detail?id=" + reply.getArticleId() + "'); </script>";
+	}
+
+	private String doActionModifyReply() {
 		int replyId = Util.getInt(req, "replyId");
 		int articleId = Util.getInt(req, "articleId");
-		Member loginedMember = (Member)session.getAttribute("LoginedMember");
+		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
 		Reply reply = articleService.getReply(replyId);
-		if (reply.getMemberId() != loginedMember.getId()) {
+		if (reply.getMemberId() != loginedMemberId) {
 			return "html:<script> alert('작성자 본인만 수정할 수 있습니다.'); location.replace('detail?id="+articleId+"'); </script>";
 		}
 		
@@ -104,13 +118,13 @@ public class ArticleController extends Controller {
 		return "article/replyModify.jsp";
 	}
 
-	private String doActionRemoveReply(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionRemoveReply() {
 		int replyId = Util.getInt(req, "replyId");
 		int articleId = Util.getInt(req, "articleId");
 		Article article = articleService.getForPrintArticle(articleId);
-		Member loginedMember = (Member)session.getAttribute("LoginedMember");
+		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
 		
-		if (article.getMemberId() != loginedMember.getId()) {
+		if (article.getMemberId() != loginedMemberId) {
 			return "html:<script> alert('작성자 본인만 삭제할 수 있습니다.'); location.replace('detail?id="+articleId+"'); </script>";
 		}
 		
@@ -118,17 +132,16 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('댓글이 삭제되었습니다.'); location.replace('detail?id="+articleId+"'); </script>";
 	}
 
-	private String doActionAddReply(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionAddReply() {
 		int articleId = Util.getInt(req, "id");
 		String body = req.getParameter("body");
-		Member loginedMember = (Member)session.getAttribute("LoginedMember");
-		int memberId = loginedMember.getId();
-		articleService.addReply(articleId, body, memberId);
+		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
+		articleService.addReply(articleId, body, loginedMemberId);
 		
 		return "html:<script> alert('댓글 작성 완료.'); location.replace('detail?id="+articleId+"'); </script>";
 	}
 
-	private String doActionDoModify(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDoModify() {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
@@ -139,12 +152,12 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('detail?id="+id+"'); </script>";
 	}
 
-	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionModify() {
 		int id = Util.getInt(req, "id");
 		Article article = articleService.getForPrintArticle(id);
-		Member loginedMember = (Member)session.getAttribute("LoginedMember");
+		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
 		
-		if (article.getMemberId() != loginedMember.getId()) {
+		if (article.getMemberId() != loginedMemberId) {
 			return "html:<script> alert('작성자 본인만 수정할 수 있습니다.'); location.replace('detail?id="+id+"'); </script>";
 		}
 		
@@ -152,12 +165,12 @@ public class ArticleController extends Controller {
 		return "article/modify.jsp";
 	}
 
-	private String doActionDelete(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDelete() {
 		int id = Util.getInt(req, "id");
 		Article article = articleService.getForPrintArticle(id);
-		Member loginedMember = (Member)session.getAttribute("LoginedMember");
+		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
 		
-		if (article.getMemberId() != loginedMember.getId()) {
+		if (article.getMemberId() != loginedMemberId) {
 			return "html:<script> alert('작성자 본인만 삭제할 수 있습니다.'); location.replace('detail?id="+id+"'); </script>";
 		}
 		
@@ -166,22 +179,22 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
 	}
 
-	private String doActionWrite(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionWrite() {
 		return "article/write.jsp";
 	}
 
-	private String doActionDoWrite(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDoWrite() {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
-		Member loginedMember = (Member)session.getAttribute("LoginedMember");
+		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
 		
-		int id = articleService.write(cateItemId, title, body, loginedMember.getId());
+		int id = articleService.write(cateItemId, title, body, loginedMemberId);
 		
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}
 
-	private String doActionDetail(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDetail() {
 		if (Util.empty(req, "id")) {
 			return "html:id를 입력해주세요.";
 		}
@@ -208,7 +221,7 @@ public class ArticleController extends Controller {
 		return "article/detail.jsp";
 	}
 
-	private String doActionList(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionList() {
 		int page = 1;
 
 		if (!Util.empty(req, "page") && Util.isNum(req, "page")) {

@@ -4,17 +4,17 @@ import java.util.Map;
 
 public class Member extends Dto {
 	private String updateDate;
-	private String userId;
-	private String userPw;
+	private String loginId;
+	private String loginPw;
 	private String name;
-	private String email;
 	private String nickname;
+	private String email;
 
 	public Member(Map<String, Object> row) {
 		super(row);
 		this.updateDate = (String) row.get("updateDate");
-		this.userId = (String) row.get("userId");
-		this.userPw = (String) row.get("userPw");
+		this.loginId = (String) row.get("loginId");
+		this.loginPw = (String) row.get("loginPw");
 		this.name = (String) row.get("name");
 		this.email = (String) row.get("email");
 		this.nickname = (String) row.get("nickname");
@@ -22,15 +22,15 @@ public class Member extends Dto {
 
 	@Override
 	public String toString() {
-		return "Article [updateDate=" + updateDate + ", userId=" + userId + ", userPw=" + userPw + ", name=" + name + ", email=" + email + ", nickname=" + nickname + ", dto=" + super.toString() + "]";
+		return "Article [updateDate=" + updateDate + ", loginId=" + loginId + ", loginPw=" + loginPw + ", name=" + name + ", email=" + email + ", nickname=" + nickname + ", dto=" + super.toString() + "]";
 	}
 
 	public String getUserId() {
-		return userId;
+		return loginId;
 	}
 
 	public void setUserId(String userId) {
-		this.userId = userId;
+		this.loginId = loginId;
 	}
 
 	public String getUpdateDate() {
@@ -58,11 +58,11 @@ public class Member extends Dto {
 	}
 
 	public String getUserPw() {
-		return userPw;
+		return loginPw;
 	}
 
 	public void setUserPw(String userPw) {
-		this.userPw = userPw;
+		this.loginPw = loginPw;
 	}
 
 	public String getNickname() {

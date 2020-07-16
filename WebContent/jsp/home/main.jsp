@@ -3,7 +3,11 @@
 <%@ include file="/jsp/part/head.jspf" %>
 <div class="con home-body">
 	<div class="body-box">
+		<% if ( isLogined ) { %>
+		<h1 class="main-title"><%=loginedMember.getNickname() %>님, 환영합니다 😀</h1>
+		<% } else {%>
 		<h1 class="main-title">환영합니다 😀</h1>
+		<% } %>
 		<div class="main-img"><img src="../../resource/img/landscape.jpg" alt="풍경이에요" /></div>
 	</div>
 	<div class="bottom">

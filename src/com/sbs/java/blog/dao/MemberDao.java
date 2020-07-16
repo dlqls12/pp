@@ -77,4 +77,13 @@ public class MemberDao extends Dao {
 
 		return members;
 	}
+
+	public Member getMemberById(int id) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("SELECT * FROM `member` ");
+		secSql.append("WHERE id = ? ", id);
+		
+		return new Member(DBUtil.selectRow(dbConn, secSql));
+	}
 }

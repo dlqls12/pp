@@ -370,6 +370,12 @@ label[for] {
 	}
 }
 
+@media ( max-width :799px ) {
+	.form1 .form-row {
+		display: block;
+	}
+}
+
 .con {
 	max-width: 1200px;
 }
@@ -602,19 +608,6 @@ label[for] {
 	width:1200px;
 }
 
-.form-row {
-	display:flex;
-	align-items: center;
-}
-
-.form1 .form-row {
-	margin-top: 10px;
-}
-
-.label {
-	width:100px;
-}
-
 .reply-writer {
 	display:block;
 }
@@ -632,6 +625,10 @@ label[for] {
 	text-align:right;
 }
 
+.reply-info > a:hover {
+	color:red;
+}
+
 .reply-box {
 	padding: 10px 20px;
 }
@@ -639,10 +636,6 @@ label[for] {
 .reply-title {
 	padding: 10px 20px;
 	border-bottom:3px solid #261326;
-}
-
-.write-form-title {
-	width:98%;
 }
 
 .reply-field {
@@ -655,4 +648,69 @@ label[for] {
 	width:100%;
 	height: 150px;
 	border:3px solid #261326;
+}
+
+.form1 .form-row {
+	align-items: center;
+	display: flex;
+	margin-top: 10px;
+}
+
+.form1 .form-row>.input {
+	flex-grow: 1;
+}
+
+.form1 .form-row> input {
+	padding:10px;
+	width:20%;
+}
+
+.form1 .form-row>.input > select {
+	padding:10px;
+}
+
+.form1 .form-row>.input > input {
+	padding:10px;
+}
+
+.form1 .form-row:nth-child(2) >.input > input {
+	width:97.8%;
+}
+
+.form1 .form-row>.label {
+	margin-right:20px;
+	width: 130px;
+	padding:6.5px;
+	text-align:right;
+}
+
+.write-form .form-row>.label {
+	font-weight:bold;
+	color:#261326;
+	margin-right:20px;
+	width: 130px;
+	text-align:center;
+	background-color:#9795A3;
+	padding:6.5px;
+	border:1px solid #261326;
+}
+
+.write-form .form-row:nth-child(3) >.label {
+	display:flex;
+	height:487px;
+	justify-content:center;
+	align-items:center;
+}
+
+.write-form .form-row:nth-child(4) >.input > input {
+	font-size:1rem;
+	font-weight:bold;
+	background-color:#9795A3;
+	border:1px solid #261326;
+	width:100%;
+}
+
+.write-form .form-row:nth-child(4) >.input:hover > input {
+	color:#9795A3;
+	background-color:#261326;
 }

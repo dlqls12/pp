@@ -95,7 +95,7 @@
 						<%if (isLogined == false) { %>
 						<li><a href="${pageContext.request.contextPath}/s/member/login" class="block">Login</a></li>
 						<%} else {%>
-						<li><a href="#" class="block">My Page</a></li>
+						<li><a href="${pageContext.request.contextPath}/s/member/mypage" class="block">My Page</a></li>
 						<li><a href="${pageContext.request.contextPath}/s/member/logout" class="block">Logout</a></li>
 						<%}%>
 					</ul>
@@ -136,7 +136,7 @@
 							<li><a href="${pageContext.request.contextPath}/s/member/join" class="block">Sing Up</a></li>
 							<li><a href="${pageContext.request.contextPath}/s/member/login" class="block">Login</a></li>
 							<%} else {%>
-							<li><a href="#" class="block">My Page</a></li>
+							<li><a href="${pageContext.request.contextPath}/s/member/mypage" class="block">My Page</a></li>
 							<li><a href="${pageContext.request.contextPath}/s/member/doLogout" class="block">Logout</a></li>
 							<%}%>
 						</ul>

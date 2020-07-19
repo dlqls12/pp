@@ -8,7 +8,12 @@
 	<div class="body-box con">
 		<h1 class="main-title">My Page</h1>
 		<div class="mp-box">
-			<%=loginedMember.getNickname() %>
+			<ul>
+				<li>아이디 : <%=loginedMember.getNickname() %></li>
+				<li>이메일 : <%=loginedMember.getEmail() %></li>
+				<li>별명 : <%=loginedMember.getNickname() %></li>
+				<li>가입날짜 : <%=loginedMember.getNickname() %></li>
+			</ul>
 		</div>
 	</div>
 	<div class="bottom">

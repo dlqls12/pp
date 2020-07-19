@@ -32,9 +32,15 @@ public class MemberController extends Controller {
 			return doActionDoLogin();
 		case "doLogout":
 			return doActionDoLogout();
+		case "mypage":
+			return doActionMyPage();
 		}
 
 		return "";
+	}
+
+	private String doActionMyPage() {
+		return "member/mypage.jsp";
 	}
 
 	private String doActionDoLogout() {

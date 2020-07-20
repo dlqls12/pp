@@ -86,4 +86,15 @@ public class MemberDao extends Dao {
 		
 		return new Member(DBUtil.selectRow(dbConn, secSql));
 	}
+
+	public int modifyNick(int id, String newNick) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("UPDATE `member`");
+		secSql.append("SET updateDate = NOW()");
+		secSql.append(", nickname = ?", newNick);
+		secSql.append(" WHERE id = ?", id);
+
+		return DBUtil.update(dbConn, secSql);
+	}
 }

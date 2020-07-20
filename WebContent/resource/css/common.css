@@ -534,6 +534,7 @@ label[for] {
 
 .body-box {
 	min-height:80vh;
+	padding-bottom:20px;
 	border-bottom:5px solid #261326;
 }
 
@@ -643,6 +644,10 @@ label[for] {
 	height:50px;
 }
 
+.add-reply-box {
+	padding:20px;
+}
+
 .about-me-box {
 	padding : 20px;
 	width:100%;
@@ -711,6 +716,61 @@ label[for] {
 }
 
 .write-form .form-row:nth-child(4) >.input:hover > input {
-	color:#9795A3;
-	background-color:#261326;
+	color:red;
+	border:1px solid red;
+}
+
+.mp-box {
+	border:3px solid #261326;
+	padding:20px;
+}
+
+.mp-box > ul > li {
+	margin-bottom:10px;
+}
+
+.mp-box > ul > li > a:hover {
+	color:red;
+}
+
+.login-box {
+	text-align:center;
+	width:400px;
+	border:3px solid #261326;
+	padding:20px;
+}
+
+.login-form .form-row {
+	display: flex;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.login-form .form-row>.label {
+	margin-right:20px;
+	width: 80px;
+	padding:5px;
+	text-align:right;
+}
+
+.big-login-box {
+	display:flex;
+	justify-content:center;
+}
+
+.submit-button-box {
+	margin:10px;
+}
+
+.submit-button {
+	width:79px;
+	height:79px;
+	background-color:#9795A3;
+	border:1px solid #261326;
+	font-weight:bold;
+}
+
+.submit-button:hover {
+	color:red;
+	border:1px solid red;
 }

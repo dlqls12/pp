@@ -113,7 +113,6 @@
 						<div class="input"><textarea class="reply-field" name="body" placeholder="내용을 입력해주세요." /></textarea></div>
 					</div>
 					<div class="form-row">
-						<div class="label">전송</div>
 						<div class="input">
 							<input type="submit" value="전송" />
 						</div>

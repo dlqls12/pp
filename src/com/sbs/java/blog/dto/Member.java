@@ -25,11 +25,11 @@ public class Member extends Dto {
 		return "Article [updateDate=" + updateDate + ", loginId=" + loginId + ", loginPw=" + loginPw + ", name=" + name + ", email=" + email + ", nickname=" + nickname + ", dto=" + super.toString() + "]";
 	}
 
-	public String getUserId() {
+	public String getLoginId() {
 		return loginId;
 	}
 
-	public void setUserId(String userId) {
+	public void setLoginId(String loginId) {
 		this.loginId = loginId;
 	}
 

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Member;
+import com.sbs.java.blog.util.Util;
 
 public class MemberController extends Controller {
 	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req,
@@ -34,9 +35,33 @@ public class MemberController extends Controller {
 			return doActionDoLogout();
 		case "mypage":
 			return doActionMyPage();
+		case "modifyNick":
+			return doActionModifyNick();
+		case "doModifyNick":
+			return doActionDoModifyNick();
 		}
 
 		return "";
+	}
+
+	private String doActionDoModifyNick() {
+		int id = Util.getInt(req, "id");
+		String newNick = req.getParameter("newNick");
+		
+		int isModified = memberService.modifyNick(id, newNick);
+		
+		if (isModified < 0 ) {
+			return "html:<script> alert('수정 실패...'); location.replace('mypage'); </script>";
+		}
+		
+		return "html:<script> alert('회원 정보가 수정되었습니다.'); location.replace('mypage'); </script>";
+	}
+
+	private String doActionModifyNick() {
+		int id = Util.getInt(req, "id");
+		
+		req.setAttribute("id", id);
+		return "member/modifyNick.jsp";
 	}
 
 	private String doActionMyPage() {

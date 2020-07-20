@@ -16,6 +16,20 @@
 				</li>
 				<li>가입날짜 : <%=loginedMember.getRegDate() %></li>
 				<li>최근수정 : <%=loginedMember.getUpdateDate() %></li>
+				<li class="flex">
+				비밀번호 변경하기:
+					<form action="doModifyLoginPw" method="POST" onsubmit="submitLoginPwForm(this); return false;">
+							<div class="form-row">
+								<div class="input">
+									<input name="id" type="hidden" value='<%=loginedMemberId%>' />
+								</div>
+							</div>
+							<div class="form-row">
+								<input name="newPw" type="password" placeholder="새로운 비번입력"/>
+								<input type="submit" value="변경!!" />
+							</div>
+					</form>
+				</li>
 			</ul>
 		</div>
 	</div>

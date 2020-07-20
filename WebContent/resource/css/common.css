@@ -720,6 +720,32 @@ label[for] {
 	border:1px solid red;
 }
 
+.modify-form .form-row> .label {
+	font-weight:bold;
+	color:#261326;
+	margin-right:20px;
+	width: 130px;
+	text-align:center;
+	background-color:#9795A3;
+	padding:6.5px;
+	border:1px solid #261326;
+}
+
+.modify-form .form-row:nth-child(4) >.label {
+	display:flex;
+	height:487px;
+	justify-content:center;
+	align-items:center;
+}
+
+.write-form .form-row:nth-child(5) >.input > input {
+	font-size:1rem;
+	font-weight:bold;
+	background-color:#9795A3;
+	border:1px solid #261326;
+	width:100%;
+}
+
 .mp-box {
 	border:3px solid #261326;
 	padding:20px;

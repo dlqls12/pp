@@ -71,4 +71,6 @@ public class Util {
 	public static String getString(HttpServletRequest req, String paramName) {
 		return req.getParameter(paramName);
 	}
+	
+	
 }

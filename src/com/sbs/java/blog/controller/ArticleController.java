@@ -27,58 +27,52 @@ public class ArticleController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "list":
-			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
-			}
 			return doActionList();
 		case "detail":
-			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
-			}
 			return doActionDetail();
 		case "doWrite":
 			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
 			return doActionDoWrite();
 		case "write":
 			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
 			return doActionWrite();
 		case "delete":
 			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
 			return doActionDelete();
 		case "modify":
 			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
 			return doActionModify();
 		case "doModify":
 			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
 			return doActionDoModify();
 		case "addReply":
 			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
 			return doActionAddReply();
 		case "removeReply":
 			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
 			return doActionRemoveReply();
 		case "modifyReply":
 			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
 			return doActionModifyReply();
 		case "doModifyReply":
 			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
 			return doActionDoModifyReply();
 		}

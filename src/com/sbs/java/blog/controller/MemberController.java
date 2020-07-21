@@ -44,33 +44,34 @@ public class MemberController extends Controller {
 			return doActionDoLogout();
 		case "mypage":
 			return doActionMyPage();
-		case "modifyNick":
-			return doActionModifyNick();
-		case "doModifyNick":
-			return doActionDoModifyNick();
+		case "modifyMemberInfo":
+			return doActionModifyMemberInfo();
+		case "doModifyMemberInfo":
+			return doActionDoModifyMemberInfo();
 		}
 
 		return "";
 	}
 
-	private String doActionDoModifyNick() {
+	private String doActionModifyMemberInfo() {
 		int id = Util.getInt(req, "id");
+		
+		req.setAttribute("id", id);
+		return "member/modifyMemberInfo.jsp";
+	}
+
+	private String doActionDoModifyMemberInfo() {
+		int id = Util.getInt(req, "id");
+		String newEmail = req.getParameter("newEmail");
 		String newNick = req.getParameter("newNick");
 		
-		int isModified = memberService.modifyNick(id, newNick);
+		int isModified = memberService.modifyMemberInfo(id, newEmail, newNick);
 		
 		if (isModified < 0 ) {
 			return "html:<script> alert('수정 실패...'); location.replace('mypage'); </script>";
 		}
 		
 		return "html:<script> alert('회원 정보가 수정되었습니다.'); location.replace('mypage'); </script>";
-	}
-
-	private String doActionModifyNick() {
-		int id = Util.getInt(req, "id");
-		
-		req.setAttribute("id", id);
-		return "member/modifyNick.jsp";
 	}
 
 	private String doActionMyPage() {
@@ -123,7 +124,7 @@ public class MemberController extends Controller {
 	}
 	
 	private void gmailSend(String email, String nickname) {
-        String user = "dlqls12321@gmail.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
+        String user = ""; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
         String password = "";   // 패스워드
 
         // SMTP 서버 정보를 설정한다.

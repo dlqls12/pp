@@ -34,7 +34,7 @@ public class MemberService extends Service {
 		return MemberDao.getMemberById(id);
 	}
 
-	public int modifyNick(int id, String newNick) {
-		return MemberDao.modifyNick(id, newNick);
+	public int modifyMemberInfo(int id, String newEmail, String newNick) {
+		return MemberDao.modifyMemberInfo(id, newEmail, newNick);
 	}
 }

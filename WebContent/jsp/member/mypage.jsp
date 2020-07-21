@@ -10,12 +10,10 @@
 			<ul>
 				<li>아이디 : <%=loginedMember.getLoginId() %></li>
 				<li>이메일 : <%=loginedMember.getEmail() %></li>
-				<li>
-					별명 : <%=loginedMember.getNickname() %>
-					<a href="${pageContext.request.contextPath}/s/member/modifyNick?id=<%=loginedMemberId %>">[변경하기]</a>
-				</li>
+				<li>별명 : <%=loginedMember.getNickname() %></li>
 				<li>가입날짜 : <%=loginedMember.getRegDate() %></li>
 				<li>최근수정 : <%=loginedMember.getUpdateDate() %></li>
+				<li><a href="${pageContext.request.contextPath}/s/member/modifyMemberInfo?id=<%=loginedMemberId %>">[회원정보 수정하기]</a></li>
 			</ul>
 		</div>
 	</div>

@@ -2,18 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
-<script src="../../resource/js/seekId.js"></script>
+<script src="../../resource/js/seekPw.js"></script>
 
 <div class="con">
 	<div class="body-box con">
-		<h1 class="main-title">아이디찾기</h1>
-		<form action="doSeekId" method="POST" class="seekId-form" onsubmit="submitSeekIdForm(this); return false;">
+		<h1 class="main-title">비밀번호 찾기</h1>
+		<form action="doSeekPw" method="POST" onsubmit="submitSeekPwForm(this); return false;">
+			<input type="hidden" name="loginPwReal">
+			<input name="tempPw" type="hidden" value='123456789a'>
 			<div>
+				<div class="form-row">
+					<div class="label">아이디 :</div>
+					<input name="loginId" type="text" placeholder="아이디를 입력해주세요.">
+				</div>
 				<div class="form-row">
 					<div class="label">이메일 :</div>
 					<input name="email" type="email" placeholder="이메일을 입력해주세요.">
-					<input type="submit" value="찾기">
 				</div>
+				<input type="submit" value="찾기">
 			</div>
 		</form>
 	</div>

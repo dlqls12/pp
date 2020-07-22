@@ -52,6 +52,10 @@ public class MemberController extends Controller {
 			return doActionSeekId();
 		case "doSeekId":
 			return doActionDoSeekId();
+		case "seekPw":
+			return doActionSeekPw();
+		case "doSeekPw":
+			return doActionDoSeekPw();
 		case "modifyPw":
 			return doActionModifyPw();
 		case "doModifyPw":
@@ -59,6 +63,38 @@ public class MemberController extends Controller {
 		}
 
 		return "";
+	}
+
+	private String doActionDoSeekPw() {
+		String loginPwReal = req.getParameter("loginPwReal");
+		String loginId = req.getParameter("loginId");
+		String email = req.getParameter("email");
+		int isExistId = memberService.isExistId(loginId);
+		int isExistEmail = memberService.isExistEmail(email);
+		
+		if (isExistId < 0) {
+			return "html:<script> alert('입력하신 아이디는 존재하지 않습니다.'); location.replace('login'); </script>";
+		}
+		if (isExistEmail < 0) {
+			return "html:<script> alert('입력하신 이메일은 존재하지않습니다.'); location.replace('login'); </script>";
+		}
+		
+		Member member = memberService.getMemberByEmail(email);
+		int isModified = memberService.modifyPw(member.getId(), loginPwReal);
+		
+		if (isModified < 0 ) {
+			return "html:<script> alert('수정 실패...'); location.replace('mypage'); </script>";
+		}
+		
+		String title = "임시 비밀번호입니다.";
+		String body = "임시 비밀번호를 발급합니다.\n임시 비밀번호는 [123456789a]입니다.\n로그인 후 비밀번호를 변경해주세요."; 
+		gmailSend(email, title, body);
+		
+		return "html:<script> alert('해당 이메일로 임시 비밀번호를 전송하였습니다.'); location.replace('login'); </script>";
+	}
+
+	private String doActionSeekPw() {
+		return "member/seekPw.jsp";
 	}
 
 	private String doActionDoModifyPw() {

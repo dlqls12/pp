@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class Util {
+	public static String gmailId;
+	public static String gmailPw;
+	
 	public static boolean empty(HttpServletRequest req, String paramName) {
 		String paramValue = req.getParameter(paramName);
 

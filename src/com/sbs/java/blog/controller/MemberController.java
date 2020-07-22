@@ -228,8 +228,8 @@ public class MemberController extends Controller {
 	}
 	
 	private void gmailSend(String email, String title, String body) {
-        String user = ""; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
-        String password = "";   // 패스워드
+        String user = Util.gmailId; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
+        String password = Util.gmailPw;   // 패스워드
 
         // SMTP 서버 정보를 설정한다.
         Properties prop = new Properties();

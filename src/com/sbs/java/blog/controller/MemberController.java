@@ -48,9 +48,67 @@ public class MemberController extends Controller {
 			return doActionModifyMemberInfo();
 		case "doModifyMemberInfo":
 			return doActionDoModifyMemberInfo();
+		case "seekId":
+			return doActionSeekId();
+		case "doSeekId":
+			return doActionDoSeekId();
+		case "modifyPw":
+			return doActionModifyPw();
+		case "doModifyPw":
+			return doActionDoModifyPw();
 		}
 
 		return "";
+	}
+
+	private String doActionDoModifyPw() {
+		int id = Util.getInt(req, "id");
+		String nowLoginPwReal = req.getParameter("nowLoginPwReal");
+		String newLoginPwReal = req.getParameter("newLoginPwReal");
+		
+		Member member = memberService.getMemberById(id);
+		String loginId = member.getLoginId();
+		Member isMember = memberService.login(loginId, nowLoginPwReal);
+		
+		if (isMember == null) {
+			return "html:<script> alert('비밀번호가 일치하지 않습니다.'); location.replace('mypage'); </script>";
+		}
+		
+		int isModified = memberService.modifyPw(id, newLoginPwReal);
+		
+		if (isModified < 0 ) {
+			return "html:<script> alert('수정 실패...'); location.replace('mypage'); </script>";
+		}
+		
+		session.removeAttribute("loginedMemberId");
+		return "html:<script> alert('비밀번호가 변경되었습니다.'); location.replace('login'); </script>";
+	}
+
+	private String doActionModifyPw() {
+		int id = Util.getInt(req, "id");
+		
+		req.setAttribute("id", id);
+		return "member/modifyPw.jsp";
+	}
+
+	private String doActionDoSeekId() {
+		String email = req.getParameter("email");
+		int isExistEmail = memberService.isExistEmail(email);
+		
+		if (isExistEmail < 0) {
+			return "html:<script> alert('입력하신 이메일은 존재하지않습니다.'); location.replace('login'); </script>";
+		}
+		
+		Member member = memberService.getMemberByEmail(email);
+		String title = "아이디 찾기 결과입니다.";
+		String body = "아이디는 [" + member.getLoginId() + "]입니다."; 
+		gmailSend(email, title, body);
+		
+		return "html:<script> alert('해당 이메일로 아이디를 전송하였습니다.'); location.replace('login'); </script>";
+	}
+
+	private String doActionSeekId() {
+		return "member/seekId.jsp";
 	}
 
 	private String doActionModifyMemberInfo() {
@@ -112,18 +170,28 @@ public class MemberController extends Controller {
 		String email = req.getParameter("email");
 		String nickname = req.getParameter("nickname");
 
-		int isExist = memberService.isExistId(loginId);
+		int isExistId = memberService.isExistId(loginId);
+		int isExistEmail = memberService.isExistEmail(email);
+		int isExistNickname = memberService.isExistNickname(nickname);
 
-		if (isExist > 0) {
-			return "html:<script> alert('입력하신 아이디가 이미 존재합니다.'); location.replace('../home/main'); </script>";
+		if (isExistId > 0) {
+			return "html:<script> alert('입력하신 아이디가 이미 존재합니다.'); location.replace('join'); </script>";
+		}
+		if (isExistEmail > 0) {
+			return "html:<script> alert('입력하신 이메일이 이미 존재합니다.'); location.replace('join'); </script>";
+		}
+		if (isExistNickname > 0) {
+			return "html:<script> alert('입력하신 닉네임이 이미 존재합니다.'); location.replace('join'); </script>";
 		}
 
 		memberService.join(loginId, loginPwReal, name, email, nickname);
-		gmailSend(email, nickname);
+		String title = "회원가입을 환영합니다.";
+		String body = nickname+"님, 환영합니다.";
+		gmailSend(email, title, body);
 		return "html:<script> alert('" + nickname + "님 환영합니다.'); location.replace('../home/main'); </script>";
 	}
 	
-	private void gmailSend(String email, String nickname) {
+	private void gmailSend(String email, String title, String body) {
         String user = ""; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
         String password = "";   // 패스워드
 
@@ -149,10 +217,10 @@ public class MemberController extends Controller {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email)); 
 
             // Subject
-            message.setSubject("회원가입을 환영합니다."); //메일 제목을 입력
+            message.setSubject(title); //메일 제목을 입력
 
             // Text
-            message.setText(nickname + "님, 환영합니다.");    //메일 내용을 입력
+            message.setText(body);    //메일 내용을 입력
 
             // send the message
             Transport.send(message); ////전송

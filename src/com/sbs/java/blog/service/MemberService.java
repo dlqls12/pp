@@ -25,6 +25,14 @@ public class MemberService extends Service {
 	public int isExistId(String loginId) {
 		return MemberDao.isExistId(loginId);
 	}
+	
+	public int isExistEmail(String email) {
+		return MemberDao.isExistEmail(email);
+	}
+	
+	public int isExistNickname(String nickname) {
+		return MemberDao.isExistNickname(nickname);
+	}
 
 	public List<Member> getAllMembers() {
 		return MemberDao.getAllMembers();
@@ -36,5 +44,13 @@ public class MemberService extends Service {
 
 	public int modifyMemberInfo(int id, String newEmail, String newNick) {
 		return MemberDao.modifyMemberInfo(id, newEmail, newNick);
+	}
+
+	public Member getMemberByEmail(String email) {
+		return MemberDao.getMemberByEmail(email);
+	}
+
+	public int modifyPw(int id, String newLoginPwReal) {
+		return MemberDao.modifyPw(id, newLoginPwReal);
 	}
 }

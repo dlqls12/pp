@@ -28,7 +28,11 @@
 						</div>
 					</div>
 				</form>
-				<div><a href="">아이디 찾기</a> / <a href="">비밀번호 찾기</a></div>
+				<div>
+					<div><a href="${pageContext.request.contextPath}/s/member/seekId">[아이디 찾기]</a>
+					 	 <a href="${pageContext.request.contextPath}/s/member/modifyMemberInfo?id=<%=loginedMemberId %>">[비밀번호 찾기]</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

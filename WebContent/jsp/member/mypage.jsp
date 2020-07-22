@@ -14,6 +14,7 @@
 				<li>가입날짜 : <%=loginedMember.getRegDate() %></li>
 				<li>최근수정 : <%=loginedMember.getUpdateDate() %></li>
 				<li><a href="${pageContext.request.contextPath}/s/member/modifyMemberInfo?id=<%=loginedMemberId %>">[회원정보 수정하기]</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/member/modifyPw?id=<%=loginedMemberId %>">[비밀번호 변경하기]</a></li>
 			</ul>
 		</div>
 	</div>

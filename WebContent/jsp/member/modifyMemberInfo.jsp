@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 <script src="../../resource/js/modifyMemberInfo.js"></script>
 <div class="con">
 	<div class="body-box con">
@@ -24,16 +23,6 @@
 					<li class="flex">별명 :
 						<div class="form-row">
 							<input name="newNick" type="text" value='<%=loginedMember.getNickname()%>' />
-						</div>
-					</li>
-					<li class="flex">비밀번호 :
-						<div class="form-row">
-							<input name="loginPw" type="password" placeholder="비밀번호를 입력해주세요.">
-						</div>
-					</li>
-					<li class="flex">비밀번호 확인 :
-						<div class="form-row">
-							<input name="loginPwConfirm" type="password" placeholder="비밀번호 확인을 입력해주세요.">
 						</div>
 					</li>
 					<li>가입날짜 : <%=loginedMember.getRegDate()%></li>

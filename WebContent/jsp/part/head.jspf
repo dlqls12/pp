@@ -1,8 +1,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.CateItem"%>
 <%@ page import="com.sbs.java.blog.dto.Member"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
 	Member loginedMember = (Member) request.getAttribute("loginedMember");

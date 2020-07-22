@@ -62,7 +62,37 @@ public class MemberDao extends Dao {
 		
 		return -1;
 	}
+	
+	public int isExistEmail(String email) {
+		SecSql secSql = new SecSql();
 
+		secSql.append("SELECT * FROM `member` ");
+		secSql.append("WHERE email = ? ", email);
+		
+		if(!DBUtil.selectRow(dbConn, secSql).isEmpty()) {
+			Map<String, Object> row = DBUtil.selectRow(dbConn, secSql);
+			Member m = new Member(row);
+			return m.getId();
+		}
+		
+		return -1;
+	}
+
+	public int isExistNickname(String nickname) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("SELECT * FROM `member` ");
+		secSql.append("WHERE nickname = ? ", nickname);
+		
+		if(!DBUtil.selectRow(dbConn, secSql).isEmpty()) {
+			Map<String, Object> row = DBUtil.selectRow(dbConn, secSql);
+			Member m = new Member(row);
+			return m.getId();
+		}
+		
+		return -1;
+	}
+	
 	public List<Member> getAllMembers() {
 		SecSql secSql = new SecSql();
 
@@ -105,6 +135,26 @@ public class MemberDao extends Dao {
 		secSql.append("SET updateDate = NOW()");
 		secSql.append(", email = ?", newEmail);
 		secSql.append(", nickname = ?", newNick);
+		secSql.append(" WHERE id = ?", id);
+
+		return DBUtil.update(dbConn, secSql);
+	}
+
+	public Member getMemberByEmail(String email) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("SELECT * FROM `member` ");
+		secSql.append("WHERE email = ? ", email);
+		
+		return new Member(DBUtil.selectRow(dbConn, secSql));
+	}
+
+	public int modifyPw(int id, String newLoginPwReal) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("UPDATE `member`");
+		secSql.append("SET updateDate = NOW()");
+		secSql.append(", loginPw = ?", newLoginPwReal);
 		secSql.append(" WHERE id = ?", id);
 
 		return DBUtil.update(dbConn, secSql);

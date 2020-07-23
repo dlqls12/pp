@@ -60,7 +60,6 @@
 		initialEditType : "markdown",
 		previewStyle : "vertical",
 		initialValue : "# 내용을 입력해주세요...",
-		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
-				replPlugin, codepenPlugin ]
+		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, replPlugin, codepenPlugin ]
 	});
 </script>

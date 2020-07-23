@@ -53,4 +53,8 @@ public class MemberService extends Service {
 	public int modifyPw(int id, String newLoginPwReal) {
 		return MemberDao.modifyPw(id, newLoginPwReal);
 	}
+
+	public int setMailAuthStatus(int id) {
+		return MemberDao.setMailAuthStatus(id);
+	}
 }

@@ -37,7 +37,7 @@
 			</div>
 			<div class="form-row">
 				<div class="input">
-					<input type="submit" value="등록하기" />
+					<input type="submit" onclick="if ( confirm('게시물 작성을 완료하시겠습니까?') == false ) return false;" value="등록하기" />
 				</div>
 			</div>
 		</form>

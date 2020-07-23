@@ -7,7 +7,7 @@
 <div class="con">
 	<div class="body-box con">
 		<h1 class="main-title">비밀번호 변경하기</h1>
-		<form action="doModifyPw" method="POST" onsubmit="submitModifyPwForm(this); return false;">
+		<form action="doModifyPw" method="POST" class="form2" onsubmit="submitModifyPwForm(this); return false;">
 			<input type="hidden" name="newLoginPwReal">
 			<input type="hidden" name="nowLoginPwReal">
 			<div class="form-row">
@@ -27,7 +27,7 @@
 					<input name="newLoginPwConfirm" type="password" placeholder="비밀번호를 입력해주세요.">
 				</div>
 			</div>
-			<input type="submit" value="변경!!" /><a href="mypage">취소</a>
+			<input type="submit" onclick="if ( confirm('정말 변경하시겠습니까?') == false ) return false;" value="변경!!" /><a href="mypage">취소</a>
 		</form>
 	</div>
 	<div class="bottom">

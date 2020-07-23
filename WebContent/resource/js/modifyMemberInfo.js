@@ -20,6 +20,17 @@ function submitNickForm(form) {
 		return;
 	}
 	
+	form.pwConfirm.value = form.pwConfirm.value.trim();
+	if (form.pwConfirm.value.length == 0) {
+		alert('비밀번호를 확인해주세요.');
+		form.pwConfirm.focus();
+
+		return;
+	}
+	
+	form.pwConfirmReal.value = sha256(form.pwConfirm.value);
+	form.pwConfirm.value = '';
+	
 	form.submit();
 	writeFormSubmitted = true;
 }

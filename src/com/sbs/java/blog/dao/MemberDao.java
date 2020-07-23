@@ -159,4 +159,15 @@ public class MemberDao extends Dao {
 
 		return DBUtil.update(dbConn, secSql);
 	}
+
+	public int setMailAuthStatus(int id) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("UPDATE `member`");
+		secSql.append("SET updateDate = NOW()");
+		secSql.append(", mailAuthStatus = 1");
+		secSql.append(" WHERE id = ?", id);
+
+		return DBUtil.update(dbConn, secSql);
+	}
 }

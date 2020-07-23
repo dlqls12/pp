@@ -12,7 +12,7 @@
 			<div class="login-box">
 				<form action="doLogin" method="POST" class="login-form" onsubmit="submitLoginForm(this); return false;">
 					<input type="hidden" name="loginPwReal">
-					<div class="flex">
+					<div class="login-form-box flex">
 						<div>
 							<div class="form-row">
 								<div class="label">아이디</div>
@@ -29,8 +29,9 @@
 					</div>
 				</form>
 				<div>
-					<div><a href="${pageContext.request.contextPath}/s/member/seekId">[아이디 찾기]</a>
-					 	 <a href="${pageContext.request.contextPath}/s/member/seekPw">[비밀번호 찾기]</a>
+					<div>
+						<a href="${pageContext.request.contextPath}/s/member/seekId">[아이디 찾기]</a>
+						<a href="${pageContext.request.contextPath}/s/member/seekPw">[비밀번호 찾기]</a>
 					</div>
 				</div>
 			</div>

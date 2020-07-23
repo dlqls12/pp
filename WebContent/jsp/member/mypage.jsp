@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
@@ -9,7 +8,7 @@
 		<div class="mp-box">
 			<ul>
 				<li>아이디 : <%=loginedMember.getLoginId() %></li>
-				<li>이메일 : <%=loginedMember.getEmail() %></li>
+				<li>이메일 : <%=loginedMember.getEmail() %> <%if (loginedMember.getMailAuthStatus()==0) { %><a href="${pageContext.request.contextPath}/s/member/mailAuth?id=<%=loginedMemberId%>">[이메일 인증하기]</a><%}%></li>
 				<li>별명 : <%=loginedMember.getNickname() %></li>
 				<li>가입날짜 : <%=loginedMember.getRegDate() %></li>
 				<li>최근수정 : <%=loginedMember.getUpdateDate() %></li>

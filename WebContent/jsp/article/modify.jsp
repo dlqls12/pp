@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
@@ -48,7 +47,7 @@
 			</div>
 			<div class="form-row">
 				<div class="input">
-					<input type="submit" value="전송" />
+					<input type="submit" onclick="if ( confirm('게시물 수정을 완료하시겠습니까?') == false ) return false;" value="수정" />
 				</div>
 			</div>
 		</form>

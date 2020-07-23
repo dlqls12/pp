@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 <script src="../../resource/js/seekId.js"></script>
@@ -7,7 +6,7 @@
 <div class="con">
 	<div class="body-box con">
 		<h1 class="main-title">아이디찾기</h1>
-		<form action="doSeekId" method="POST" class="seekId-form" onsubmit="submitSeekIdForm(this); return false;">
+		<form action="doSeekId" method="POST" class="form2" onsubmit="submitSeekIdForm(this); return false;">
 			<div>
 				<div class="form-row">
 					<div class="label">이메일 :</div>

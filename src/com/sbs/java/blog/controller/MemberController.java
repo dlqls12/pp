@@ -60,9 +60,41 @@ public class MemberController extends Controller {
 			return doActionModifyPw();
 		case "doModifyPw":
 			return doActionDoModifyPw();
+		case "mailAuth":
+			return doActionMailAuth();
+		case "doMailAuth":
+			return doActionDoMailAuth();
 		}
 
 		return "";
+	}
+
+	private String doActionDoMailAuth() {
+		int id = Util.getInt(req, "id");
+		String authCode = req.getParameter("authCode");
+		String mailAuthCode = req.getParameter("mailAuthCode");
+		
+		if ( authCode.equals(mailAuthCode) ) {
+			int isAuth = memberService.setMailAuthStatus(id);
+			return "html:<script> alert('인증이 완료되었습니다.'); location.replace('../home/main'); </script>";
+		}
+		return "html:<script> alert('인증번호가 일치하지 않습니다.'); location.replace('../home/main'); </script>";
+	}
+
+	private String doActionMailAuth() {
+		int id = Util.getInt(req, "id");
+		Member member = memberService.getMemberById(id);
+
+		String authCode = Util.numberGen(6, 2);
+		
+		String email = member.getEmail();
+		String title = "메일 인증";
+		String body = "인증번호는 [" + authCode + "]입니다.";
+		
+		gmailSend(email, title, body);
+		
+		req.setAttribute("authCode", authCode);
+		return "member/mailAuth.jsp";
 	}
 
 	private String doActionDoSeekPw() {
@@ -158,6 +190,14 @@ public class MemberController extends Controller {
 		int id = Util.getInt(req, "id");
 		String newEmail = req.getParameter("newEmail");
 		String newNick = req.getParameter("newNick");
+		String pwConfirmReal = req.getParameter("pwConfirmReal");
+		
+		Member member = memberService.getMemberById(id);
+		Member isMember = memberService.login(member.getLoginId(), pwConfirmReal);
+		
+		if (isMember == null) {
+			return "html:<script> alert('비밀번호를 확인해주세요.'); location.replace('mypage'); </script>";
+		}
 		
 		int isModified = memberService.modifyMemberInfo(id, newEmail, newNick);
 		
@@ -187,7 +227,7 @@ public class MemberController extends Controller {
 			session.setAttribute("loginedMemberId", member.getId());
 			return "html:<script> alert('" + member.getNickname() + "님 환영합니다.'); location.replace('../home/main'); </script>";
 		} else {
-			return "html:<script> alert('아이디나 비밀번호가 틀렸습니다.'); location.replace('../home/main'); </script>";
+			return "html:<script> alert('아이디나 비밀번호가 틀렸습니다.'); location.replace('login'); </script>";
 		}
 	}
 

@@ -31,7 +31,7 @@
 				<%if (article.getId() < fullPage) {%><a href="detail?id=<%=article.getId() + 1%>">[다음글]</a><%}%>
 			</div>
 			<div class="next-or-prev-button">
-				<a href="${pageContext.request.contextPath}/s/article/delete?id=<%=article.getId()%>">[삭제하기]</a>
+				<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/delete?id=<%=article.getId()%>">[삭제하기]</a>
 				<a href="${pageContext.request.contextPath}/s/article/modify?id=<%=article.getId()%>">[수정하기]</a>
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 						↪ <%=reply.getBody()%>
 						</div>
 						<div class="reply-info">작성날짜 :<%=reply.getRegDate()%> | 수정날짜 : <%=reply.getUpdateDate()%>
-							<a href="${pageContext.request.contextPath}/s/article/removeReply?articleId=<%=article.getId() %>&replyId=<%=reply.getId()%>">[삭제하기]</a>
+							<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/removeReply?articleId=<%=article.getId() %>&replyId=<%=reply.getId()%>">[삭제하기]</a>
 							<a href="${pageContext.request.contextPath}/s/article/modifyReply?articleId=<%=article.getId() %>&replyId=<%=reply.getId()%>">[수정하기]</a>
 						</div>
 						<%}%>
@@ -69,7 +69,7 @@
 					</div>
 					<div class="form-row">
 						<div class="input">
-							<input type="submit" value="전송" />
+							<input type="submit" onclick="if ( confirm('댓글 작성을 완료하시겠습니까?') == false ) return false;" value="전송" />
 						</div>
 					</div>
 				</form>

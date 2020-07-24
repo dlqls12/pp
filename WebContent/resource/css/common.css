@@ -488,6 +488,7 @@ label[for] {
 	background-color: #F2F4EF;
 	color: #261326;
 	display: none;
+	z-index:100;
 }
 
 .mobile-side-bar.active {
@@ -683,20 +684,20 @@ label[for] {
 }
 
 .form1 .form-row>.label {
-	margin-right:20px;
-	width: 130px;
-	padding:6.5px;
+	margin-right:10px;
+	width: 140px;
+	padding:5px;
 	text-align:right;
 }
 
 .write-form .form-row>.label {
 	font-weight:bold;
 	color:#261326;
-	margin-right:20px;
-	width: 130px;
+	margin-right:10px;
+	width: 140px;
 	text-align:center;
 	background-color:#9795A3;
-	padding:6.5px;
+	padding:5px;
 	border:1px solid #261326;
 }
 
@@ -720,30 +721,15 @@ label[for] {
 	border:1px solid red;
 }
 
-.modify-form .form-row> .label {
+.write-form-cancle-button {
 	font-weight:bold;
 	color:#261326;
-	margin-right:20px;
-	width: 130px;
+	margin-right:10px;
+	width: 140px;
 	text-align:center;
 	background-color:#9795A3;
-	padding:6.5px;
+	padding:8.5px 5px;
 	border:1px solid #261326;
-}
-
-.modify-form .form-row:nth-child(4) >.label {
-	display:flex;
-	height:487px;
-	justify-content:center;
-	align-items:center;
-}
-
-.write-form .form-row:nth-child(5) >.input > input {
-	font-size:1rem;
-	font-weight:bold;
-	background-color:#9795A3;
-	border:1px solid #261326;
-	width:100%;
 }
 
 .mp-box {

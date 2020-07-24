@@ -1,9 +1,14 @@
-<%--jstl 적용완료 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
 <script src="../../resource/js/write.js"></script>
+<script>
+    var checkUnload = true;
+    $(window).on("beforeunload", function(){
+        if(checkUnload) return "???";
+    });
+</script>
 
 <div class="con">
 	<div class="con body-box">
@@ -33,6 +38,7 @@
 				</div>
 			</div>
 			<div class="form-row">
+				<a href="${pageContext.request.contextPath}/s/article/list" onclick="if ( confirm('작성중인 내용이 사라집니다. 정말 취소하시겠습니까?') == false ) return false;" class="write-form-cancle-button">취소하기</a>
 				<div class="input">
 					<input type="submit" onclick="if ( confirm('게시물 작성을 완료하시겠습니까?') == false ) return false;" value="등록하기" />
 				</div>

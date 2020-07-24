@@ -7,9 +7,9 @@
 		<h1 class="main-title">My Page</h1>
 		<div class="mp-box">
 			<ul>
-				<li>아이디 : ${loginedMember.id}</li>
+				<li>아이디 : ${loginedMember.loginId}</li>
 				<li>이메일 : ${loginedMember.email} <c:if test="${loginedMember.mailAuthStatus==0}"><a href="${pageContext.request.contextPath}/s/member/mailAuth?id=${loginedMemberId}">[이메일 인증하기]</a></c:if></li>
-				<li>별명 : ${loginedMember.nickname}</li>
+				<li>닉네임 : ${loginedMember.nickname}</li>
 				<li>가입날짜 : ${loginedMember.regDate}</li>
 				<li>최근수정 : ${loginedMember.updateDate}</li>
 				<li><a href="${pageContext.request.contextPath}/s/member/modifyMemberInfo?id=${loginedMemberId}">[회원정보 수정하기]</a></li>

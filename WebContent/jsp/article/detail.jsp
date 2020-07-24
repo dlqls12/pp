@@ -1,14 +1,9 @@
-<%--jstl 적용완료 --%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page import="com.sbs.java.blog.dto.Reply"%>
 <%@ page import="com.sbs.java.blog.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
-
-<%
-	Article article = (Article) request.getAttribute("article");
-%>
 
 <script src="../../resource/js/detail.js"></script>
 
@@ -19,7 +14,7 @@
 			카테고리 :${cateItem.name}| 등록날짜 :${article.regDate} | 작성자:<c:forEach items="${members}" var="member"><c:if test="${member.id==article.memberId}">${member.nickname}</c:if></c:forEach>| 조회수 :${article.hit }
 		</div>
 		<div class="detail-box">
-			<script type="text/x-template"><%=article.getBodyForXTemplate()%></script>
+			<script type="text/x-template">${article.bodyForXTemplate}</script>
 			<div class="toast-editor toast-editor-viewer"></div>
 		</div>
 		<div class="con flex flex-jc-sb">

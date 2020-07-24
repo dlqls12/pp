@@ -20,7 +20,7 @@
 							<input name="newEmail" type="email" value='${loginedMember.email}' />
 						</div>
 					</li>
-					<li class="flex">별명 :
+					<li class="flex">닉네임 :
 						<div class="form-row">
 							<input name="newNick" type="text" value='${loginedMember.nickname}' />
 						</div>

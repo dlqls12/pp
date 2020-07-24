@@ -1,13 +1,8 @@
+<%--jstl 적용완료 --%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.CateItem"%>
 <%@ page import="com.sbs.java.blog.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
-	Member loginedMember = (Member) request.getAttribute("loginedMember");
-	int loginedMemberId = (int) request.getAttribute("loginedMemberId");
-	boolean isLogined = (boolean) request.getAttribute("isLogined");
-%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>

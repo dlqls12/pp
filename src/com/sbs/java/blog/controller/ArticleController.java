@@ -103,6 +103,9 @@ public class ArticleController extends Controller {
 		List<Reply> replies = articleService.getReplies(article.getId());
 		List<Member> members = memberService.getAllMembers();
 		
+		int replySize = replies.size();
+		
+		req.setAttribute("replySize", replySize);
 		req.setAttribute("members", members);
 		req.setAttribute("replies", replies);
 		req.setAttribute("cateItem", cateItem);
@@ -206,6 +209,9 @@ public class ArticleController extends Controller {
 		List<Reply> replies = articleService.getReplies(article.getId());
 		List<Member> members = memberService.getAllMembers();
 		
+		int replySize = replies.size();
+		
+		req.setAttribute("replySize", replySize);
 		req.setAttribute("members", members);
 		req.setAttribute("replies", replies);
 		req.setAttribute("cateItem", cateItem);
@@ -257,8 +263,9 @@ public class ArticleController extends Controller {
 		req.setAttribute("totalPage", totalPage);
 		req.setAttribute("page", page);
 
-		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId,
-				searchKeywordType, searchKeyword);
+		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId, searchKeywordType, searchKeyword);
+		int size = articles.size();
+		req.setAttribute("size", size);
 		req.setAttribute("articles", articles);
 		return "article/list.jsp";
 	}

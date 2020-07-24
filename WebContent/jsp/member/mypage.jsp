@@ -7,13 +7,13 @@
 		<h1 class="main-title">My Page</h1>
 		<div class="mp-box">
 			<ul>
-				<li>아이디 : <%=loginedMember.getLoginId() %></li>
-				<li>이메일 : <%=loginedMember.getEmail() %> <%if (loginedMember.getMailAuthStatus()==0) { %><a href="${pageContext.request.contextPath}/s/member/mailAuth?id=<%=loginedMemberId%>">[이메일 인증하기]</a><%}%></li>
-				<li>별명 : <%=loginedMember.getNickname() %></li>
-				<li>가입날짜 : <%=loginedMember.getRegDate() %></li>
-				<li>최근수정 : <%=loginedMember.getUpdateDate() %></li>
-				<li><a href="${pageContext.request.contextPath}/s/member/modifyMemberInfo?id=<%=loginedMemberId %>">[회원정보 수정하기]</a></li>
-				<li><a href="${pageContext.request.contextPath}/s/member/modifyPw?id=<%=loginedMemberId %>">[비밀번호 변경하기]</a></li>
+				<li>아이디 : ${loginedMember.id}</li>
+				<li>이메일 : ${loginedMember.email} <c:if test="${loginedMember.mailAuthStatus==0}"><a href="${pageContext.request.contextPath}/s/member/mailAuth?id=${loginedMemberId}">[이메일 인증하기]</a></c:if></li>
+				<li>별명 : ${loginedMember.nickname}</li>
+				<li>가입날짜 : ${loginedMember.regDate}</li>
+				<li>최근수정 : ${loginedMember.updateDate}</li>
+				<li><a href="${pageContext.request.contextPath}/s/member/modifyMemberInfo?id=${loginedMemberId}">[회원정보 수정하기]</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/member/modifyPw?id=${loginedMemberId}">[비밀번호 변경하기]</a></li>
 			</ul>
 		</div>
 	</div>

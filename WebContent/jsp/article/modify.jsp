@@ -1,3 +1,4 @@
+<%--jstl 적용완료 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ include file="/jsp/part/head.jspf"%>
@@ -16,25 +17,21 @@
 				<div class="label">카테고리 선택</div>
 				<div class="input">
 					<select name="cateItemId">
-						<%
-							for (CateItem cateItem : cateItems) {
-						%>
-						<option value="<%=cateItem.getId()%>"><%=cateItem.getName()%></option>
-						<%
-							}
-						%>
+						<c:forEach items="${cateItems}" var="cateItem">
+							<option value="${cateItem.id}">${cateItem.name}</option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="input">
-					<input name="id" type="hidden" value='<%=article.getId()%>' />
+					<input name="id" type="hidden" value='${article.id }' />
 				</div>
 			</div>
 			<div class="form-row write-form-title">
 				<div class="label">제목</div>
 				<div class="input">
-					<input name="title" type="text" value='<%=article.getTitle()%>' />
+					<input name="title" type="text" value='${article.title }' />
 				</div>
 			</div>
 			<div class="form-row">

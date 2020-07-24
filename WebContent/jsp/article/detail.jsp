@@ -1,3 +1,4 @@
+<%--jstl 적용완료 --%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page import="com.sbs.java.blog.dto.Reply"%>
 <%@ page import="com.sbs.java.blog.dto.Member"%>
@@ -6,20 +7,16 @@
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
 <%
-	List<Member> members = (List<Member>) request.getAttribute("members");
-	List<Reply> replies = (List<Reply>) request.getAttribute("replies");
 	Article article = (Article) request.getAttribute("article");
-	int fullPage = (int) request.getAttribute("fullPage");
-	CateItem cateItem = (CateItem) request.getAttribute("cateItem");
 %>
 
 <script src="../../resource/js/detail.js"></script>
 
 <div class="con">
 	<div class="body-box">
-		<h1 class="main-title"><%=article.getTitle()%></h1>
+		<h1 class="main-title">${article.title }</h1>
 		<div class="cate-and-date">
-			카테고리 :<%=cateItem.getName()%>| 등록날짜 :<%=article.getRegDate()%>| 작성자:<%for(Member member : members){%><%if(member.getId()==article.getMemberId()){%><%=member.getNickname()%><%}%><%}%>| 조회수 :<%=article.getHit()%>
+			카테고리 :${cateItem.name}| 등록날짜 :${article.regDate} | 작성자:<c:forEach items="${members}" var="member"><c:if test="${member.id==article.memberId}">${member.nickname}</c:if></c:forEach>| 조회수 :${article.hit }
 		</div>
 		<div class="detail-box">
 			<script type="text/x-template"><%=article.getBodyForXTemplate()%></script>
@@ -27,32 +24,33 @@
 		</div>
 		<div class="con flex flex-jc-sb">
 			<div class="next-or-prev-button">
-				<%if (article.getId() > 1) {%><a href="detail?id=<%=article.getId() - 1%>">[이전글]</a><%}%>
-				<%if (article.getId() < fullPage) {%><a href="detail?id=<%=article.getId() + 1%>">[다음글]</a><%}%>
+				<c:if test="${article.id > 1}"><a href="detail?id=${article.id-1}">[이전글]</a></c:if>
+				<c:if test="${article.id < fullPage}"><a href="detail?id=${article.id+1}">[다음글]</a></c:if>
 			</div>
 			<div class="next-or-prev-button">
-				<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/delete?id=<%=article.getId()%>">[삭제하기]</a>
-				<a href="${pageContext.request.contextPath}/s/article/modify?id=<%=article.getId()%>">[수정하기]</a>
+				<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/delete?id=${article.id}">[삭제하기]</a>
+				<a href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}">[수정하기]</a>
 			</div>
 		</div>
 		<div class="con">
 			<h4 class="reply-title">댓글</h4>
 			<div class="reply-box">
 				<div>
-					<%if (replies.size() == 0) {%>
+					<c:if test="${replySize==0}">
 						<div>댓글이 없습니다.😞</div>
-					<%} else {%>
-						<%for (Reply reply : replies) {%>
+					</c:if>
+					<c:if test="${replySize!=0}">
+						<c:forEach items="${replies}" var="reply">
 						<div class="reply-body">
-						<div class="reply-writer">작성자 :<%for (Member member : members) {%><%if (member.getId() == reply.getMemberId()) {%><%=member.getNickname()%><%}%><%}%></div>
-						↪ <%=reply.getBody()%>
+						<div class="reply-writer">작성자 :<c:forEach items="${members}" var="member"><c:if test="${member.id==reply.memberId}">${member.nickname}</c:if></c:forEach></div>
+						↪ ${reply.body}
 						</div>
-						<div class="reply-info">작성날짜 :<%=reply.getRegDate()%> | 수정날짜 : <%=reply.getUpdateDate()%>
-							<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/removeReply?articleId=<%=article.getId() %>&replyId=<%=reply.getId()%>">[삭제하기]</a>
-							<a href="${pageContext.request.contextPath}/s/article/modifyReply?articleId=<%=article.getId() %>&replyId=<%=reply.getId()%>">[수정하기]</a>
+						<div class="reply-info">작성날짜 :${reply.regDate} | 수정날짜 : ${reply.updateDate}
+							<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/removeReply?articleId=${article.id}&replyId=${reply.id}">[삭제하기]</a>
+							<a href="${pageContext.request.contextPath}/s/article/modifyReply?articleId=${article.id}&replyId=${reply.id}">[수정하기]</a>
 						</div>
-						<%}%>
-					<%}%>
+						</c:forEach>
+					</c:if>
 				</div>
 			</div>
 			<div class="con add-reply-box">
@@ -60,7 +58,7 @@
 					onsubmit="submitReplyForm(this); return false;">
 					<div class="form-row">
 						<div class="input">
-							<input name="id" type="hidden" value='<%=article.getId()%>' />
+							<input name="id" type="hidden" value='${article.id}' />
 						</div>
 					</div>
 					<div class="con form-row">

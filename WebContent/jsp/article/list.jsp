@@ -1,13 +1,11 @@
+<%--jstl 적용완료 --%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%
-	List<Article> articles = (List<Article>) request.getAttribute("articles");
 	int totalPage = (int) request.getAttribute("totalPage");
 	int paramPage = (int) request.getAttribute("page");
-	String cateItemName = (String)request.getAttribute("cateItemName");
 %>
 
 <style>
@@ -28,18 +26,15 @@
 <div class="con">
 	<div class="con body-box">
 		<div class="con main-title">
-			<div class="article-title"><%=cateItemName%> 게시물 리스트</div>
+			<div class="article-title">${cateItemName} 게시물 리스트</div>
 			<div class="articles-amount">총 게시물 수 : ${totalCount}</div>
 		</div>
 		
 		<div class="list-box">
-			<%
-				if (articles.size() == 0) {
-			%>
+			<c:if test="${size==0}">
 				<h2>게시물이 존재하지 않습니다. 😞</h2>
-			<%
-				} else {
-			%>
+			</c:if>
+			<c:if test="${size!=0}">
 			<table class="con">
 				<thead>
 					<tr>
@@ -51,38 +46,24 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						for (Article article : articles) {
-					%>
+					<c:forEach items="${articles}" var="article">
 					<tr>
-						<td><%=article.getId()%></td>
-						<td><a href="../article/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
-						<td><%=article.getRegDate()%></td>
-						<td><%=article.getUpdateDate()%></td>
+						<td>${article.id}</td>
+						<td><a href="../article/detail?id=${article.id}">${article.title}</a></td>
+						<td>${article.regDate}</td>
+						<td>${article.updateDate}</td>
 					<td>
-						<%
-							for (int i = 0; i < cateItems.size(); i++) {
-						%> 
-								<%
-								if (cateItems.get(i).getId() == article.getCateItemId()) {
-								%>
-								<%=cateItems.get(i).getName()%>
-							<%
-							}
-							%>
-						<%
-						}
-						%>
+						<c:forEach items="${cateItems}" var="cateItem">
+							<c:if test="${cateItem.id==article.cateItemId}">
+								${cateItem.name}
+							</c:if>
+						</c:forEach>
 					</td>
 					</tr>
-						<%
-						}
-						%>
+					</c:forEach>
 				</tbody>
 			</table>
-			<%
-				}
-			%>
+			</c:if>
 		</div>
 		<div class="con page-box">
 			<ul class="flex flex-jc-c">

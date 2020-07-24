@@ -10,23 +10,23 @@
 				<input type="hidden" name="pwConfirmReal">
 				<div class="form-row">
 					<div class="input">
-						<input name="id" type="hidden" value='<%=loginedMemberId%>' />
+						<input name="id" type="hidden" value='${loginedMemberId}' />
 					</div>
 				</div>
 				<ul>
-					<li>아이디 : <%=loginedMember.getLoginId()%></li>
+					<li>아이디 : ${loginedMember.loginId}</li>
 					<li class="flex">이메일 : 
 						<div class="form-row">
-							<input name="newEmail" type="email" value='<%=loginedMember.getEmail()%>' />
+							<input name="newEmail" type="email" value='${loginedMember.email}' />
 						</div>
 					</li>
 					<li class="flex">별명 :
 						<div class="form-row">
-							<input name="newNick" type="text" value='<%=loginedMember.getNickname()%>' />
+							<input name="newNick" type="text" value='${loginedMember.nickname}' />
 						</div>
 					</li>
-					<li>가입날짜 : <%=loginedMember.getRegDate()%></li>
-					<li>최근수정 : <%=loginedMember.getUpdateDate()%></li>
+					<li>가입날짜 : ${loginedMember.regDate}</li>
+					<li>최근수정 : ${loginedMember.updateDate}</li>
 					<li class="flex">비밀번호 확인 :
 						<div class="form-row">
 							<input name="pwConfirm" type="password" placeholder="비밀번호 확인" />

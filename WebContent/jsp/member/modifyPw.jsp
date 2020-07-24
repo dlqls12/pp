@@ -12,7 +12,7 @@
 			<input type="hidden" name="nowLoginPwReal">
 			<div class="form-row">
 				<div class="input">
-					<input name="id" type="hidden" value='<%=loginedMemberId %>' />
+					<input name="id" type="hidden" value='${loginedMemberId}' />
 				</div>
 				<div class="form-row">
 					<div class="label">현재 비밀번호</div>

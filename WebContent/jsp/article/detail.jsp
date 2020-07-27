@@ -23,12 +23,13 @@
 				<c:if test="${article.id < fullPage}"><a href="detail?id=${article.id+1}">[다음글]</a></c:if>
 			</div>
 			<div class="next-or-prev-button">
-				<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/delete?id=${article.id}">[삭제하기]</a>
-				<a href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}">[수정하기]</a>
+				<c:if test="${loginedMemberId==article.memberId}">
+					<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/delete?id=${article.id}">[삭제하기]</a>
+					<a href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}">[수정하기]</a>
+				</c:if>
 			</div>
 		</div>
 		<div class="con">
-			<h4 class="reply-title">댓글</h4>
 			<div class="reply-box">
 				<div>
 					<c:if test="${replySize==0}">
@@ -41,30 +42,23 @@
 						↪ ${reply.body}
 						</div>
 						<div class="reply-info">작성날짜 :${reply.regDate} | 수정날짜 : ${reply.updateDate}
-							<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/removeReply?articleId=${article.id}&replyId=${reply.id}">[삭제하기]</a>
-							<a href="${pageContext.request.contextPath}/s/article/modifyReply?articleId=${article.id}&replyId=${reply.id}">[수정하기]</a>
+							<c:if test="${loginedMemberId==reply.memberId}">
+								<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/removeReply?articleId=${article.id}&replyId=${reply.id}">[삭제하기]</a>
+								<a href="${pageContext.request.contextPath}/s/article/modifyReply?articleId=${article.id}&replyId=${reply.id}">[수정하기]</a>
+							</c:if>
 						</div>
 						</c:forEach>
 					</c:if>
 				</div>
 			</div>
 			<div class="con add-reply-box">
-				<form action="addReply" method="POST" class="reply-form"
-					onsubmit="submitReplyForm(this); return false;">
+				<form action="addReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
+					<input name="id" type="hidden" value='${article.id}' />
 					<div class="form-row">
-						<div class="input">
-							<input name="id" type="hidden" value='${article.id}' />
-						</div>
-					</div>
-					<div class="con form-row">
-						<div class="label">댓글</div>
+						<div class="reply-title">댓글작성하기</div>
 						<div class="input"><textarea class="reply-field" name="body" placeholder="내용을 입력해주세요." /></textarea></div>
 					</div>
-					<div class="form-row">
-						<div class="input">
-							<input type="submit" onclick="if ( confirm('댓글 작성을 완료하시겠습니까?') == false ) return false;" value="전송" />
-						</div>
-					</div>
+					<input type="submit" onclick="if ( confirm('댓글 작성을 완료하시겠습니까?') == false ) return false;" value="전송" />
 				</form>
 			</div>
 		</div>

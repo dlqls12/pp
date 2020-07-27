@@ -6,7 +6,7 @@
 	<div class="body-box con">
 		<h1 class="main-title">회원정보 수정</h1>
 		<div class="mp-box">
-			<form action="doModifyMemberInfo" method="POST" onsubmit="submitNickForm(this); return false;">
+			<form action="doModifyMemberInfo" method="POST" class="modify-member-info-box" onsubmit="submitNickForm(this); return false;">
 				<input type="hidden" name="pwConfirmReal">
 				<div class="form-row">
 					<div class="input">
@@ -33,7 +33,7 @@
 						</div>
 					</li>
 				</ul>
-				<input type="submit" onclick="if ( confirm('정말 변경하시겠습니까?') == false ) return false;" value="변경!!" />
+				<input type="submit" onclick="if ( confirm('정말 변경하시겠습니까?') == false ) return false;" value="변경" />
 				<a onclick="if ( confirm('취소하시겠습니까?') == false ) return false;" href="mypage">취소</a>
 			</form>
 		</div>

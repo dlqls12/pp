@@ -633,20 +633,22 @@ label[for] {
 
 .reply-box {
 	padding: 10px 20px;
-}
-
-.reply-title {
-	padding: 10px 20px;
+	margin-top:10px;
+	border-top:3px solid #261326;
 	border-bottom:3px solid #261326;
 }
 
+.reply-title {
+	padding:10px 0;
+}
+
 .reply-field {
-	width:1075px;
+	width:99.5%;
 	height:50px;
 }
 
 .add-reply-box {
-	padding:20px;
+	padding:0 20px;
 }
 
 .about-me-box {
@@ -683,14 +685,14 @@ label[for] {
 	width:97.8%;
 }
 
-.form1 .form-row>.label {
+.form1 .form-row >.label {
 	margin-right:10px;
 	width: 140px;
 	padding:5px;
 	text-align:right;
 }
 
-.write-form .form-row>.label {
+.write-form .form-row >.label {
 	font-weight:bold;
 	color:#261326;
 	margin-right:10px;
@@ -743,6 +745,10 @@ label[for] {
 
 .mp-box > ul > li > a:hover {
 	color:red;
+}
+
+.modify-member-info-box > ul > li {
+	margin-bottom:10px;
 }
 
 .login-box {
@@ -798,4 +804,26 @@ label[for] {
 .form2 {
 	padding:20px;
 	border:3px solid #261326;
+}
+
+.form2 > .form-row {
+	margin-bottom: 10px;
+}
+
+.form2 > .form-row > .label {
+	width:120px;
+}
+
+.form-row > .label {
+	text-align:right;
+	margin-right:5px;
+}
+
+.form2 > div > input {
+	text-align:center;
+	margin:0 10px;
+}
+
+.form2 > div > .form-row {
+	margin:5px;
 }

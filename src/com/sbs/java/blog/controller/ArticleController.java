@@ -91,11 +91,6 @@ public class ArticleController extends Controller {
 	private String doActionModifyReply() {
 		int replyId = Util.getInt(req, "replyId");
 		int articleId = Util.getInt(req, "articleId");
-		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
-		Reply reply = articleService.getReply(replyId);
-		if (reply.getMemberId() != loginedMemberId) {
-			return "html:<script> alert('작성자 본인만 수정할 수 있습니다.'); location.replace('detail?id="+articleId+"'); </script>";
-		}
 		
 		int fullPage = articleService.getForPrintListArticlesCount(0, "", "");
 		Article article = articleService.getForPrintArticle(articleId);
@@ -118,12 +113,6 @@ public class ArticleController extends Controller {
 	private String doActionRemoveReply() {
 		int replyId = Util.getInt(req, "replyId");
 		int articleId = Util.getInt(req, "articleId");
-		Article article = articleService.getForPrintArticle(articleId);
-		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
-		
-		if (article.getMemberId() != loginedMemberId) {
-			return "html:<script> alert('작성자 본인만 삭제할 수 있습니다.'); location.replace('detail?id="+articleId+"'); </script>";
-		}
 		
 		articleService.removeReply(replyId);
 		return "html:<script> alert('댓글이 삭제되었습니다.'); location.replace('detail?id="+articleId+"'); </script>";
@@ -152,11 +141,6 @@ public class ArticleController extends Controller {
 	private String doActionModify() {
 		int id = Util.getInt(req, "id");
 		Article article = articleService.getForPrintArticle(id);
-		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
-		
-		if (article.getMemberId() != loginedMemberId) {
-			return "html:<script> alert('작성자 본인만 수정할 수 있습니다.'); location.replace('detail?id="+id+"'); </script>";
-		}
 		
 		req.setAttribute("article", article);
 		return "article/modify.jsp";
@@ -164,12 +148,6 @@ public class ArticleController extends Controller {
 
 	private String doActionDelete() {
 		int id = Util.getInt(req, "id");
-		Article article = articleService.getForPrintArticle(id);
-		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
-		
-		if (article.getMemberId() != loginedMemberId) {
-			return "html:<script> alert('작성자 본인만 삭제할 수 있습니다.'); location.replace('detail?id="+id+"'); </script>";
-		}
 		
 		articleService.delete(id);
 		

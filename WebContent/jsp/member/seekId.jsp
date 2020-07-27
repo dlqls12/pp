@@ -8,11 +8,11 @@
 		<h1 class="main-title">아이디찾기</h1>
 		<form action="doSeekId" method="POST" class="form2" onsubmit="submitSeekIdForm(this); return false;">
 			<div>
-				<div class="form-row">
+				<div class="flex form-row">
 					<div class="label">이메일 :</div>
 					<input name="email" type="email" placeholder="이메일을 입력해주세요.">
-					<input type="submit" value="찾기">
 				</div>
+				<input type="submit" value="찾기">
 			</div>
 		</form>
 	</div>

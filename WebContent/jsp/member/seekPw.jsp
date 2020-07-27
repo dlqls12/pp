@@ -10,11 +10,11 @@
 			<input type="hidden" name="loginPwReal">
 			<input name="tempPw" type="hidden" value='123456789a'>
 			<div>
-				<div class="form-row">
+				<div class="flex form-row">
 					<div class="label">아이디 :</div>
 					<input name="loginId" type="text" placeholder="아이디를 입력해주세요.">
 				</div>
-				<div class="form-row">
+				<div class="flex form-row">
 					<div class="label">이메일 :</div>
 					<input name="email" type="email" placeholder="이메일을 입력해주세요.">
 				</div>

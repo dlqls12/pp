@@ -1,4 +1,3 @@
-<%--jstl 적용완료 --%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -70,8 +69,9 @@
 				<%
 					for (int i = 1; i <= totalPage; i++) {
 				%>
-				<li class="<%=i == paramPage ? "current" : ""%>"><a
-					href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=<%=i%>" class="block"><%=i%></a></li>
+				<li class="<%=i == paramPage ? "current" : ""%>">
+					<a href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=<%=i%>" class="block"><%=i%></a>
+				</li>
 				<%
 					}	
 				%>

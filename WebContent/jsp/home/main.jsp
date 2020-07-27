@@ -1,15 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf" %>
 <div class="con home-body">
 	<div class="body-box">
 		<c:if test="${isLogined }">
-		<h1 class="main-title">${loginedMember.nickname} 님, 환영합니다 😀</h1>
+		<h1 class="main-title">${loginedMember.nickname} 님, 환영합니다 😃</h1>
 		</c:if>
 		<c:if test="${isLogined ==false}">
-		<h1 class="main-title">환영합니다 😀</h1>
+		<h1 class="main-title">환영합니다 😃</h1>
 		</c:if>
-		<div class="main-img"><img src="../../resource/img/landscape.jpg" alt="풍경이에요" /></div>
+		<div class="main-img"><img src="../../resource/img/human.jpg" alt="human" /></div>
 	</div>
 	<div class="bottom">
 		<div>

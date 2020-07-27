@@ -34,7 +34,7 @@
 				<div class="label">내용</div>
 				<div class="input">
 					<input type="hidden" name="body">
-					<div id="editor1"></div>
+					<div id="editor1" class="123"></div>
 				</div>
 			</div>
 			<div class="form-row">

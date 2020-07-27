@@ -9,6 +9,9 @@
 				<li>이름 : 이용빈</li>
 				<li>나이 : 27</li>
 				<li>취미 : 영화감상 & 게임</li>
+				<li><a href="https://github.com/dlqls12" target="_blank">▶ [GITHUB]</a></li>
+				<li><a href="https://dlqls12.tistory.com/" target="_blank">▶ [TISTORY]</a></li>
+				<li><a href="https://www.youtube.com/channel/UCqNhFabl_LORlyYzvHeJTVg?view_as=subscriber" target="_blank">▶ [YOUTUBE]</a></li>
 			</ul>
 		</div>
 	</div>

@@ -390,13 +390,15 @@ label[for] {
 
 .top-bar .logo {
 	font-size: 3rem;
-	padding: 0 30px;
+}
+
+.logo > img {
+	width:85px;
 }
 
 .top-bar .menu-box-1>ul>li>a {
 	padding: 0 30px;
-	font-weight: bold;
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 }
 
 .top-bar .menu-box-1>ul>li:hover>a {
@@ -425,7 +427,6 @@ label[for] {
 }
 
 .top-bar .menu-box-1>ul ul>li>a {
-	font-weight: bold;
 	text-align: center;
 	padding: 30px 0;
 }
@@ -496,8 +497,7 @@ label[for] {
 }
 
 .mobile-side-bar .menu-box-1 ul>li>a {
-	font-size: 1.2rem;
-	font-weight: bold;
+	font-size: 1.3rem;
 	text-align: center;
 	padding:25px 0;
 }
@@ -658,6 +658,10 @@ label[for] {
 	border:3px solid #261326;
 }
 
+.about-me-box > ul > li:hover > a {
+	color:red;
+}
+
 .form1 .form-row {
 	align-items: center;
 	display: flex;
@@ -671,6 +675,7 @@ label[for] {
 .form1 .form-row> input {
 	padding:10px;
 	width:20%;
+	border:1px solid #261326;
 }
 
 .form1 .form-row>.input > select {
@@ -693,27 +698,29 @@ label[for] {
 }
 
 .write-form .form-row >.label {
-	font-weight:bold;
-	color:#261326;
+	color:#F2F4EF;
 	margin-right:10px;
 	width: 140px;
 	text-align:center;
-	background-color:#9795A3;
 	padding:5px;
 	border:1px solid #261326;
+	background-color:#261326;
 }
 
 .write-form .form-row:nth-child(3) >.label {
+	color:#F2F4EF;
 	display:flex;
 	height:487px;
 	justify-content:center;
 	align-items:center;
+	background-color:#261326;
 }
 
 .write-form .form-row:nth-child(4) >.input > input {
+	color:#F2F4EF;
 	font-size:1rem;
 	font-weight:bold;
-	background-color:#9795A3;
+	background-color:#261326;;
 	border:1px solid #261326;
 	width:100%;
 }
@@ -724,14 +731,18 @@ label[for] {
 }
 
 .write-form-cancle-button {
-	font-weight:bold;
-	color:#261326;
+	color:#F2F4EF;
 	margin-right:10px;
 	width: 140px;
 	text-align:center;
-	background-color:#9795A3;
+	background-color:#261326;
 	padding:8.5px 5px;
 	border:1px solid #261326;
+}
+
+.write-form-cancle-button:hover {
+	color:red;
+	border:1px solid red;
 }
 
 .mp-box {

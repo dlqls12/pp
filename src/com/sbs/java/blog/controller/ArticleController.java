@@ -200,6 +200,7 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionList() {
+		long startTime = System.nanoTime();
 		int page = 1;
 
 		if (!Util.empty(req, "page") && Util.isNum(req, "page")) {
@@ -245,6 +246,11 @@ public class ArticleController extends Controller {
 		int size = articles.size();
 		req.setAttribute("size", size);
 		req.setAttribute("articles", articles);
+		long endTime = System.nanoTime();
+		long estimatedTime = endTime - startTime;
+		// nano seconds to seconds
+		double seconds = estimatedTime / 1000000000.0;
+		System.out.println("seconds:" + seconds);
 		return "article/list.jsp";
 	}
 }

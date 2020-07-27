@@ -169,6 +169,7 @@ public class ArticleDao extends Dao {
 
 		secSql.append("SELECT * FROM articleReply");
 		secSql.append("WHERE articleId = ?", id);
+		secSql.append("ORDER BY id DESC");
 
 		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
 		List<Reply> replies = new ArrayList<>();

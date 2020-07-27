@@ -1,4 +1,3 @@
-<%--jstl 적용완료 --%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.CateItem"%>
 <%@ page import="com.sbs.java.blog.dto.Member"%>
@@ -50,9 +49,8 @@
 <body>
 	<div class="block-block visible-on-sm-down">aaaaa</div>
 	<div class="mobile-top-bar visible-on-sm-down flex">
-		<a href="#" class="btn-toggle-mobile-side-bar flex flex-ai-c"> <i class="fas fa-bars"></i> <i class="fas fa-times"></i>
-		</a> <a href="${pageContext.request.contextPath}/s/home/main" class="logo absolute-center absolute-middle flex flex-ai-c"> <i class="fas fa-hiking"></i>
-		</a>
+		<a href="#" class="btn-toggle-mobile-side-bar flex flex-ai-c"> <i class="fas fa-bars"></i> <i class="fas fa-times"></i></a>
+		<a href="${pageContext.request.contextPath}/s/home/main" class="logo absolute-center absolute-middle flex flex-ai-c"><img src="../../resource/img/yb.png" alt="로고입니다." /></a>
 	</div>
 	<div class="mobile-side-bar flex visible-on-sm-down">
 		<nav class="menu-box-1 flex-grow-1">
@@ -91,7 +89,7 @@
 	</div>
 	<div class="con top-bar visible-on-md-up">
 		<div class="con flex flex-jc-sb height-100p">
-			<a href="${pageContext.request.contextPath}/s/home/main" class="logo flex flex-ai-c"> <i class="fas fa-hiking"></i></a>
+			<a href="${pageContext.request.contextPath}/s/home/main" class="logo flex flex-ai-c"> <img src="../../resource/img/yb.png" alt="로고입니다." /></a>
 
 			<nav class="menu-box-1">
 				<ul class="flex height-100p">

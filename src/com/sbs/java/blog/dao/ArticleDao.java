@@ -18,6 +18,27 @@ public class ArticleDao extends Dao {
 		this.dbConn = dbConn;
 	}
 
+	public List<Reply> getForPrintListReplies(int page, int itemsInAPage, int id) {
+		SecSql secSql = new SecSql();
+
+		int limitFrom = (page - 1) * itemsInAPage;
+
+		secSql.append("SELECT * ");
+		secSql.append("FROM articleReply ");
+		secSql.append("WHERE articleId = ? ", id);
+		secSql.append("ORDER BY id DESC ");
+		secSql.append("LIMIT ?, ? ", limitFrom, itemsInAPage);
+
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
+		List<Reply> replies = new ArrayList<>();
+
+		for (Map<String, Object> row : rows) {
+			replies.add(new Reply(row));
+		}
+
+		return replies;
+	}
+	
 	public List<Article> getForPrintListArticles(int page, int itemsInAPage, int cateItemId, String searchKeywordType,
 			String searchKeyword) {
 		SecSql secSql = new SecSql();

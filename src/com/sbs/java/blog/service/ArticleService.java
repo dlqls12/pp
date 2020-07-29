@@ -71,4 +71,8 @@ public class ArticleService extends Service {
 	public Reply getReply(int replyId) {
 		return articleDao.getReply(replyId);
 	}
+
+	public List<Reply> getForPrintListReplies(int page, int repliesInAPage, int id) {
+		return articleDao.getForPrintListReplies(page, repliesInAPage, id);
+	}
 }

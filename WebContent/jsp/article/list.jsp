@@ -79,10 +79,10 @@
 		</div>
 		<div class="con search-box flex flex-jc-c">	
 			<form action="${pageContext.request.contextPath}/s/article/list">
-				<input type="hidden" name="page" value="1" /> <input type="hidden"
-					name="cateItemId" value="${param.cateItemId}" /> <input
-					type="hidden" name="searchKeywordType" value="title" /> <input
-					type="text" name="searchKeyword" value="${param.searchKeyword}" />
+				<input type="hidden" name="page" value="1" />
+				<input type="hidden" name="cateItemId" value="${param.cateItemId}" /> 
+				<input type="hidden" name="searchKeywordType" value="title" /> 
+				<input type="text" name="searchKeyword" value="${param.searchKeyword}" />
 				<button type="submit">검색</button>	
 			</form>
 		</div>

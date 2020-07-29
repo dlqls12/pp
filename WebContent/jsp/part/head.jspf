@@ -38,6 +38,7 @@
 		loginedMember = {};
 		loginedMember["id"] = parseInt("${loginedMember.id}");
 		loginedMember["regDate"] = "${loginedMember.regDate}";
+		loginedMember["updateDate"] = "${loginedMember.updateDate}";
 		loginedMember["loginId"] = "${loginedMember.loginId}";
 		loginedMember["name"] = "${loginedMember.name}";
 		loginedMember["nickname"] = "${loginedMember.nickname}";

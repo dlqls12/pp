@@ -85,7 +85,7 @@ public class ArticleController extends Controller {
 		Reply reply = articleService.getReply(replyId);
 		
 		articleService.modifyReply(body, replyId);
-		return "html:<script> alert('댓글 수정 완료.'); location.replace('detail?id=" + reply.getArticleId() + "'); </script>";
+		return "html:<script> alert('댓글 수정 완료.'); location.replace('detail?id=" + reply.getArticleId() + "&page=1'); </script>";
 	}
 
 	private String doActionModifyReply() {
@@ -115,7 +115,7 @@ public class ArticleController extends Controller {
 		int articleId = Util.getInt(req, "articleId");
 		
 		articleService.removeReply(replyId);
-		return "html:<script> alert('댓글이 삭제되었습니다.'); location.replace('detail?id="+articleId+"'); </script>";
+		return "html:<script> alert('댓글이 삭제되었습니다.'); location.replace('detail?id="+articleId+"&page=1'); </script>";
 	}
 
 	private String doActionAddReply() {
@@ -124,7 +124,7 @@ public class ArticleController extends Controller {
 		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
 		articleService.addReply(articleId, body, loginedMemberId);
 		
-		return "html:<script> alert('댓글 작성 완료.'); location.replace('detail?id="+articleId+"'); </script>";
+		return "html:<script> alert('댓글 작성 완료.'); location.replace('detail?id="+articleId+"&page=1'); </script>";
 	}
 
 	private String doActionDoModify() {
@@ -135,7 +135,7 @@ public class ArticleController extends Controller {
 		
 		articleService.update(cateItemId, title, body, id);
 		
-		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('detail?id="+id+"'); </script>";
+		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('detail?id="+id+"&page=1'); </script>";
 	}
 
 	private String doActionModify() {
@@ -170,15 +170,7 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionDetail() {
-		if (Util.empty(req, "id")) {
-			return "html:id를 입력해주세요.";
-		}
-
-		if (Util.isNum(req, "id") == false) {
-			return "html:id를 정수로 입력해주세요.";
-		}
-
-		int page =1;
+		int page = 1;
 		int repliesInAPage = 5;
 		
 		page = Util.getInt(req, "page");
@@ -188,12 +180,21 @@ public class ArticleController extends Controller {
 		int fullPage = articleService.getForPrintListArticlesCount(0, "", "");
 		Article article = articleService.getForPrintArticle(id);
 		CateItem cateItem = articleService.getCateItem(article.getCateItemId());
-		List<Reply> replies = articleService.getReplies(article.getId());
+		List<Reply> replies = articleService.getForPrintListReplies(page, repliesInAPage, article.getId());
+		List<Reply> AllReplies = articleService.getReplies(article.getId());
 		List<Member> members = memberService.getAllMembers();
 		
-		int replySize = replies.size();
+		int replySize = AllReplies.size();
+		int allPage;
+		if ( replySize%repliesInAPage == 0 ) {
+			allPage = (replySize/repliesInAPage);
+		}
+		else {
+			allPage = (replySize/repliesInAPage)+1;
+		}
 		
-		req.setAttribute("repliesInAPage", repliesInAPage);
+		req.setAttribute("paramPage", page);
+		req.setAttribute("allPage", allPage);
 		req.setAttribute("replySize", replySize);
 		req.setAttribute("members", members);
 		req.setAttribute("replies", replies);

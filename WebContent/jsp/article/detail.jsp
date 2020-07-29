@@ -5,6 +5,11 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
+<%
+	int allPage = (int) request.getAttribute("allPage");
+	int paramPage = (int) request.getAttribute("paramPage");
+%>
+
 <script src="../../resource/js/detail.js"></script>
 
 <div class="con">
@@ -19,13 +24,13 @@
 		</div>
 		<div class="con flex flex-jc-sb">
 			<div class="next-or-prev-button">
-				<c:if test="${article.id > 1}"><a href="detail?id=${article.id-1}">[이전글]</a></c:if>
-				<c:if test="${article.id < fullPage}"><a href="detail?id=${article.id+1}">[다음글]</a></c:if>
+				<c:if test="${article.id > 1}"><a href="detail?id=${article.id-1}&page=1">[이전글]</a></c:if>
+				<c:if test="${article.id < fullPage}"><a href="detail?id=${article.id+1}&page=1">[다음글]</a></c:if>
 			</div>
 			<div class="next-or-prev-button">
 				<c:if test="${loginedMemberId==article.memberId}">
-					<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/delete?id=${article.id}">[삭제하기]</a>
-					<a href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}">[수정하기]</a>
+					<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/delete?id=${article.id}&page=${paramPage}">[삭제하기]</a>
+					<a href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}&page=${paramPage}">[수정하기]</a>
 				</c:if>
 			</div>
 		</div>
@@ -43,11 +48,22 @@
 						</div>
 						<div class="reply-info">작성날짜 :${reply.regDate} | 수정날짜 : ${reply.updateDate}
 							<c:if test="${loginedMemberId==reply.memberId}">
-								<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/removeReply?articleId=${article.id}&replyId=${reply.id}">[삭제하기]</a>
-								<a href="${pageContext.request.contextPath}/s/article/modifyReply?articleId=${article.id}&replyId=${reply.id}">[수정하기]</a>
+								<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/removeReply?articleId=${article.id}&page=${paramPage}&replyId=${reply.id}">[삭제하기]</a>
+								<a href="${pageContext.request.contextPath}/s/article/modifyReply?articleId=${article.id}&page=${paramPage}&replyId=${reply.id}">[수정하기]</a>
 							</c:if>
 						</div>
 						</c:forEach>
+					</c:if>
+				</div>
+				<div class ="reply-paging flex">
+					<c:if test="${replySize==0}">
+					</c:if>
+					<c:if test="${replySize!=0}">
+						<%for (int i = 1; i <= allPage; i++) { %>
+							<div class="<%=i == paramPage ? "current" : ""%>">
+								<a href="${pageContext.request.contextPath}/s/article/detail?id=${article.id}&page=<%=i%>">[<%=i%>]</a>
+							</div>
+						<%}%>
 					</c:if>
 				</div>
 			</div>

@@ -842,3 +842,19 @@ label[for] {
 textarea {
 	border:1px solid #261326;
 }
+
+.reply-paging {
+	justify-content:center;
+}
+
+.reply-paging > a {
+	padding:10px;
+}
+
+.reply-paging > a:hover {
+	color:red;
+}
+
+.current {
+	color:red;
+}

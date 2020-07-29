@@ -3,12 +3,6 @@
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
 <script src="../../resource/js/write.js"></script>
-<script>
-    var checkUnload = true;
-    $(window).on("beforeunload", function(){
-        if(checkUnload) return "???";
-    });
-</script>
 
 <div class="con">
 	<div class="con body-box">

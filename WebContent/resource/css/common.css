@@ -838,3 +838,7 @@ label[for] {
 .form2 > div > .form-row {
 	margin:5px;
 }
+
+textarea {
+	border:1px solid #261326;
+}

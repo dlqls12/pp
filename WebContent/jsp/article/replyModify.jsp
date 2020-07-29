@@ -40,54 +40,37 @@
 					</c:if>
 					<c:if test="${replySize!=0}">
 						<c:forEach items="${replies}" var="reply">
-							<div class="reply-body">
 							<c:if test="${reply.id==replyId}">
-								<form action="doModifyReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
-									<div class="form-row">
-										<div class="input">
-											<input name="replyId" type="hidden" value='${reply.id}' />
+								<div class="con add-reply-box">
+									<form action="doModifyReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
+										<input name="replyId" type="hidden" value='${reply.id}' />
+										<div class="form-row">
+											<div class="input"><textarea class="reply-field" name="body" placeholder="${reply.body}" /></textarea></div>
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="label">댓글</div>
-										<div class="input"><textarea name="body" placeholder="${reply.body}"/></textarea></div>
-									</div>
-									<div class="form-row">
-										<div class="label">전송</div>
-										<div class="input">
-											<input type="submit" onclick="if ( confirm('댓글 수정을 완료하시겠습니까?') == false ) return false;" value="전송" />
-										</div>
-									</div>
-								</form>
+										<input type="submit" onclick="if ( confirm('댓글 수정을 완료하시겠습니까?') == false ) return false;" value="수정" />
+										<a href="${pageContext.request.contextPath}/s/article/detail?id=${article.id}">취소</a>
+									</form>
+								</div>
 							</c:if>
 							<c:if test="${reply.id!=replyId}">
-							<div class="reply-writer">작성자 :<c:forEach items="${members}" var="member"><c:if test="${member.id==reply.memberId}">${member.nickname}</c:if></c:forEach></div>
-							↪ ${reply.body}
+								<div class="reply-body">
+									<div class="reply-writer">작성자 :<c:forEach items="${members}" var="member"><c:if test="${member.id==reply.memberId}">${member.nickname}</c:if></c:forEach></div>
+									↪ ${reply.body}
+								</div>
 							</c:if>
-						</div>
 						<div class="reply-info">작성날짜 :${reply.regDate} | 수정날짜 : ${reply.updateDate}</div>
 						</c:forEach>
 					</c:if>
 				</div>
 			</div>
 			<div class="con add-reply-box">
-				<form action="addReply" method="POST" class="reply-form"
-					onsubmit="submitReplyForm(this); return false;">
+				<form action="addReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
+					<input name="id" type="hidden" value='${article.id}' />
 					<div class="form-row">
-						<div class="input">
-							<input name="id" type="hidden" value='${article.id}' />
-						</div>
+						<div class="reply-title">댓글작성하기</div>
+						<div class="input"><textarea class="reply-field" name="body" placeholder="내용을 입력해주세요." /></textarea></div>
 					</div>
-					<div class="form-row">
-						<div class="label">댓글</div>
-						<div class="input"><textarea class ="reply-field" name="body" placeholder="내용을 입력해주세요." /></textarea></div>
-					</div>
-					<div class="form-row">
-						<div class="label">전송</div>
-						<div class="input">
-							<input type="submit" value="전송" />
-						</div>
-					</div>
+					<input type="submit" onclick="if ( confirm('댓글 작성을 완료하시겠습니까?') == false ) return false;" value="전송" />
 				</form>
 			</div>
 		</div>

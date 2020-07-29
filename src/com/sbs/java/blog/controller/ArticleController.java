@@ -178,9 +178,13 @@ public class ArticleController extends Controller {
 			return "html:id를 정수로 입력해주세요.";
 		}
 
+		int page =1;
+		int repliesInAPage = 5;
+		
+		page = Util.getInt(req, "page");
 		int id = Util.getInt(req, "id");
-
 		articleService.increaseHit(id);
+		
 		int fullPage = articleService.getForPrintListArticlesCount(0, "", "");
 		Article article = articleService.getForPrintArticle(id);
 		CateItem cateItem = articleService.getCateItem(article.getCateItemId());
@@ -189,6 +193,7 @@ public class ArticleController extends Controller {
 		
 		int replySize = replies.size();
 		
+		req.setAttribute("repliesInAPage", repliesInAPage);
 		req.setAttribute("replySize", replySize);
 		req.setAttribute("members", members);
 		req.setAttribute("replies", replies);

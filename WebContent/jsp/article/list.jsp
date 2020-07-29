@@ -46,19 +46,19 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${articles}" var="article">
-					<tr>
-						<td>${article.id}</td>
-						<td><a href="../article/detail?id=${article.id}">${article.title}</a></td>
-						<td>${article.regDate}</td>
-						<td>${article.updateDate}</td>
-					<td>
-						<c:forEach items="${cateItems}" var="cateItem">
-							<c:if test="${cateItem.id==article.cateItemId}">
-								${cateItem.name}
-							</c:if>
-						</c:forEach>
-					</td>
-					</tr>
+						<tr>
+							<td>${article.id}</td>
+							<td><a href="../article/detail?id=${article.id}&page=1">${article.title}</a></td>
+							<td>${article.regDate}</td>
+							<td>${article.updateDate}</td>
+							<td>
+								<c:forEach items="${cateItems}" var="cateItem">
+									<c:if test="${cateItem.id==article.cateItemId}">
+										${cateItem.name}
+									</c:if>
+								</c:forEach>
+							</td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>

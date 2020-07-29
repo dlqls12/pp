@@ -27,59 +27,59 @@ public class ArticleController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "list":
-			return doActionList();
+			return actionList();
 		case "detail":
-			return doActionDetail();
+			return actionDetail();
 		case "doWrite":
 			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
-			return doActionDoWrite();
+			return actionDoWrite();
 		case "write":
 			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
-			return doActionWrite();
+			return actionWrite();
 		case "delete":
 			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
-			return doActionDelete();
+			return actionDelete();
 		case "modify":
 			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
-			return doActionModify();
+			return actionModify();
 		case "doModify":
 			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
-			return doActionDoModify();
+			return actionDoModify();
 		case "addReply":
 			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
-			return doActionAddReply();
+			return actionAddReply();
 		case "removeReply":
 			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
-			return doActionRemoveReply();
+			return actionRemoveReply();
 		case "modifyReply":
 			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
-			return doActionModifyReply();
+			return actionModifyReply();
 		case "doModifyReply":
 			if (session.getAttribute("loginedMemberId") == null) {
 				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
 			}
-			return doActionDoModifyReply();
+			return actionDoModifyReply();
 		}
 		return "";
 	}
 
-	private String doActionDoModifyReply() {
+	private String actionDoModifyReply() {
 		String body = req.getParameter("body");
 		int replyId = Util.getInt(req, "replyId");
 		Reply reply = articleService.getReply(replyId);
@@ -88,18 +88,32 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('댓글 수정 완료.'); location.replace('detail?id=" + reply.getArticleId() + "&page=1'); </script>";
 	}
 
-	private String doActionModifyReply() {
+	private String actionModifyReply() {
+		int page = 1;
+		int repliesInAPage = 5;
+		
+		page = Util.getInt(req, "page");
 		int replyId = Util.getInt(req, "replyId");
 		int articleId = Util.getInt(req, "articleId");
 		
 		int fullPage = articleService.getForPrintListArticlesCount(0, "", "");
 		Article article = articleService.getForPrintArticle(articleId);
 		CateItem cateItem = articleService.getCateItem(article.getCateItemId());
-		List<Reply> replies = articleService.getReplies(article.getId());
+		List<Reply> replies = articleService.getForPrintListReplies(page, repliesInAPage, article.getId());
+		List<Reply> AllReplies = articleService.getReplies(article.getId());
 		List<Member> members = memberService.getAllMembers();
 		
-		int replySize = replies.size();
+		int replySize = AllReplies.size();
+		int allPage;
+		if ( replySize%repliesInAPage == 0 ) {
+			allPage = (replySize/repliesInAPage);
+		}
+		else {
+			allPage = (replySize/repliesInAPage)+1;
+		}
 		
+		req.setAttribute("paramPage", page);
+		req.setAttribute("allPage", allPage);
 		req.setAttribute("replySize", replySize);
 		req.setAttribute("members", members);
 		req.setAttribute("replies", replies);
@@ -110,7 +124,7 @@ public class ArticleController extends Controller {
 		return "article/replyModify.jsp";
 	}
 
-	private String doActionRemoveReply() {
+	private String actionRemoveReply() {
 		int replyId = Util.getInt(req, "replyId");
 		int articleId = Util.getInt(req, "articleId");
 		
@@ -118,7 +132,7 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('댓글이 삭제되었습니다.'); location.replace('detail?id="+articleId+"&page=1'); </script>";
 	}
 
-	private String doActionAddReply() {
+	private String actionAddReply() {
 		int articleId = Util.getInt(req, "id");
 		String body = req.getParameter("body");
 		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
@@ -127,7 +141,7 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('댓글 작성 완료.'); location.replace('detail?id="+articleId+"&page=1'); </script>";
 	}
 
-	private String doActionDoModify() {
+	private String actionDoModify() {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
@@ -138,7 +152,7 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('detail?id="+id+"&page=1'); </script>";
 	}
 
-	private String doActionModify() {
+	private String actionModify() {
 		int id = Util.getInt(req, "id");
 		Article article = articleService.getForPrintArticle(id);
 		
@@ -146,7 +160,7 @@ public class ArticleController extends Controller {
 		return "article/modify.jsp";
 	}
 
-	private String doActionDelete() {
+	private String actionDelete() {
 		int id = Util.getInt(req, "id");
 		
 		articleService.delete(id);
@@ -154,11 +168,11 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
 	}
 
-	private String doActionWrite() {
+	private String actionWrite() {
 		return "article/write.jsp";
 	}
 
-	private String doActionDoWrite() {
+	private String actionDoWrite() {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
@@ -169,7 +183,7 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}
 
-	private String doActionDetail() {
+	private String actionDetail() {
 		int page = 1;
 		int repliesInAPage = 5;
 		
@@ -205,7 +219,7 @@ public class ArticleController extends Controller {
 		return "article/detail.jsp";
 	}
 
-	private String doActionList() {
+	private String actionList() {
 		long startTime = System.nanoTime();
 		int page = 1;
 

@@ -33,43 +33,43 @@ public class MemberController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "join":
-			return doActionJoin();
+			return actionJoin();
 		case "doJoin":
-			return doActionDoJoin();
+			return actionDoJoin();
 		case "login":
-			return doActionLogin();
+			return actionLogin();
 		case "doLogin":
-			return doActionDoLogin();
+			return actionDoLogin();
 		case "doLogout":
-			return doActionDoLogout();
+			return actionDoLogout();
 		case "mypage":
-			return doActionMyPage();
+			return actionMyPage();
 		case "modifyMemberInfo":
-			return doActionModifyMemberInfo();
+			return actionModifyMemberInfo();
 		case "doModifyMemberInfo":
-			return doActionDoModifyMemberInfo();
+			return actionDoModifyMemberInfo();
 		case "seekId":
-			return doActionSeekId();
+			return actionSeekId();
 		case "doSeekId":
-			return doActionDoSeekId();
+			return actionDoSeekId();
 		case "seekPw":
-			return doActionSeekPw();
+			return actionSeekPw();
 		case "doSeekPw":
-			return doActionDoSeekPw();
+			return actionDoSeekPw();
 		case "modifyPw":
-			return doActionModifyPw();
+			return actionModifyPw();
 		case "doModifyPw":
-			return doActionDoModifyPw();
+			return actionDoModifyPw();
 		case "mailAuth":
-			return doActionMailAuth();
+			return actionMailAuth();
 		case "doMailAuth":
-			return doActionDoMailAuth();
+			return actionDoMailAuth();
 		}
 
 		return "";
 	}
 
-	private String doActionDoMailAuth() {
+	private String actionDoMailAuth() {
 		int id = Util.getInt(req, "id");
 		String authCode = req.getParameter("authCode");
 		String mailAuthCode = req.getParameter("mailAuthCode");
@@ -81,7 +81,7 @@ public class MemberController extends Controller {
 		return "html:<script> alert('인증번호가 일치하지 않습니다.'); location.replace('../home/main'); </script>";
 	}
 
-	private String doActionMailAuth() {
+	private String actionMailAuth() {
 		int id = Util.getInt(req, "id");
 		Member member = memberService.getMemberById(id);
 
@@ -97,7 +97,7 @@ public class MemberController extends Controller {
 		return "member/mailAuth.jsp";
 	}
 
-	private String doActionDoSeekPw() {
+	private String actionDoSeekPw() {
 		String loginPwReal = req.getParameter("loginPwReal");
 		String loginId = req.getParameter("loginId");
 		String email = req.getParameter("email");
@@ -125,11 +125,11 @@ public class MemberController extends Controller {
 		return "html:<script> alert('해당 이메일로 임시 비밀번호를 전송하였습니다.'); location.replace('login'); </script>";
 	}
 
-	private String doActionSeekPw() {
+	private String actionSeekPw() {
 		return "member/seekPw.jsp";
 	}
 
-	private String doActionDoModifyPw() {
+	private String actionDoModifyPw() {
 		int id = Util.getInt(req, "id");
 		String nowLoginPwReal = req.getParameter("nowLoginPwReal");
 		String newLoginPwReal = req.getParameter("newLoginPwReal");
@@ -152,14 +152,14 @@ public class MemberController extends Controller {
 		return "html:<script> alert('비밀번호가 변경되었습니다.'); location.replace('login'); </script>";
 	}
 
-	private String doActionModifyPw() {
+	private String actionModifyPw() {
 		int id = Util.getInt(req, "id");
 		
 		req.setAttribute("id", id);
 		return "member/modifyPw.jsp";
 	}
 
-	private String doActionDoSeekId() {
+	private String actionDoSeekId() {
 		String email = req.getParameter("email");
 		int isExistEmail = memberService.isExistEmail(email);
 		
@@ -175,18 +175,18 @@ public class MemberController extends Controller {
 		return "html:<script> alert('해당 이메일로 아이디를 전송하였습니다.'); location.replace('login'); </script>";
 	}
 
-	private String doActionSeekId() {
+	private String actionSeekId() {
 		return "member/seekId.jsp";
 	}
 
-	private String doActionModifyMemberInfo() {
+	private String actionModifyMemberInfo() {
 		int id = Util.getInt(req, "id");
 		
 		req.setAttribute("id", id);
 		return "member/modifyMemberInfo.jsp";
 	}
 
-	private String doActionDoModifyMemberInfo() {
+	private String actionDoModifyMemberInfo() {
 		int id = Util.getInt(req, "id");
 		String newEmail = req.getParameter("newEmail");
 		String newNick = req.getParameter("newNick");
@@ -208,16 +208,16 @@ public class MemberController extends Controller {
 		return "html:<script> alert('회원 정보가 수정되었습니다.'); location.replace('mypage'); </script>";
 	}
 
-	private String doActionMyPage() {
+	private String actionMyPage() {
 		return "member/mypage.jsp";
 	}
 
-	private String doActionDoLogout() {
+	private String actionDoLogout() {
 		session.removeAttribute("loginedMemberId");
 		return "html:<script> alert('로그아웃 되었습니다.'); location.replace('../home/main'); </script>";
 	}
 
-	private String doActionDoLogin() {
+	private String actionDoLogin() {
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
 		
@@ -231,15 +231,15 @@ public class MemberController extends Controller {
 		}
 	}
 
-	private String doActionLogin() {
+	private String actionLogin() {
 		return "member/login.jsp";		
 	}
 
-	private String doActionJoin() {
+	private String actionJoin() {
 		return "member/join.jsp";
 	}
 
-	private String doActionDoJoin() {
+	private String actionDoJoin() {
 		String loginId = req.getParameter("loginId");
 		String loginPwReal = req.getParameter("loginPwReal");
 		String name = req.getParameter("name");

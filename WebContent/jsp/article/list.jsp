@@ -40,7 +40,7 @@
 						<th>ID</th>
 						<th>제목</th>
 						<th>등록날짜</th>
-						<th>갱신날짜</th>
+						<th>작성자</th>
 						<th>카테고리</th>
 					</tr>
 				</thead>
@@ -50,7 +50,7 @@
 							<td>${article.id}</td>
 							<td><a href="../article/detail?id=${article.id}&page=1">${article.title}</a></td>
 							<td>${article.regDate}</td>
-							<td>${article.updateDate}</td>
+							<td>${article.extra.writer}</td>
 							<td>
 								<c:forEach items="${cateItems}" var="cateItem">
 									<c:if test="${cateItem.id==article.cateItemId}">

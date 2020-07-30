@@ -16,7 +16,7 @@
 	<div class="body-box">
 		<h1 class="main-title">${article.title }</h1>
 		<div class="cate-and-date">
-			카테고리 :${cateItem.name}| 등록날짜 :${article.regDate} | 작성자:<c:forEach items="${members}" var="member"><c:if test="${member.id==article.memberId}">${member.nickname}</c:if></c:forEach>| 조회수 :${article.hit }
+			카테고리 :${cateItem.name}| 등록날짜 :${article.regDate} | 작성자:${article.extra.writer }| 조회수 :${article.hit }
 		</div>
 		<div class="detail-box">
 			<script type="text/x-template">${article.bodyForXTemplate}</script>
@@ -43,7 +43,7 @@
 					<c:if test="${replySize!=0}">
 						<c:forEach items="${replies}" var="reply">
 						<div class="reply-body">
-						<div class="reply-writer">작성자 :<c:forEach items="${members}" var="member"><c:if test="${member.id==reply.memberId}">${member.nickname}</c:if></c:forEach></div>
+						<div class="reply-writer">작성자 :${reply.extra.writer }</div>
 						↪ ${reply.body}
 						</div>
 						<div class="reply-info">작성날짜 :${reply.regDate} | 수정날짜 : ${reply.updateDate}

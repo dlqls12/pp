@@ -23,10 +23,12 @@ public class ArticleDao extends Dao {
 
 		int limitFrom = (page - 1) * itemsInAPage;
 
-		secSql.append("SELECT * ");
-		secSql.append("FROM articleReply ");
-		secSql.append("WHERE articleId = ? ", id);
-		secSql.append("ORDER BY id DESC ");
+		secSql.append("SELECT AR.*, M.nickname AS extra__writer");
+		secSql.append("FROM articleReply AS AR ");
+		secSql.append("INNER JOIN member AS M ");
+		secSql.append("ON AR.memberId = M.id");
+		secSql.append("WHERE AR.articleId = ? ", id);
+		secSql.append("ORDER BY AR.id DESC ");
 		secSql.append("LIMIT ?, ? ", limitFrom, itemsInAPage);
 
 		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
@@ -45,9 +47,11 @@ public class ArticleDao extends Dao {
 
 		int limitFrom = (page - 1) * itemsInAPage;
 
-		secSql.append("SELECT * ");
-		secSql.append("FROM article ");
-		secSql.append("WHERE displayStatus = 1 ");
+		secSql.append("SELECT A.*, M.nickname AS extra__writer");
+		secSql.append("FROM article AS A");
+		secSql.append("INNER JOIN member AS M");
+		secSql.append("ON A.memberId = M.id");
+		secSql.append("WHERE A.displayStatus = 1 ");
 		if (cateItemId != 0) {
 			secSql.append("AND cateItemId = ? ", cateItemId);
 		}
@@ -89,11 +93,13 @@ public class ArticleDao extends Dao {
 	public Article getForPrintArticle(int id) {
 		SecSql secSql = new SecSql();
 
-		secSql.append("SELECT * ");
-		secSql.append("FROM article ");
+		secSql.append("SELECT A.*, M.nickname AS extra__writer ");
+		secSql.append("FROM article AS A");
+		secSql.append("INNER JOIN member AS M");
+		secSql.append("ON A.memberId = M.id");
 		secSql.append("WHERE 1 ");
-		secSql.append("AND id = ? ", id);
-		secSql.append("AND displayStatus = 1 ");
+		secSql.append("AND A.id = ? ", id);
+		secSql.append("AND A.displayStatus = 1 ");
 
 		return new Article(DBUtil.selectRow(dbConn, secSql));
 	}
@@ -188,9 +194,11 @@ public class ArticleDao extends Dao {
 	public List<Reply> getReplies(int id) {
 		SecSql secSql = new SecSql();
 
-		secSql.append("SELECT * FROM articleReply");
-		secSql.append("WHERE articleId = ?", id);
-		secSql.append("ORDER BY id DESC");
+		secSql.append("SELECT AR.*, M.nickname AS extra__writer FROM articleReply AS AR");
+		secSql.append("INNER JOIN member AS M");
+		secSql.append("ON AR.memberId = M.id");
+		secSql.append("AND AR.articleId = ?", id);
+		secSql.append("ORDER BY AR.id DESC");
 
 		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
 		List<Reply> replies = new ArrayList<>();

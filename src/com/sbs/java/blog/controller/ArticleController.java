@@ -82,10 +82,11 @@ public class ArticleController extends Controller {
 	private String actionDoModifyReply() {
 		String body = req.getParameter("body");
 		int replyId = Util.getInt(req, "replyId");
+		int paramPage = Util.getInt(req, "paramPage");
 		Reply reply = articleService.getReply(replyId);
 		
 		articleService.modifyReply(body, replyId);
-		return "html:<script> alert('댓글 수정 완료.'); location.replace('detail?id=" + reply.getArticleId() + "&page=1'); </script>";
+		return "html:<script> alert('댓글 수정 완료.'); location.replace('detail?id=" + reply.getArticleId() + "&page=" + paramPage + "'); </script>";
 	}
 
 	private String actionModifyReply() {
@@ -101,7 +102,6 @@ public class ArticleController extends Controller {
 		CateItem cateItem = articleService.getCateItem(article.getCateItemId());
 		List<Reply> replies = articleService.getForPrintListReplies(page, repliesInAPage, article.getId());
 		List<Reply> AllReplies = articleService.getReplies(article.getId());
-		List<Member> members = memberService.getAllMembers();
 		
 		int replySize = AllReplies.size();
 		int allPage;
@@ -115,7 +115,6 @@ public class ArticleController extends Controller {
 		req.setAttribute("paramPage", page);
 		req.setAttribute("allPage", allPage);
 		req.setAttribute("replySize", replySize);
-		req.setAttribute("members", members);
 		req.setAttribute("replies", replies);
 		req.setAttribute("cateItem", cateItem);
 		req.setAttribute("fullPage", fullPage);
@@ -135,10 +134,11 @@ public class ArticleController extends Controller {
 	private String actionAddReply() {
 		int articleId = Util.getInt(req, "id");
 		String body = req.getParameter("body");
+		int page = Util.getInt(req, "page");
 		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
 		articleService.addReply(articleId, body, loginedMemberId);
 		
-		return "html:<script> alert('댓글 작성 완료.'); location.replace('detail?id="+articleId+"&page=1'); </script>";
+		return "html:<script> alert('댓글 작성 완료.'); location.replace('detail?id="+articleId+"&page=" + page + "'); </script>";
 	}
 
 	private String actionDoModify() {
@@ -196,7 +196,6 @@ public class ArticleController extends Controller {
 		CateItem cateItem = articleService.getCateItem(article.getCateItemId());
 		List<Reply> replies = articleService.getForPrintListReplies(page, repliesInAPage, article.getId());
 		List<Reply> AllReplies = articleService.getReplies(article.getId());
-		List<Member> members = memberService.getAllMembers();
 		
 		int replySize = AllReplies.size();
 		int allPage;
@@ -210,7 +209,6 @@ public class ArticleController extends Controller {
 		req.setAttribute("paramPage", page);
 		req.setAttribute("allPage", allPage);
 		req.setAttribute("replySize", replySize);
-		req.setAttribute("members", members);
 		req.setAttribute("replies", replies);
 		req.setAttribute("cateItem", cateItem);
 		req.setAttribute("fullPage", fullPage);
@@ -220,7 +218,6 @@ public class ArticleController extends Controller {
 	}
 
 	private String actionList() {
-		long startTime = System.nanoTime();
 		int page = 1;
 
 		if (!Util.empty(req, "page") && Util.isNum(req, "page")) {
@@ -266,11 +263,6 @@ public class ArticleController extends Controller {
 		int size = articles.size();
 		req.setAttribute("size", size);
 		req.setAttribute("articles", articles);
-		long endTime = System.nanoTime();
-		long estimatedTime = endTime - startTime;
-		// nano seconds to seconds
-		double seconds = estimatedTime / 1000000000.0;
-		System.out.println("seconds:" + seconds);
 		return "article/list.jsp";
 	}
 }

@@ -5,22 +5,33 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
-<%
-	int allPage = (int) request.getAttribute("allPage");
-	int paramPage = (int) request.getAttribute("paramPage");
-%>
-
 <script src="../../resource/js/detail.js"></script>
+
+<style>
+	.reply-paging {
+		justify-content:center;
+	}
+	
+	.reply-paging > div > a {
+		padding:0 10px;
+		text-decoration:underline;
+		color:#787878;
+	}
+	
+	.reply-paging > div > a:hover {
+		color:black;
+	}
+	
+	.current > a {
+		color:red !important;
+	}
+</style>
 
 <div class="con">
 	<div class="body-box">
 		<h1 class="main-title">${article.title}</h1>
 		<div class="cate-and-date">
-			카테고리 :${cateItem.name}| 등록날짜 :${article.regDate} | 작성자:
-			<c:forEach items="${members}" var="member">
-				<c:if test="${member.id==article.memberId}">${member.nickname}</c:if>
-			</c:forEach> 
-			| 조회수 :${article.hit }
+			카테고리 :${cateItem.name}| 등록날짜 :${article.regDate} | 작성자: ${article.extra.writer} | 조회수 :${article.hit }
 		</div>
 		<div class="detail-box">
 			<script type="text/x-template">${article.bodyForXTemplate}</script>
@@ -52,6 +63,7 @@
 							<div class="con add-reply-box">
 								<form action="doModifyReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
 									<input name="replyId" type="hidden" value='${reply.id}' />
+									<input name="paramPage" type="hidden" value='${paramPage}' />
 									<div class="form-row">
 										<div class="input">
 											<textarea class="reply-field" name="body" placeholder="${reply.body}" /></textarea>
@@ -64,25 +76,25 @@
 						</c:if>
 						<c:if test="${reply.id!=replyId}">
 							<div class="reply-body">
-								<div class="reply-writer">작성자 : <c:forEach items="${members}" var="member"> <c:if test="${member.id==reply.memberId}">${member.nickname}</c:if></c:forEach></div>
+								<div class="reply-writer">작성자 : ${reply.extra.writer }</div>
 								↪ ${reply.body}
 							</div>
 						</c:if>
 						<div class="reply-info">작성날짜 :${reply.regDate} | 수정날짜 : ${reply.updateDate}</div>
 					</c:forEach>
 				</c:if>
-			</div>
 				<div class ="reply-paging flex">
 					<c:if test="${replySize==0}">
 					</c:if>
 					<c:if test="${replySize!=0}">
-						<%for (int i = 1; i <= allPage; i++) { %>
-							<div class="<%=i == paramPage ? "current" : ""%>">
-								<a href="${pageContext.request.contextPath}/s/article/detail?id=${article.id}&page=<%=i%>">[<%=i%>]</a>
+						<c:forEach var="cnt" begin="1" end="${allPage}">
+							<div class="${cnt==paramPage ? "current" : "" }">
+								<a href="${pageContext.request.contextPath}/s/article/detail?id=${article.id}&page=${cnt}">${cnt}</a>
 							</div>
-						<%}%>
+						</c:forEach>
 					</c:if>
 				</div>
+			</div>
 			<div class="con add-reply-box">
 				<form action="addReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
 					<input name="id" type="hidden" value='${article.id}' />

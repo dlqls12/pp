@@ -2,10 +2,6 @@
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-<%
-	int totalPage = (int) request.getAttribute("totalPage");
-	int paramPage = (int) request.getAttribute("page");
-%>
 
 <style>
 .page-box>ul>li>a {
@@ -66,15 +62,11 @@
 		</div>
 		<div class="con page-box">
 			<ul class="flex flex-jc-c">
-				<%
-					for (int i = 1; i <= totalPage; i++) {
-				%>
-				<li class="<%=i == paramPage ? "current" : ""%>">
-					<a href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=<%=i%>" class="block"><%=i%></a>
-				</li>
-				<%
-					}	
-				%>
+				<c:forEach var="cnt" begin="1" end="${totalPage}">
+					<li class="${cnt==page ? "current" : "" }">
+						<a href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${cnt}" class="block">${cnt}</a>
+					</li>
+				</c:forEach>
 			</ul>
 		</div>
 		<div class="con search-box flex flex-jc-c">	

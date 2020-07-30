@@ -5,13 +5,26 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
-<%
-	int allPage = (int) request.getAttribute("allPage");
-	int paramPage = (int) request.getAttribute("paramPage");
-%>
-
 <script src="../../resource/js/detail.js"></script>
-
+<style>
+	.reply-paging {
+		justify-content:center;
+	}
+	
+	.reply-paging > div > a {
+		padding:0 10px;
+		text-decoration:underline;
+		color:#787878;
+	}
+	
+	.reply-paging > div > a:hover {
+		color:black;
+	}
+	
+	.current > a {
+		color:red !important;
+	}
+</style>
 <div class="con">
 	<div class="body-box">
 		<h1 class="main-title">${article.title }</h1>
@@ -59,17 +72,18 @@
 					<c:if test="${replySize==0}">
 					</c:if>
 					<c:if test="${replySize!=0}">
-						<%for (int i = 1; i <= allPage; i++) { %>
-							<div class="<%=i == paramPage ? "current" : ""%>">
-								<a href="${pageContext.request.contextPath}/s/article/detail?id=${article.id}&page=<%=i%>">[<%=i%>]</a>
+						<c:forEach var="cnt" begin="1" end="${allPage}">
+							<div class="${cnt==paramPage ? "current" : "" }">
+								<a href="${pageContext.request.contextPath}/s/article/detail?id=${article.id}&page=${cnt}">${cnt}</a>
 							</div>
-						<%}%>
+						</c:forEach>
 					</c:if>
 				</div>
 			</div>
 			<div class="con add-reply-box">
 				<form action="addReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
 					<input name="id" type="hidden" value='${article.id}' />
+					<input name="page" type="hidden" value='${paramPage}' />
 					<div class="form-row">
 						<div class="reply-title">댓글작성하기</div>
 						<div class="input"><textarea class="reply-field" name="body" placeholder="내용을 입력해주세요." /></textarea></div>

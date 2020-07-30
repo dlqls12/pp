@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.service.ArticleService;
+import com.sbs.java.blog.service.AttrService;
 import com.sbs.java.blog.service.MemberService;
 
 public abstract class Controller {
@@ -22,6 +23,7 @@ public abstract class Controller {
 
 	protected ArticleService articleService;
 	protected MemberService memberService;
+	protected AttrService attrService;
 
 	public Controller(Connection dbConn, String actionMethodName, HttpServletRequest req, HttpServletResponse resp) {
 		this.dbConn = dbConn;
@@ -31,6 +33,7 @@ public abstract class Controller {
 		this.session = req.getSession();
 		articleService = new ArticleService(dbConn);
 		memberService = new MemberService(dbConn);
+		attrService = new AttrService(dbConn);
 	}
 
 	public void beforeAction() {

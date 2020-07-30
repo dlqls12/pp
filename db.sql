@@ -65,6 +65,14 @@ ALTER TABLE `member` ADD mailAuthStatus TINYINT(1) UNSIGNED;
 ALTER TABLE `article` ADD INDEX (`cateItemId`, `displayStatus`);
 ALTER TABLE `articleReply` ADD INDEX (`articleId`);
 
-SET @cnt = 0;
-UPDATE article SET id = @cnt:= @cnt + 1;
-ALTER TABLE article AUTO_INCREMENT = 1;
+DROP TABLE IF EXISTS attr;
+CREATE TABLE attr (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `name` CHAR(100) NOT NULL UNIQUE,
+    `value` TEXT NOT NULL
+);
+
+# updateDate 칼럼 추가
+ALTER TABLE `cateItem` ADD COLUMN `updateDate` DATETIME NOT NULL AFTER `regDate`;

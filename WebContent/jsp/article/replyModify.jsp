@@ -4,7 +4,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
-
+<%
+	int replySize = (int) request.getAttribute("replySize");
+	int paramPage = (int) request.getAttribute("paramPage");
+%>
 <script src="../../resource/js/article/detail.js"></script>
 
 <style>
@@ -58,7 +61,11 @@
 					<div>댓글이 없습니다.😞</div>
 				</c:if>
 				<c:if test="${replySize!=0}">
+					<% int i = 0; %>
 					<c:forEach items="${replies}" var="reply">
+						<% i = i + 1; %>
+						<% int no = 0; %>
+						<% no = replySize - ((paramPage-1)*5)-(i-1); %>
 						<c:if test="${reply.id==replyId}">
 							<div class="con add-reply-box">
 								<form action="doModifyReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
@@ -76,7 +83,7 @@
 						</c:if>
 						<c:if test="${reply.id!=replyId}">
 							<div class="reply-body">
-								<div class="reply-writer">작성자 : ${reply.extra.writer }</div>
+								<div class="reply-writer">no.<%=no%> | 작성자 : ${reply.extra.writer }</div>
 								↪ ${reply.body}
 							</div>
 						</c:if>

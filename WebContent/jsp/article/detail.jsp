@@ -54,9 +54,11 @@
 						<div>댓글이 없습니다.😞</div>
 					</c:if>
 					<c:if test="${replySize!=0}">
+						<% int i = 0; %>
 						<c:forEach items="${replies}" var="reply">
+						<% i = i + 1; %>
 						<div class="reply-body">
-						<div class="reply-writer">작성자 :${reply.extra.writer }</div>
+						<div class="reply-writer">no.<%=i %> | 작성자 :${reply.extra.writer }</div>
 						↪ ${reply.body}
 						</div>
 						<div class="reply-info">작성날짜 :${reply.regDate} | 수정날짜 : ${reply.updateDate}

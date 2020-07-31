@@ -31,9 +31,9 @@ public abstract class Controller {
 		this.req = req;
 		this.resp = resp;
 		this.session = req.getSession();
-		articleService = new ArticleService(dbConn);
-		memberService = new MemberService(dbConn);
 		attrService = new AttrService(dbConn);
+		articleService = new ArticleService(dbConn);
+		memberService = new MemberService(dbConn, attrService);
 	}
 
 	public void beforeAction() {

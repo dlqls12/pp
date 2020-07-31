@@ -2,6 +2,7 @@ package com.sbs.java.blog.controller;
 
 import java.sql.Connection;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -18,8 +19,7 @@ import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.util.Util;
 
 public class MemberController extends Controller {
-	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req,
-			HttpServletResponse resp) {
+	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req, HttpServletResponse resp) {
 		super(dbConn, actionMethodName, req, resp);
 	}
 
@@ -64,9 +64,30 @@ public class MemberController extends Controller {
 			return actionMailAuth();
 		case "doMailAuth":
 			return actionDoMailAuth();
+		case "pwCheck":
+			return actionPwCheck();
+		case "doPwCheck":
+			return actionDoPwCheck();
 		}
 
 		return "";
+	}
+
+	private String actionDoPwCheck() {
+		String loginPw = req.getParameter("loginPwReal");
+		
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		int loginedMemberId = loginedMember.getId();
+		if ( loginedMember.getLoginPw().equals(loginPw) ) {
+			String authCode = memberService.genAuthCode(loginedMemberId);
+			
+			return "html:<script>location.replace('mypage?authCode=" + authCode + "'); </script>";
+		}
+		return "html:<script> alert('비밀번호가 일치하지 않습니다.'); location.replace('../member/pwCheck'); </script>";
+	}
+
+	private String actionPwCheck() {
+		return "member/pwCheck.jsp";
 	}
 
 	private String actionDoMailAuth() {
@@ -75,7 +96,7 @@ public class MemberController extends Controller {
 		String mailAuthCode = req.getParameter("mailAuthCode");
 		
 		if ( authCode.equals(mailAuthCode) ) {
-			int isAuth = memberService.setMailAuthStatus(id);
+			memberService.setMailAuthStatus(id);
 			return "html:<script> alert('인증이 완료되었습니다.'); location.replace('../home/main'); </script>";
 		}
 		return "html:<script> alert('인증번호가 일치하지 않습니다.'); location.replace('../home/main'); </script>";
@@ -209,6 +230,13 @@ public class MemberController extends Controller {
 	}
 
 	private String actionMyPage() {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		
+		String authCode = req.getParameter("authCode");
+		if ( memberService.isValidAuthCode(loginedMemberId, authCode) == false ) {
+			return "html:<script> alert('비밀번호를 다시 체크해주세요.'); location.replace('../member/pwCheck'); </script>";
+		}
+		
 		return "member/mypage.jsp";
 	}
 

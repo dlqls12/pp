@@ -118,7 +118,7 @@
 							<li><a href="${pageContext.request.contextPath}/s/member/login" class="block">Login</a></li>
 							</c:if>
 							<c:if test="${isLogined}">
-							<li><a href="${pageContext.request.contextPath}/s/member/mypage" class="block">My Page</a></li>
+							<li><a href="${pageContext.request.contextPath}/s/member/pwCheck" class="block">My Page</a></li>
 							<li><a href="${pageContext.request.contextPath}/s/member/doLogout" class="block">Logout</a></li>
 							</c:if>
 						</ul>

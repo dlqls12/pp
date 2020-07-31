@@ -2,6 +2,7 @@ package com.sbs.java.blog.service;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.UUID;
 
 import com.sbs.java.blog.dao.MemberDao;
 import com.sbs.java.blog.dto.Member;
@@ -9,9 +10,11 @@ import com.sbs.java.blog.dto.Member;
 public class MemberService extends Service {
 
 	private MemberDao MemberDao;
+	private AttrService attrService;
 
-	public MemberService(Connection dbConn) {
+	public MemberService(Connection dbConn, AttrService attrService) {
 		MemberDao = new MemberDao(dbConn);
+		this.attrService = attrService;
 	}
 
 	public Member login(String loginId, String loginPw) {
@@ -56,5 +59,18 @@ public class MemberService extends Service {
 
 	public int setMailAuthStatus(int id) {
 		return MemberDao.setMailAuthStatus(id);
+	}
+
+	public String genAuthCode(int actorId) {
+		String authCode = UUID.randomUUID().toString();
+		attrService.setValue("member__" + actorId + "__extra__modifyPrivateAuthCode", authCode);
+		
+		return authCode;
+	}
+
+	public boolean isValidAuthCode(int actorId, String authCode) {
+		String authCodeOnDB = attrService.getValue("member__" + actorId + "__extra__modifyPrivateAuthCode");
+		
+		return authCodeOnDB.equals(authCode);
 	}
 }

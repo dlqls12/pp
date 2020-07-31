@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
-<script src="../../resource/js/modifyMemberInfo.js"></script>
+<script src="../../resource/js/member/modifyMemberInfo.js"></script>
 <div class="con">
 	<div class="body-box con">
 		<h1 class="main-title">회원정보 수정</h1>

@@ -78,6 +78,21 @@ public class MemberDao extends Dao {
 		return -1;
 	}
 
+	public int isExistName(String name) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("SELECT * FROM `member` ");
+		secSql.append("WHERE name = ? ", name);
+		
+		if(!DBUtil.selectRow(dbConn, secSql).isEmpty()) {
+			Map<String, Object> row = DBUtil.selectRow(dbConn, secSql);
+			Member m = new Member(row);
+			return m.getId();
+		}
+		
+		return -1;
+	}
+	
 	public int isExistNickname(String nickname) {
 		SecSql secSql = new SecSql();
 

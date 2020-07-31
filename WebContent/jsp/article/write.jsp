@@ -2,7 +2,7 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
-<script src="../../resource/js/write.js"></script>
+<script src="../../resource/js/article/write.js"></script>
 
 <div class="con">
 	<div class="con body-box">

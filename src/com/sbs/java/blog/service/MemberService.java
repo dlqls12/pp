@@ -33,6 +33,10 @@ public class MemberService extends Service {
 		return MemberDao.isExistEmail(email);
 	}
 	
+	public int isExistName(String name) {
+		return MemberDao.isExistName(name);
+	}
+	
 	public int isExistNickname(String nickname) {
 		return MemberDao.isExistNickname(nickname);
 	}

@@ -763,13 +763,13 @@ label[for] {
 }
 
 .login-box {
+	display:inline-block;
 	text-align:center;
 	width:400px;
-	border:3px solid #261326;
 	padding:20px;
 }
 
-.login-box > div > div > a:hover {
+.login-box > div > a:hover {
 	color:red;
 }
 
@@ -779,8 +779,24 @@ label[for] {
 	margin-bottom: 10px;
 }
 
-.login-form .form-row>.label {
-	margin-right:20px;
+.modifyPw-form .form-row {
+	display: flex;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.modifyPw-form .form-row >.label {
+	width: 150px;
+	padding:5px;
+	text-align:right;
+}
+
+.form-row > .label {
+	text-align:right;
+	margin-right:5px;
+}
+
+.login-form .form-row >.label {
 	width: 80px;
 	padding:5px;
 	text-align:right;
@@ -791,8 +807,8 @@ label[for] {
 }
 
 .big-login-box {
-	display:flex;
-	justify-content:center;
+	border:3px solid #261326;
+	text-align:center;
 }
 
 .submit-button-box {
@@ -807,38 +823,15 @@ label[for] {
 	font-weight:bold;
 }
 
+.submit-button2 {
+	width:119.5px;
+	height:119.5px;
+	background-color:#9795A3;
+	border:1px solid #261326;
+	font-weight:bold;
+}
+
 .submit-button:hover {
 	color:red;
 	border:1px solid red;
-}
-
-.form2 {
-	padding:20px;
-	border:3px solid #261326;
-}
-
-.form2 > .form-row {
-	margin-bottom: 10px;
-}
-
-.form2 > .form-row > .label {
-	width:120px;
-}
-
-.form-row > .label {
-	text-align:right;
-	margin-right:5px;
-}
-
-.form2 > div > input {
-	text-align:center;
-	margin:0 10px;
-}
-
-.form2 > div > .form-row {
-	margin:5px;
-}
-
-textarea {
-	border:1px solid #261326;
 }

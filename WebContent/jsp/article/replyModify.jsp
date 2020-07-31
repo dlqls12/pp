@@ -5,7 +5,7 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
-<script src="../../resource/js/detail.js"></script>
+<script src="../../resource/js/article/detail.js"></script>
 
 <style>
 	.reply-paging {

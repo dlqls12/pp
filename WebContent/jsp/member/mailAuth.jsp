@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 
-<script src="../../resource/js/mailAuth.js"></script>
+<script src="../../resource/js/member/mailAuth.js"></script>
 <script>alert("해당 이메일로 인증번호를 발송하였습니다.\n인증번호를 확인해주세요.") </script>
 
 <div class="con">
 	<div class="body-box con">
 		<h1 class="main-title">메일 인증</h1>
-		<form action="doMailAuth" method="POST" class="form2 flex" onsubmit="submitAuthForm(this); return false;">
+		<form action="doMailAuth" method="POST" onsubmit="submitAuthForm(this); return false;">
 			<input type="hidden" name="authCode" value='${authCode}'>
 			<input type="hidden" name="id" value='${loginedMemberId }'>
 			<div class="form-row flex">
@@ -17,6 +17,7 @@
 			</div>
 			<input type="submit" value="인증">
 		</form>
+		<a onClick="window.location.reload()" style="cursor: pointer;">[다시보내기]</a>
 	</div>
 	<div class="bottom">
 		<div>

@@ -181,11 +181,23 @@ public class MemberController extends Controller {
 	}
 
 	private String actionDoSeekId() {
+		String name = req.getParameter("name");
 		String email = req.getParameter("email");
+		
+		int isExistName = memberService.isExistName(name);
 		int isExistEmail = memberService.isExistEmail(email);
 		
+		if (isExistName < 0) {
+			return "html:<script> alert('이름을 다시 입력해주세요.'); location.replace('seekId'); </script>";
+		}
+		
 		if (isExistEmail < 0) {
-			return "html:<script> alert('입력하신 이메일은 존재하지않습니다.'); location.replace('login'); </script>";
+			return "html:<script> alert('입력하신 이메일은 존재하지 않습니다.'); location.replace('seekId'); </script>";
+		}
+		
+		Member member2 = memberService.getMemberByEmail(email);
+		if ( !member2.getName().equals(name) ) {
+			return "html:<script> alert('이름또는 이메일이 틀렸습니다.'); location.replace('seekId'); </script>";
 		}
 		
 		Member member = memberService.getMemberByEmail(email);

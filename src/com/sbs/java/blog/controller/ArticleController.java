@@ -31,9 +31,6 @@ public class ArticleController extends Controller {
 		case "detail":
 			return actionDetail();
 		case "doWrite":
-			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
-			}
 			return actionDoWrite();
 		case "write":
 			if (session.getAttribute("loginedMemberId") == null) {
@@ -41,19 +38,10 @@ public class ArticleController extends Controller {
 			}
 			return actionWrite();
 		case "delete":
-			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
-			}
 			return actionDelete();
 		case "modify":
-			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
-			}
 			return actionModify();
 		case "doModify":
-			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
-			}
 			return actionDoModify();
 		case "addReply":
 			if (session.getAttribute("loginedMemberId") == null) {
@@ -61,19 +49,10 @@ public class ArticleController extends Controller {
 			}
 			return actionAddReply();
 		case "removeReply":
-			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
-			}
 			return actionRemoveReply();
 		case "modifyReply":
-			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
-			}
 			return actionModifyReply();
 		case "doModifyReply":
-			if (session.getAttribute("loginedMemberId") == null) {
-				return "html:<script> alert('로그인 후 이용하실 수 있습니다.'); location.replace('../member/login'); </script>";
-			}
 			return actionDoModifyReply();
 		}
 		return "";
@@ -136,6 +115,14 @@ public class ArticleController extends Controller {
 		String body = req.getParameter("body");
 		int page = Util.getInt(req, "page");
 		int loginedMemberId = (int)session.getAttribute("loginedMemberId");
+		
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		int isAuthed = loginedMember.getMailAuthStatus();
+		
+		if (isAuthed == 0) {
+			return "html:<script> alert('이메일 인증 후 이용하실 수 있습니다.'); location.replace('detail?id="+articleId+"&page=" + page + "'); </script>";
+		}
+		
 		articleService.addReply(articleId, body, loginedMemberId);
 		
 		return "html:<script> alert('댓글 작성 완료.'); location.replace('detail?id="+articleId+"&page=" + page + "'); </script>";
@@ -169,6 +156,12 @@ public class ArticleController extends Controller {
 	}
 
 	private String actionWrite() {
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		int isAuthed = loginedMember.getMailAuthStatus();
+		
+		if (isAuthed == 0) {
+			return "html:<script> alert('이메일 인증 후 이용하실 수 있습니다.'); location.replace('../home/main'); </script>";
+		}
 		return "article/write.jsp";
 	}
 

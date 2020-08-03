@@ -142,6 +142,7 @@ public class MemberController extends Controller {
 		String title = "임시 비밀번호입니다.";
 		String body = "임시 비밀번호를 발급합니다.\n임시 비밀번호는 [123456789a]입니다.\n로그인 후 비밀번호를 변경해주세요."; 
 		gmailSend(email, title, body);
+		memberService.setTempPw(member.getId());
 		
 		return "html:<script> alert('해당 이메일로 임시 비밀번호를 전송하였습니다.'); location.replace('login'); </script>";
 	}
@@ -264,6 +265,10 @@ public class MemberController extends Controller {
 		Member member = null;
 		member = memberService.login(loginId, loginPw);
 		if (member != null) {
+			if ( memberService.isUseTempPassword(member.getId()) ) {
+				session.setAttribute("loginedMemberId", member.getId());
+				return "html:<script> alert('임시 비밀번호 사용중입니다. 비밀번호를 변경해주세요.'); location.replace('../home/main'); </script>";
+			}
 			session.setAttribute("loginedMemberId", member.getId());
 			return "html:<script> alert('" + member.getNickname() + "님 환영합니다.'); location.replace('../home/main'); </script>";
 		} else {
@@ -304,6 +309,7 @@ public class MemberController extends Controller {
 		String title = "회원가입을 환영합니다.";
 		String body = nickname+"님, 환영합니다.";
 		gmailSend(email, title, body);
+		
 		return "html:<script> alert('" + nickname + "님 환영합니다.'); location.replace('../home/main'); </script>";
 	}
 	

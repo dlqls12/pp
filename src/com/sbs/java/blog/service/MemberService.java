@@ -1,11 +1,13 @@
 package com.sbs.java.blog.service;
 
 import java.sql.Connection;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
 import com.sbs.java.blog.dao.MemberDao;
 import com.sbs.java.blog.dto.Member;
+import com.sbs.java.blog.util.Util;
 
 public class MemberService extends Service {
 
@@ -58,6 +60,7 @@ public class MemberService extends Service {
 	}
 
 	public int modifyPw(int id, String newLoginPwReal) {
+		attrService.setValue("member__" + id + "__extra__useTempPassword", "0");
 		return MemberDao.modifyPw(id, newLoginPwReal);
 	}
 
@@ -76,5 +79,18 @@ public class MemberService extends Service {
 		String authCodeOnDB = attrService.getValue("member__" + actorId + "__extra__modifyPrivateAuthCode");
 		
 		return authCodeOnDB.equals(authCode);
+	}
+
+	public void setTempPw(int actorId) {
+		attrService.setValue("member__" + actorId + "__extra__useTempPassword", "1");
+	}
+
+	public boolean isUseTempPassword(int actorId) {
+		String isUseTempPw = attrService.getValue("member__" + actorId + "__extra__useTempPassword");
+		
+		if ( isUseTempPw.equals("1") ) {
+			return true;
+		}
+		return false;
 	}
 }

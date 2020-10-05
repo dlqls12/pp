@@ -67,13 +67,13 @@
 						<% int no = 0; %>
 						<% no = replySize - ((paramPage-1)*5)-(i-1); %>
 						<c:if test="${reply.id==replyId}">
-							<div class="con add-reply-box">
-								<form action="doModifyReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
+							<div class="con">
+								<form action="doModifyReply" method="POST" onsubmit="submitReplyForm(this); return false;">
 									<input name="replyId" type="hidden" value='${reply.id}' />
 									<input name="paramPage" type="hidden" value='${paramPage}' />
 									<div class="form-row">
 										<div class="input">
-											<textarea class="reply-field" name="body" placeholder="${reply.body}" /></textarea>
+											<textarea class="reply-field" wrap="hard" name="body" />${reply.body}</textarea>
 										</div>
 									</div>
 									<input type="submit" onclick="if ( confirm('댓글 수정을 완료하시겠습니까?') == false ) return false;" value="수정" />
@@ -84,7 +84,7 @@
 						<c:if test="${reply.id!=replyId}">
 							<div class="reply-body">
 								<div class="reply-writer">no.<%=no%> | 작성자 : ${reply.extra.writer }</div>
-								↪ ${reply.body}
+								<pre style="margin:0;">${reply.body}</pre>
 							</div>
 						</c:if>
 						<div class="reply-info">작성날짜 :${reply.regDate} | 수정날짜 : ${reply.updateDate}</div>

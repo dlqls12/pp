@@ -40,10 +40,6 @@
 		</div>
 		<div class="con flex flex-jc-sb">
 			<div class="next-or-prev-button">
-				<c:if test="${article.id > 1}"><a href="detail?id=${article.id-1}&page=1">[이전글]</a></c:if>
-				<c:if test="${article.id < fullPage}"><a href="detail?id=${article.id+1}&page=1">[다음글]</a></c:if>
-			</div>
-			<div class="next-or-prev-button">
 				<c:if test="${loginedMemberId==article.memberId}">
 					<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="${pageContext.request.contextPath}/s/article/delete?id=${article.id}&page=${paramPage}">[삭제하기]</a>
 					<a href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}&page=${paramPage}">[수정하기]</a>
@@ -63,8 +59,8 @@
 						<% int no = 0; %>
 						<% no = replySize - ((paramPage-1)*5)-(i-1); %>
 						<div class="reply-body">
-						<div class="reply-writer">no.<%=no%> | 작성자 :${reply.extra.writer }</div>
-						↪ ${reply.body}
+						<div class="reply-writer">no.<%=no%> | 작성자 :${reply.extra.writer}</div>
+						<pre style="margin:0;">${reply.body}</pre>
 						</div>
 						<div class="reply-info">작성날짜 :${reply.regDate} | 수정날짜 : ${reply.updateDate}
 							<c:if test="${loginedMemberId==reply.memberId}">
@@ -87,13 +83,13 @@
 					</c:if>
 				</div>
 			</div>
-			<div class="con add-reply-box">
-				<form action="addReply" method="POST" class="reply-form" onsubmit="submitReplyForm(this); return false;">
+			<div class="con">
+				<form action="addReply" method="POST" onsubmit="submitReplyForm(this); return false;">
 					<input name="id" type="hidden" value='${article.id}' />
 					<input name="page" type="hidden" value='${paramPage}' />
 					<div class="form-row">
 						<div class="reply-title">댓글작성하기</div>
-						<div class="input"><textarea class="reply-field" name="body" placeholder="내용을 입력해주세요." /></textarea></div>
+						<div class="input"><textarea class="reply-field" name="body" wrap="hard" placeholder="내용을 입력해주세요." /></textarea></div>
 					</div>
 					<input type="submit" onclick="if ( confirm('댓글 작성을 완료하시겠습니까?') == false ) return false;" value="전송" />
 				</form>

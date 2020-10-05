@@ -521,7 +521,6 @@ label[for] {
 	display:flex;
 	align-items:center;
 	justify-content:space-between;
-	padding: 10px 20px;
 }
 
 .main-title > div {
@@ -589,7 +588,6 @@ label[for] {
 
 .cate-and-date {
 	font-size:1.2rem;
-	padding:10px 20px;
 }
 
 .detail-box {
@@ -617,13 +615,10 @@ label[for] {
 .reply-body {
 	display:block;
 	background-color:white;
-	padding:15px;
 	border:1px solid #261326;
-	padding-top:0;
 }
 
 .reply-info {
-	padding:0 10px;
 	text-align:right;
 }
 
@@ -632,7 +627,7 @@ label[for] {
 }
 
 .reply-box {
-	padding: 10px 20px;
+	padding:10px 0;
 	margin-top:10px;
 	border-top:3px solid #261326;
 	border-bottom:3px solid #261326;
@@ -645,10 +640,7 @@ label[for] {
 .reply-field {
 	width:99.5%;
 	height:50px;
-}
-
-.add-reply-box {
-	padding:0 20px;
+	resize:none;
 }
 
 .about-me-box {

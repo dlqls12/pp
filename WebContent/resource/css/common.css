@@ -678,7 +678,7 @@ label[for] {
 	padding:10px;
 }
 
-.form1 .form-row:nth-child(2) >.input > input {
+.title-input > input {
 	width:97.8%;
 }
 
@@ -699,7 +699,7 @@ label[for] {
 	background-color:#261326;
 }
 
-.write-form .form-row:nth-child(3) >.label {
+.label1 {
 	color:#F2F4EF;
 	display:flex;
 	height:487px;
@@ -708,7 +708,7 @@ label[for] {
 	background-color:#261326;
 }
 
-.write-form .form-row:nth-child(4) >.input > input {
+.submit-input > input {
 	color:#F2F4EF;
 	font-size:1rem;
 	font-weight:bold;
@@ -717,7 +717,7 @@ label[for] {
 	width:100%;
 }
 
-.write-form .form-row:nth-child(4) >.input:hover > input {
+.submit-input:hover > input {
 	color:red;
 	border:1px solid red;
 }

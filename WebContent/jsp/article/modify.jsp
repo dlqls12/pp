@@ -8,7 +8,8 @@
 <div class="con">
 	<div class="write-form-box body-box con">
 		<h1 class="main-title">게시물 수정</h1>
-		<form action="doWrite" method="POST" class="write-form form1" onsubmit="submitWriteForm(this); return false;">
+		<form action="doModify" method="POST" class="write-form form1" onsubmit="submitWriteForm(this); return false;">
+			<input type="hidden" name="id" value="${article.id}" />
 			<div class="form-row">
 				<div class="label">카테고리 선택</div>
 				<div class="input">
@@ -21,12 +22,12 @@
 			</div>
 			<div class="form-row">
 				<div class="label">제목</div>
-				<div class="input">
-					<input name="title" type="text" placeholder="제목을 입력해주세요." />
+				<div class="input title-input">
+					<input name="title" type="text" value="${article.title}" />
 				</div>
 			</div>
 			<div class="form-row">
-				<div class="label">내용</div>
+				<div class="label label1">내용</div>
 				<div class="input">
 					<input type="hidden" name="body">
 					<script type="text/x-template" id="origin1" style="display:none;">${article.bodyForXTemplate}</script>
@@ -35,7 +36,7 @@
 			</div>
 			<div class="form-row">
 				<a href="${pageContext.request.contextPath}/s/article/list" onclick="if ( confirm('작성중인 내용이 사라집니다. 정말 취소하시겠습니까?') == false ) return false;" class="write-form-cancle-button">취소하기</a>
-				<div class="input">
+				<div class="input submit-input">
 					<input type="submit" onclick="if ( confirm('게시물 수정을 완료하시겠습니까?') == false ) return false;" value="수정하기" />
 				</div>
 			</div>

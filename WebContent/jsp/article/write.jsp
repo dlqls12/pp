@@ -20,12 +20,12 @@
 			</div>
 			<div class="form-row">
 				<div class="label">제목</div>
-				<div class="input">
+				<div class="input title-input">
 					<input name="title" type="text" placeholder="제목을 입력해주세요." />
 				</div>
 			</div>
 			<div class="form-row">
-				<div class="label">내용</div>
+				<div class="label label1">내용</div>
 				<div class="input">
 					<input type="hidden" name="body">
 					<div id="editor1" class="123"></div>
@@ -33,7 +33,7 @@
 			</div>
 			<div class="form-row">
 				<a href="${pageContext.request.contextPath}/s/article/list" onclick="if ( confirm('작성중인 내용이 사라집니다. 정말 취소하시겠습니까?') == false ) return false;" class="write-form-cancle-button">취소하기</a>
-				<div class="input">
+				<div class="input submit-input">
 					<input type="submit" onclick="if ( confirm('게시물 작성을 완료하시겠습니까?') == false ) return false;" value="등록하기" />
 				</div>
 			</div>

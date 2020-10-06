@@ -9,7 +9,16 @@
 	int paramPage = (int) request.getAttribute("paramPage");
 %>
 <script src="../../resource/js/article/detail.js"></script>
+<style>
+textarea.autosize { min-height: 50px; }
+</style>
 
+<script>
+function resize(obj) {
+  obj.style.height = "1px";
+  obj.style.height = (12+obj.scrollHeight)+"px";
+}
+</script>
 <style>
 	.reply-paging {
 		justify-content:center;
@@ -55,7 +64,6 @@
 			</div>
 		</div>
 		<div class="con">
-			<h4 class="reply-title">댓글</h4>
 			<div class="reply-box">
 				<c:if test="${replySize==0}">
 					<div>댓글이 없습니다.😞</div>
@@ -73,11 +81,11 @@
 									<input name="paramPage" type="hidden" value='${paramPage}' />
 									<div class="form-row">
 										<div class="input">
-											<textarea class="reply-field" wrap="hard" name="body" />${reply.body}</textarea>
+											<textarea class="reply-field autosize" name="body" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)" />${reply.body}</textarea>
 										</div>
 									</div>
 									<input type="submit" onclick="if ( confirm('댓글 수정을 완료하시겠습니까?') == false ) return false;" value="수정" />
-									<a href="${pageContext.request.contextPath}/s/article/detail?id=${article.id}">취소</a>
+									<a href="${pageContext.request.contextPath}/s/article/detail?id=${article.id}&page=1">취소</a>
 								</form>
 							</div>
 						</c:if>

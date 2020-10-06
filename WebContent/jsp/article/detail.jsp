@@ -10,6 +10,16 @@
 %>
 <script src="../../resource/js/article/detail.js"></script>
 <style>
+textarea.autosize { min-height: 50px; }
+</style>
+
+<script>
+function resize(obj) {
+  obj.style.height = "1px";
+  obj.style.height = (12+obj.scrollHeight)+"px";
+}
+</script>
+<style>
 	.reply-paging {
 		justify-content:center;
 	}
@@ -89,7 +99,9 @@
 					<input name="page" type="hidden" value='${paramPage}' />
 					<div class="form-row">
 						<div class="reply-title">댓글작성하기</div>
-						<div class="input"><textarea class="reply-field" name="body" wrap="hard" placeholder="내용을 입력해주세요." /></textarea></div>
+						<div class="input">
+							<textarea class="reply-field autosize" name="body" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="내용을 입력해주세요." /></textarea>
+						</div>
 					</div>
 					<input type="submit" onclick="if ( confirm('댓글 작성을 완료하시겠습니까?') == false ) return false;" value="전송" />
 				</form>
